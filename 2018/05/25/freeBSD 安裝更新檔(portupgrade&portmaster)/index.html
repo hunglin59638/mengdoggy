@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hunglin59638.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="直接進入主題，freebsd增加了可以自動安裝更新版本的功能後方便了許多 輸入 cd &#x2F;usr&#x2F;ports&#x2F;ports-mgmt&#x2F;portupgrade 到達這個位置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="freeBSD 安裝更新檔(portupgrade&amp;portmaster)">
+<meta property="og:url" content="https://hunglin59638.github.io/2018/05/25/freeBSD%20%E5%AE%89%E8%A3%9D%E6%9B%B4%E6%96%B0%E6%AA%94(portupgrade&portmaster)/index.html">
+<meta property="og:site_name" content="MengDoggy">
+<meta property="og:description" content="直接進入主題，freebsd增加了可以自動安裝更新版本的功能後方便了許多 輸入 cd &#x2F;usr&#x2F;ports&#x2F;ports-mgmt&#x2F;portupgrade 到達這個位置">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526554899-1088362320_n.png">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526554995-2513571141_n.png">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526555581-624778536_n.png">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1527237092-2427673285_n.png">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1527237176-3374283288_n.png?v=1527237178">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1527237212-3771339895_n.png">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1527237281-1756253802_n.png">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1527237459-3150663970_n.png?v=1527237462">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1527237529-3329340744_n.png?v=1527237534">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1527237985-4260713784_n.png">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1527238440-15893770_n.png">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1527239783-3675408027_n.png">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1527239820-1540634278_n.png">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1527240320-4077435610_n.png">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1527242065-1298021466_n.png">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1527242132-3461326606_n.png">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1527240604-1183492664_n.png">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1527240717-4210116866_n.png">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1527240934-2577902395_n.png">
+<meta property="article:published_time" content="2018-05-24T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-03-25T16:58:55.213Z">
+<meta property="article:author" content="Hugnlin Chen">
+<meta property="article:tag" content="technology">
+<meta property="article:tag" content="freeBSD">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic.pimg.tw/alex59638/1526554899-1088362320_n.png">
+
+
+<link rel="canonical" href="https://hunglin59638.github.io/2018/05/25/freeBSD%20%E5%AE%89%E8%A3%9D%E6%9B%B4%E6%96%B0%E6%AA%94(portupgrade&portmaster)/">
+
+
+<script data-pjax class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-tw'
+  };
+</script>
+<title>freeBSD 安裝更新檔(portupgrade&portmaster) | MengDoggy</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">MengDoggy</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">風中一匹狼</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hugnlin Chen"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Hugnlin Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hunglin59638" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hunglin59638" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hunglin59638@gmail.com" title="E-Mail → mailto:hunglin59638@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://discord.gg/4WpdhECsXq" title="Discord → https:&#x2F;&#x2F;discord.gg&#x2F;4WpdhECsXq" rel="noopener" target="_blank"><i class="fab fa-discord fa-fw"></i>Discord</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-tw">
+    <link itemprop="mainEntityOfPage" href="https://hunglin59638.github.io/2018/05/25/freeBSD%20%E5%AE%89%E8%A3%9D%E6%9B%B4%E6%96%B0%E6%AA%94(portupgrade&portmaster)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Hugnlin Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MengDoggy">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          freeBSD 安裝更新檔(portupgrade&portmaster)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-05-25 00:00:00" itemprop="dateCreated datePublished" datetime="2018-05-25T00:00:00+08:00">2018-05-25</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-03-26 00:58:55" itemprop="dateModified" datetime="2021-03-26T00:58:55+08:00">2021-03-26</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>直接進入主題，freebsd增加了可以自動安裝更新版本的功能後方便了許多</p>
+<p>輸入 <code>cd /usr/ports/ports-mgmt/portupgrade</code> 到達這個位置</p>
+<span id="more"></span>
+
+<p><img src="https://pic.pimg.tw/alex59638/1526554899-1088362320_n.png" alt="2.PNG" title="2.PNG"></p>
+<p>輸入 <code>make install</code> 開始安裝更新檔</p>
+<p><code>portupgrade</code>可以自動更新整個port</p>
+<p>之後在安裝新的執行檔時才不會有抓不到檔案的問題</p>
+<p>它會開始一直跑程式碼，要等1~2分鐘</p>
+<p><img src="https://pic.pimg.tw/alex59638/1526554995-2513571141_n.png" alt="3.PNG" title="3.PNG"></p>
+<p>以下這些步驟都是upgrade在安裝時所需的工具，只是都會問你要不要。</p>
+<p>當然就都按OK吧</p>
+<p><img src="https://pic.pimg.tw/alex59638/1526555581-624778536_n.png" alt="4.PNG" title="4.PNG"></p>
+<p><img src="https://pic.pimg.tw/alex59638/1527237092-2427673285_n.png" alt="5.PNG" title="5.PNG"></p>
+<p><img src="https://pic.pimg.tw/alex59638/1527237176-3374283288_n.png?v=1527237178" alt="6.PNG" title="6.PNG"></p>
+<p><img src="https://pic.pimg.tw/alex59638/1527237212-3771339895_n.png" alt="7.PNG" title="7.PNG"></p>
+<p><img src="https://pic.pimg.tw/alex59638/1527237281-1756253802_n.png" alt="8.PNG" title="8.PNG"></p>
+<p><img src="https://pic.pimg.tw/alex59638/1527237459-3150663970_n.png?v=1527237462" alt="9.PNG" title="9.PNG"></p>
+<p><img src="https://pic.pimg.tw/alex59638/1527237529-3329340744_n.png?v=1527237534" alt="10.PNG" title="10.PNG"></p>
+<p><img src="https://pic.pimg.tw/alex59638/1527237985-4260713784_n.png" alt="12.PNG" title="12.PNG"></p>
+<p><img src="https://pic.pimg.tw/alex59638/1527238440-15893770_n.png" alt="13.PNG" title="13.PNG"></p>
+<p><img src="https://pic.pimg.tw/alex59638/1527239783-3675408027_n.png" alt="14.PNG" title="14.PNG"></p>
+<p><img src="https://pic.pimg.tw/alex59638/1527239820-1540634278_n.png" alt="15.PNG" title="15.PNG"></p>
+<p>安裝完<code>portupgrade</code>後可以下一個指令問它在哪裡</p>
+<p><code>which portupgrade</code><br><img src="https://pic.pimg.tw/alex59638/1527240320-4077435610_n.png" alt="16.PNG" title="16.PNG"></p>
+<p>再來安裝 <code>portmaster</code></p>
+<p>它的功能會幫你找你要安裝的檔案所需的其他套件</p>
+<p>首先前往它的位置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ..&#x2F;..</span><br></pre></td></tr></table></figure>
+<p>這時你會發現它說它找不到你現在的位置</p>
+<p>因為你在安裝完portupgrade時這個資料夾也不見了</p>
+<p>所以就用</p>
+<p><code>cd /</code> 回到最上層</p>
+<p>再輸入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;usr&#x2F;ports&#x2F;ports-mgmt&#x2F;portmaster</span><br></pre></td></tr></table></figure>
+<p><img src="https://pic.pimg.tw/alex59638/1527242065-1298021466_n.png" alt="21.PNG" title="21.PNG"></p>
+<p><code>make install </code>執行安裝</p>
+<p>接著會跳到下方視窗 就選OK</p>
+<p><img src="https://pic.pimg.tw/alex59638/1527242132-3461326606_n.png" alt="22.PNG" title="22.PNG"></p>
+<p>在來就是更新<code>portsnap</code></p>
+<p>輸入的指令是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">portsnap fetch update</span><br></pre></td></tr></table></figure>
+<p>這時她會跟你說要更新的東西在未來</p>
+<p>也就是我們時間有問題</p>
+<p>不過這問題只會出現在virtual box</p>
+<p><img src="https://pic.pimg.tw/alex59638/1527240604-1183492664_n.png" alt="17.PNG" title="17.PNG"></p>
+<p>這時候只要調整時間即可</p>
+<p>指令是<code>date 1805251730</code></p>
+<p>意思是設定時間至2018年05月25日17:30</p>
+<p>當然你需要依照你現在的時間調整</p>
+<p><img src="https://pic.pimg.tw/alex59638/1527240717-4210116866_n.png" alt="18.PNG" title="18.PNG"></p>
+<p>接下來再試一次<code>portsnap fetch update</code>就可以了</p>
+<p><img src="https://pic.pimg.tw/alex59638/1527240934-2577902395_n.png" alt="19.PNG" title="19.PNG"></p>
+<p>接下來他會要求你解壓縮(extract)</p>
+<p>輸入<code>portsnap extract</code></p>
+<p><code>portupgrade</code> 和<code>portmaster</code>是在使用freeBSD時必安裝的工具呢!</p>
+<p>可以讓你在往後安裝其他工具時方便很多</p>
+<p>不會因為版本或是在網路上的連結位置失效而出現無法安裝的問題</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/technology/" rel="tag"># technology</a>
+              <a href="/tags/freeBSD/" rel="tag"># freeBSD</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/05/17/freeBSD%20%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4%E4%BB%8B%E7%B4%B9/" rel="prev" title="freeBSD 基本指令介紹">
+                  <i class="fa fa-chevron-left"></i> freeBSD 基本指令介紹
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/07/17/%E6%8E%A2%E7%B4%A2%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90%20R/" rel="next" title="探索資料分析 R">
+                  探索資料分析 R <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hugnlin Chen</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '.page-configurations',
+    '.main-inner',
+    '.post-toc-wrap',
+    '.languages',
+    '.pjax'
+  ],
+  analytics: false,
+  cacheBust: false,
+  scrollRestoration: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  const hasTOC = document.querySelector('.post-toc');
+  document.querySelector('.sidebar-inner').classList.toggle('sidebar-nav-active', hasTOC);
+  document.querySelector(hasTOC ? '.sidebar-nav-toc' : '.sidebar-nav-overview').click();
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+
+
+
+    <div class="pjax">
+
+
+    </div>
+</body>
+</html>

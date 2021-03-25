@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hunglin59638.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="生物領域研究常是比較多組間是否有顯著差異本篇文章介紹使用統計軟體時採用的策略及一定要知道基本觀念其實要注意的細節很多，但為了要讓大家可以先有個簡單的概念所以這裡就只以單因子變異數分析(one-way ANOVA)為例舉例來說就是比較A、B、C、D四組動物的採食量之平均值有沒有顯著差異">
+<meta property="og:type" content="article">
+<meta property="og:title" content="差異檢定之生物統計策略及基本觀念">
+<meta property="og:url" content="https://hunglin59638.github.io/2019/02/08/%E5%B7%AE%E7%95%B0%E6%AA%A2%E5%AE%9A%E4%B9%8B%E7%94%9F%E7%89%A9%E7%B5%B1%E8%A8%88%E7%AD%96%E7%95%A5%E5%8F%8A%E5%9F%BA%E6%9C%AC%E8%A7%80%E5%BF%B5/index.html">
+<meta property="og:site_name" content="MengDoggy">
+<meta property="og:description" content="生物領域研究常是比較多組間是否有顯著差異本篇文章介紹使用統計軟體時採用的策略及一定要知道基本觀念其實要注意的細節很多，但為了要讓大家可以先有個簡單的概念所以這裡就只以單因子變異數分析(one-way ANOVA)為例舉例來說就是比較A、B、C、D四組動物的採食量之平均值有沒有顯著差異">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://lh3.googleusercontent.com/yVhSnySa3sOYDB7v3B84RJSBXEfNRIlDj8VACgFi8t6MNTPb7R_ZMw7fJDwLI1xBgeP5M8ruFVc1a52ZFzwWBx3RDdc4jYTtbCoKSFQNAwu84GIPkM9Gawce-YukuDuCQJltmpgWMA=w800">
+<meta property="og:image" content="https://lh3.googleusercontent.com/8I-zs9iNYsAt9MYe9i3dCQwMLuiZMAFcqKDZLZYugt4XvzRjjorglfoIqJK-JGQlEOQRcHeVCyrd1GGSGkWfG4tV1C7PyXog3LqJQXtLscwudZ5Tf0svkHBFlSvObAgrXz7yS0dWSQ=w400">
+<meta property="og:image" content="https://lh3.googleusercontent.com/jOvZLclQslOHZvgAyq3khPoDnJUNfR6ImKPc7kv1t4SP6V9UOWWiYmW9JSpLE8ut-Y0KIlI8eF_Fy0GoNJOxKCzXIdKjMArtpuVYDanvTmimWR3pAHcVF_ItAKISyaHspcN1HY2zTA=w400">
+<meta property="og:image" content="https://lh3.googleusercontent.com/dhjio1HhvzNpxYdkjQ1ekDcK7LB02M_Dl93JgbD8E8ZdPD3d84OBaxWSN8M48mL-nbKdHtgN1-c20--_M0CBZQe5dvvi4SnX_3RDmrsj1fIYGESEa2KG2ArevWTXrVrQt-ri__Ua-A=w400">
+<meta property="og:image" content="https://lh3.googleusercontent.com/Zy5irBIGABoYd2W0oOBk3aEsIpxJ6-C-h3fO2H2k20spu506Nf0zX31rQPTYkcuqsRnipMuY0DoQ0oyHkDGvCCR_TjW_IyclFL1_0GvRyg2HF3fabUeZjidRRYavwADJJcUdD0wejw=w600">
+<meta property="article:published_time" content="2019-02-07T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-03-25T15:54:44.043Z">
+<meta property="article:author" content="Hugnlin Chen">
+<meta property="article:tag" content="biostatistics">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lh3.googleusercontent.com/yVhSnySa3sOYDB7v3B84RJSBXEfNRIlDj8VACgFi8t6MNTPb7R_ZMw7fJDwLI1xBgeP5M8ruFVc1a52ZFzwWBx3RDdc4jYTtbCoKSFQNAwu84GIPkM9Gawce-YukuDuCQJltmpgWMA=w800">
+
+
+<link rel="canonical" href="https://hunglin59638.github.io/2019/02/08/%E5%B7%AE%E7%95%B0%E6%AA%A2%E5%AE%9A%E4%B9%8B%E7%94%9F%E7%89%A9%E7%B5%B1%E8%A8%88%E7%AD%96%E7%95%A5%E5%8F%8A%E5%9F%BA%E6%9C%AC%E8%A7%80%E5%BF%B5/">
+
+
+<script data-pjax class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-tw'
+  };
+</script>
+<title>差異檢定之生物統計策略及基本觀念 | MengDoggy</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">MengDoggy</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">風中一匹狼</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E6%9B%B8%E7%B1%8D%E8%88%87%E4%BE%86%E6%BA%90"><span class="nav-number">1.</span> <span class="nav-text">參考書籍與來源</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B6%B2%E8%B7%AF%E6%96%87%E7%AB%A0"><span class="nav-number">1.1.</span> <span class="nav-text">網路文章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B8%E7%B1%8D"><span class="nav-number">1.2.</span> <span class="nav-text">書籍</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hugnlin Chen"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Hugnlin Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hunglin59638" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hunglin59638" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hunglin59638@gmail.com" title="E-Mail → mailto:hunglin59638@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://discord.gg/4WpdhECsXq" title="Discord → https:&#x2F;&#x2F;discord.gg&#x2F;4WpdhECsXq" rel="noopener" target="_blank"><i class="fab fa-discord fa-fw"></i>Discord</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-tw">
+    <link itemprop="mainEntityOfPage" href="https://hunglin59638.github.io/2019/02/08/%E5%B7%AE%E7%95%B0%E6%AA%A2%E5%AE%9A%E4%B9%8B%E7%94%9F%E7%89%A9%E7%B5%B1%E8%A8%88%E7%AD%96%E7%95%A5%E5%8F%8A%E5%9F%BA%E6%9C%AC%E8%A7%80%E5%BF%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Hugnlin Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MengDoggy">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          差異檢定之生物統計策略及基本觀念
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-02-08 00:00:00" itemprop="dateCreated datePublished" datetime="2019-02-08T00:00:00+08:00">2019-02-08</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-03-25 23:54:44" itemprop="dateModified" datetime="2021-03-25T23:54:44+08:00">2021-03-25</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/biostatistics/" itemprop="url" rel="index"><span itemprop="name">biostatistics</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>生物領域研究常是比較多組間是否有顯著差異<br>本篇文章介紹使用統計軟體時採用的策略及一定要知道基本觀念<br>其實要注意的細節很多，但為了要讓大家可以先有個簡單的概念<br>所以這裡就只以單因子變異數分析(one-way ANOVA)為例<br>舉例來說就是比較A、B、C、D四組動物的採食量之平均值有沒有顯著差異</p>
+<span id="more"></span>
+
+<p>在要使用哪種統計方法之前需要檢測你的資料是否符合一些假設<br>1.各組資料是否皆為常態分佈<br>2. 各組資料變異數是否同質性<br>以下詳細介紹</p>
+<ol>
+<li>各組資料是否皆為常態分佈<br>也就是常態性檢定，其要求每組資料所對應的母體都應該要符合常態分佈。<br>舉例來說，A、B、C、D四組動物的採食量數值皆為常態分佈<br>要知道資料有沒有符合常態分佈，常用的統計方法有三種<br>(1) Shapiro-Wilk常態性檢定<br>適用於小樣本(3&lt;n&lt;50)，對峰型偏移很敏感，有些微偏離常態分佈就會被拒絕。<br>(2) K-S常態性檢定<br>適用於大樣本(&gt;50)<br>上述兩者的檢定方法的虛無假設(H0)都是資料符合常態分佈，所以P &lt; 0.05則不符合常態分佈。<br>舉例來說，下圖以Shapiro-Wilk常態性檢定四組 p-value皆大於0.05，所以皆符合常態分佈的假設。<br><img src="https://lh3.googleusercontent.com/yVhSnySa3sOYDB7v3B84RJSBXEfNRIlDj8VACgFi8t6MNTPb7R_ZMw7fJDwLI1xBgeP5M8ruFVc1a52ZFzwWBx3RDdc4jYTtbCoKSFQNAwu84GIPkM9Gawce-YukuDuCQJltmpgWMA=w800"></img><br>(3) Q-Q圖檢定常態性<br>這方法是以作圖判斷資料常態性，如下圖  </li>
+</ol>
+<p><img src="https://lh3.googleusercontent.com/8I-zs9iNYsAt9MYe9i3dCQwMLuiZMAFcqKDZLZYugt4XvzRjjorglfoIqJK-JGQlEOQRcHeVCyrd1GGSGkWfG4tV1C7PyXog3LqJQXtLscwudZ5Tf0svkHBFlSvObAgrXz7yS0dWSQ=w400"></img></p>
+<p>如果有四組的話就會有四張圖喔，縱軸是資料的數值，橫軸是對應之資料標準化數值(將資料修正成平均值為0，標準差為1)<br>判斷方式為資料的分布是否接近45度角，像這張看起來就是有接近，則可判斷為常態分佈 </p>
+<ol start="2">
+<li>各組資料變異數是否同質性<br>變異數同質性假定要求各組資料的母體變異數必須相等。<br>常用檢定方法有兩種:<br>(1) 圖形檢定<br>檢定變異數同質性可以使用合鬚圖，判斷各組資料離散程度是否接近，還有沒有離異值。<br>如下圖，橫軸為不同組別，縱軸為觀測值，大致看分布情況差不多，第2組有兩個離異值，需要注意可能會影響同質性。<br><img src="https://lh3.googleusercontent.com/jOvZLclQslOHZvgAyq3khPoDnJUNfR6ImKPc7kv1t4SP6V9UOWWiYmW9JSpLE8ut-Y0KIlI8eF_Fy0GoNJOxKCzXIdKjMArtpuVYDanvTmimWR3pAHcVF_ItAKISyaHspcN1HY2zTA=w400"></img>   </li>
+</ol>
+<p>(2) Levene變異數同質性檢定<br>該方法虛無假說為各組資料滿足變異數同質性<br><img src="https://lh3.googleusercontent.com/dhjio1HhvzNpxYdkjQ1ekDcK7LB02M_Dl93JgbD8E8ZdPD3d84OBaxWSN8M48mL-nbKdHtgN1-c20--_M0CBZQe5dvvi4SnX_3RDmrsj1fIYGESEa2KG2ArevWTXrVrQt-ri__Ua-A=w400"></img><br>如上圖，p-value為 0.4858，大於0.05，無法拒絕H0，<br>故各組符合變異數同質性。<br>看完自己的資料是否符合以上兩種假設後才可以來選擇適合的差異統計方法<br>第一個會用到假設是常態性檢定，<br>符合常態分佈的資料才可以進行變異數分析(ANOVA)，<br>不符合則需要使用無母數檢定或是將資料轉形成符合常態分佈，<br>後者難度較高，通常都直接選擇無母數檢定，稍後再介紹。<br>使用ANOVA會得到類似的表格  </p>
+<p>其虛無假說為各組間平均值皆相等，該表檢定的P值為0.00879，因此拒絕H0，<br>代表至少有兩組是有顯著差異。<br>而要知道哪些組別間有顯著差異則需要進行事後檢定 (post hoc tests)，<br>有很多種方式，這裡就不多介紹了，<br>不同種都有其適合的情況，可以參考以下連結介紹<br>有個很重要的觀念要說，如果P &gt; 0.05，表示各組間沒有顯著差異，<br>這時不能就直接往下做事後檢定，因為前提不成立的情況下是不能執行的。<br>可以改採t-test，兩兩比較，但需要注意第一型錯誤(偽陽性率)會提高，<br>也就是沒有差異但誤判為有差異的情況。<br>而第二個假設的同質性檢定，在變異數分析中，對其要求是相對較寬鬆的，<br>各組間變異數略有不同時，對分析結果影響不太大<br>特別是當各組裡的樣本相同時，不相等的變異數對ANOVA是較無影響的。<br>但其實還是有統計方法是修正不同變異數的影響的，這裡也是不多作介紹。<br>其實在自然界多數情況下，很多觀測值都不是常態分佈，<br>這時就會轉而採用無母數統計方法，其就沒有需要符合常態分佈這項假設了。<br>虛無假設不是以平均值是否有差異，<br>而是將數值以排序(rank)表示，改成以中位數是否有差異。<br>這裡介紹兩種無母數對應的one-way ANOVA方法  </p>
+<ol>
+<li><p>Kruskal–Wallis檢定<br>適用各組變異數符合同質性，對應的事後檢定方法為 Dunn Post Hoc test檢定  </p>
+</li>
+<li><p>Welch’s anova<br>是用各組變異數不相等時，對應的事後檢定為Games-Howell檢定<br>判別方法都跟ANOVA一樣，都會給p-value，判斷多組間是否有差異。<br>如下圖，以Kruskal–Wallis檢定，得到 P &lt; 0.05，四組中至少有兩組有差異。  </p>
+</li>
+</ol>
+<p><img src="https://lh3.googleusercontent.com/Zy5irBIGABoYd2W0oOBk3aEsIpxJ6-C-h3fO2H2k20spu506Nf0zX31rQPTYkcuqsRnipMuY0DoQ0oyHkDGvCCR_TjW_IyclFL1_0GvRyg2HF3fabUeZjidRRYavwADJJcUdD0wejw=w600"></img>  </p>
+<p>事後檢定以 Dunn Post Hoc test檢定，可以知道A-C和B-D間沒有差異，其餘皆有顯著差異。  </p>
+<p>這篇希望能夠讓對生物統計很困擾的人對統計有點概念，<br>還有一個觀念要讓大家知道，<br><strong>統計分析的本質是從資料中找出結論，從資料中尋找啟發，而不是尋找支持。<br>真正的統計分析事先是沒有結論的，透過對資料的分析才得出結論</strong><br>以上的範例皆以R語言得出</p>
+<h2 id="參考書籍與來源"><a href="#參考書籍與來源" class="headerlink" title="參考書籍與來源"></a>參考書籍與來源</h2><h3 id="網路文章"><a href="#網路文章" class="headerlink" title="網路文章"></a>網路文章</h3><p><a target="_blank" rel="noopener" href="http://blog.pulipuli.info/2018/01/rkruskalwalliswelchs-anova-non.html">多組非常態分佈資料之差異檢定與事後比較</a><br><a target="_blank" rel="noopener" href="https://researcher20.com/2008/08/11/%E7%94%A8%E5%93%AA%E7%A8%AE%E7%B5%B1%E8%A8%88%E5%88%86%E6%9E%90%E6%96%B9%E5%BC%8F%E5%A5%BD%EF%BC%9F%E5%8D%A1%E6%96%B9anovat-test-or-regression/">用哪種統計分析方式好？(卡方,Anova,T-test, or regression?)</a><br><a target="_blank" rel="noopener" href="http://amebse.nchu.edu.tw/new_page_534.htm">多重比較分析檢定</a></p>
+<h3 id="書籍"><a href="#書籍" class="headerlink" title="書籍"></a>書籍</h3><p><a target="_blank" rel="noopener" href="http://www.sanmin.com.tw/product/index/006191466">生物統計學：如何選擇與應用</a><br><a target="_blank" rel="noopener" href="https://www.books.com.tw/products/0010745107">統計學：基於R的應用</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/biostatistics/" rel="tag"># biostatistics</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/02/05/%E4%B8%AD%E8%88%88%E5%A4%A7%E5%AD%B8%E7%A0%94%E7%A9%B6%E6%89%80%E7%94%9F%E7%89%A9%E8%B3%87%E8%A8%8A%E8%AA%B2%E7%A8%8B/" rel="prev" title="中興大學研究所生物資訊課程">
+                  <i class="fa fa-chevron-left"></i> 中興大學研究所生物資訊課程
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/02/28/%E6%88%91%E4%B9%9F%E6%83%B3%E6%B4%BB%E5%9C%A8%E5%92%8C%E8%AB%A7%E7%9A%841984%E5%B9%B4/" rel="next" title="我也想活在和諧的1984年">
+                  我也想活在和諧的1984年 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hugnlin Chen</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '.page-configurations',
+    '.main-inner',
+    '.post-toc-wrap',
+    '.languages',
+    '.pjax'
+  ],
+  analytics: false,
+  cacheBust: false,
+  scrollRestoration: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  const hasTOC = document.querySelector('.post-toc');
+  document.querySelector('.sidebar-inner').classList.toggle('sidebar-nav-active', hasTOC);
+  document.querySelector(hasTOC ? '.sidebar-nav-toc' : '.sidebar-nav-overview').click();
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+
+
+
+    <div class="pjax">
+
+
+    </div>
+</body>
+</html>

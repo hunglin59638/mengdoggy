@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hunglin59638.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="資料型態: 幾乎任何資料都可以拿來做資料探索，實務上，當變數數目跟觀測數都夠多時，資料探索的用處比較大。資料探索的目的為處理觀測值之間的交互關係，並將期間模式凸顯給實驗者。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="資料探索的檢定_主成分分析, 多變量變異數分析, 集群分析_R語言">
+<meta property="og:url" content="https://hunglin59638.github.io/2018/08/28/%E8%B3%87%E6%96%99%E6%8E%A2%E7%B4%A2%E7%9A%84%E6%AA%A2%E5%AE%9A_%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90,%20%E5%A4%9A%E8%AE%8A%E9%87%8F%E8%AE%8A%E7%95%B0%E6%95%B8%E5%88%86%E6%9E%90,%20%E9%9B%86%E7%BE%A4%E5%88%86%E6%9E%90_R%E8%AA%9E%E8%A8%80/index.html">
+<meta property="og:site_name" content="MengDoggy">
+<meta property="og:description" content="資料型態: 幾乎任何資料都可以拿來做資料探索，實務上，當變數數目跟觀測數都夠多時，資料探索的用處比較大。資料探索的目的為處理觀測值之間的交互關係，並將期間模式凸顯給實驗者。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1535435572-3823596276.png">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1535435545-4262172769.png">
+<meta property="article:published_time" content="2018-08-27T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-03-25T15:50:52.909Z">
+<meta property="article:author" content="Hugnlin Chen">
+<meta property="article:tag" content="R">
+<meta property="article:tag" content="biostatistics">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic.pimg.tw/alex59638/1535435572-3823596276.png">
+
+
+<link rel="canonical" href="https://hunglin59638.github.io/2018/08/28/%E8%B3%87%E6%96%99%E6%8E%A2%E7%B4%A2%E7%9A%84%E6%AA%A2%E5%AE%9A_%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90,%20%E5%A4%9A%E8%AE%8A%E9%87%8F%E8%AE%8A%E7%95%B0%E6%95%B8%E5%88%86%E6%9E%90,%20%E9%9B%86%E7%BE%A4%E5%88%86%E6%9E%90_R%E8%AA%9E%E8%A8%80/">
+
+
+<script data-pjax class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-tw'
+  };
+</script>
+<title>資料探索的檢定_主成分分析, 多變量變異數分析, 集群分析_R語言 | MengDoggy</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">MengDoggy</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">風中一匹狼</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90%E5%92%8C%E5%9B%A0%E7%B4%A0%E5%88%86%E6%9E%90-Principle-component-analysis-PCA-and-factor-analysis"><span class="nav-number">1.</span> <span class="nav-text">主成分分析和因素分析 (Principle component analysis (PCA) and factor analysis)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A6%96%E8%A6%BA%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">視覺化:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Example-%E7%A0%94%E7%A9%B6%E5%85%A9%E7%A8%AE%E6%9E%9C%E8%A0%85%E7%89%A9%E7%A8%AE%EF%BC%8C%E8%A7%80%E5%AF%9F%E8%B3%87%E6%96%99%E5%8C%85%E5%90%AB%E4%BA%94%E7%A8%AE%E5%9E%8B%E6%85%8B%E7%9A%84%E5%96%AE%E4%BD%8D%E3%80%81%E6%80%A7%E5%88%A5%E5%92%8C%E7%89%A9%E7%A8%AE%E5%88%A5%E3%80%82"><span class="nav-number">3.</span> <span class="nav-text">Example: 研究兩種果蠅物種，觀察資料包含五種型態的單位、性別和物種別。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B8%E5%9E%8B%E8%AE%8A%E9%87%8F%E5%88%86%E6%9E%90-Canonical-variate-analysis"><span class="nav-number">4.</span> <span class="nav-text">典型變量分析 (Canonical variate analysis):</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%80%E5%88%A5%E5%87%BD%E6%95%B8%E5%88%86%E6%9E%90-Discriminant-function-analysis"><span class="nav-number">5.</span> <span class="nav-text">區別函數分析 (Discriminant function analysis):</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E8%AE%8A%E9%87%8F%E8%AE%8A%E7%95%B0%E6%95%B8%E5%88%86%E6%9E%90-Multivariate-analysis-of-variance-MANOVA"><span class="nav-number">6.</span> <span class="nav-text">多變量變異數分析 (Multivariate analysis of variance) (MANOVA)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E8%AE%8A%E9%87%8F%E5%85%B1%E8%AE%8A%E6%95%B8%E5%88%86%E6%9E%90-Multivariate-analysis-of-covariance-MANCOVA"><span class="nav-number">7.</span> <span class="nav-text">多變量共變數分析 (Multivariate analysis of covariance) (MANCOVA):</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9B%86%E7%BE%A4%E5%88%86%E6%9E%90-Cluster-analysis"><span class="nav-number">8.</span> <span class="nav-text">集群分析 (Cluster analysis):</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%8D%E8%B6%A8%E5%8B%A2%E5%B0%8D%E6%87%89%E5%88%86%E6%9E%90-DECORANA-%E5%92%8C%E9%9B%99%E5%90%91%E6%8C%87%E6%A8%99%E7%89%A9%E7%A8%AE%E5%88%86%E6%9E%90-TWINSPAN"><span class="nav-number">9.</span> <span class="nav-text">降趨勢對應分析(DECORANA)和雙向指標物種分析 (TWINSPAN):</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hugnlin Chen"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Hugnlin Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hunglin59638" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hunglin59638" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hunglin59638@gmail.com" title="E-Mail → mailto:hunglin59638@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://discord.gg/4WpdhECsXq" title="Discord → https:&#x2F;&#x2F;discord.gg&#x2F;4WpdhECsXq" rel="noopener" target="_blank"><i class="fab fa-discord fa-fw"></i>Discord</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-tw">
+    <link itemprop="mainEntityOfPage" href="https://hunglin59638.github.io/2018/08/28/%E8%B3%87%E6%96%99%E6%8E%A2%E7%B4%A2%E7%9A%84%E6%AA%A2%E5%AE%9A_%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90,%20%E5%A4%9A%E8%AE%8A%E9%87%8F%E8%AE%8A%E7%95%B0%E6%95%B8%E5%88%86%E6%9E%90,%20%E9%9B%86%E7%BE%A4%E5%88%86%E6%9E%90_R%E8%AA%9E%E8%A8%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Hugnlin Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MengDoggy">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          資料探索的檢定_主成分分析, 多變量變異數分析, 集群分析_R語言
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-08-28 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-28T00:00:00+08:00">2018-08-28</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-03-25 23:50:52" itemprop="dateModified" datetime="2021-03-25T23:50:52+08:00">2021-03-25</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/biostatistics/" itemprop="url" rel="index"><span itemprop="name">biostatistics</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>資料型態: 幾乎任何資料都可以拿來做資料探索，實務上，當變數數目跟觀測數都夠多時，資料探索的用處比較大。資料探索的目的為處理觀測值之間的交互關係，並將期間模式凸顯給實驗者。</p>
+<span id="more"></span>
+
+<h2 id="主成分分析和因素分析-Principle-component-analysis-PCA-and-factor-analysis"><a href="#主成分分析和因素分析-Principle-component-analysis-PCA-and-factor-analysis" class="headerlink" title="主成分分析和因素分析 (Principle component analysis (PCA) and factor analysis)"></a>主成分分析和因素分析 (Principle component analysis (PCA) and factor analysis)</h2><p>都是藉由加權變數來將每個個體的差異最大化。許多方面，主成分分析跟相關係數和回歸分析很類似。只要資料中每個個體都有兩個以上的觀測值就可使用。主成分分析假第資料是連續的且遵從常態分佈。若執行此分析的目的是為了建立新假設就可以忽略此假定。</p>
+<h2 id="視覺化"><a href="#視覺化" class="headerlink" title="視覺化:"></a>視覺化:</h2><p>藉由「每個個體指有兩個觀測值」的特例將主成分分析的運作視覺化。想像將兩個相關的變數製成散佈圖，其資料形成橢圓形雲狀物。PCA會計算通過此橢圓形長軸的直線，並將此直線當成第一個主要軸線(PCA1)。通過資料雲，且和第一個軸線垂直的直線就是PCA2。分析過程是電腦以多維空間的形式進行，每個變數都代表一個維度，每條通過資料雲的直線都來自對於個變數做適當的加權。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.plob.org/article/11869.html">PCA主成分分析原理及分析實踐詳細介紹</a> (很詳盡的介紹，也有R的演示)</p>
+</blockquote>
+<h2 id="Example-研究兩種果蠅物種，觀察資料包含五種型態的單位、性別和物種別。"><a href="#Example-研究兩種果蠅物種，觀察資料包含五種型態的單位、性別和物種別。" class="headerlink" title="Example: 研究兩種果蠅物種，觀察資料包含五種型態的單位、性別和物種別。"></a>Example: 研究兩種果蠅物種，觀察資料包含五種型態的單位、性別和物種別。</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">sex&lt;- <span class="built_in">c</span>(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>)</span><br><span class="line">species&lt;- <span class="built_in">c</span>(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>)</span><br><span class="line">thorax&lt;- <span class="built_in">c</span>(<span class="number">1.01</span>,<span class="number">0.98</span>,<span class="number">1.02</span>,<span class="number">1.05</span>,<span class="number">0.98</span>,<span class="number">0.89</span>,<span class="number">0.89</span>,<span class="number">0.95</span>,<span class="number">1.20</span>,<span class="number">1.15</span>,<span class="number">1.18</span>,<span class="number">1.21</span>,<span class="number">0.95</span>,<span class="number">0.94</span>,<span class="number">0.96</span>,<span class="number">0.91</span>) <span class="comment">#胸長</span></span><br><span class="line">wing&lt;- <span class="built_in">c</span>(<span class="number">2.51</span>, <span class="number">2.45</span>, <span class="number">2.57</span>, <span class="number">2.61</span>, <span class="number">2.40</span>,<span class="number">2.35</span>, <span class="number">2.38</span>,<span class="number">2.41</span>,<span class="number">3.10</span>,<span class="number">3.12</span>, <span class="number">3.21</span>, <span class="number">3.20</span>, <span class="number">2.51</span>,<span class="number">2.50</span>,<span class="number">2.62</span>,<span class="number">2.45</span>) <span class="comment">#翅長</span></span><br><span class="line">femur&lt;- <span class="built_in">c</span>(<span class="number">.06</span>,<span class="number">.05</span>,<span class="number">.08</span>,<span class="number">.07</span>,<span class="number">.04</span>,<span class="number">.04</span>,<span class="number">.05</span>,<span class="number">.05</span>,<span class="number">.09</span>,<span class="number">.10</span>,<span class="number">.09</span>,<span class="number">.10</span>,<span class="number">.08</span>,<span class="number">.07</span>,<span class="number">.08</span>,<span class="number">.07</span>) <span class="comment">#腿長</span></span><br><span class="line">eye&lt;- <span class="built_in">c</span>(<span class="number">.52</span>,<span class="number">.53</span>,<span class="number">.55</span>,<span class="number">.52</span>,<span class="number">.54</span>,<span class="number">.50</span>,<span class="number">.50</span>,<span class="number">.49</span>,<span class="number">.48</span>,<span class="number">.52</span>,<span class="number">.52</span>,<span class="number">.55</span>,<span class="number">.56</span>,<span class="number">.49</span>,<span class="number">.51</span>,<span class="number">.52</span>) <span class="comment">#眼距</span></span><br><span class="line">ant&lt;- <span class="built_in">c</span>(<span class="number">.11</span>,<span class="number">.12</span>,<span class="number">.11</span>,<span class="number">.10</span>,<span class="number">.13</span>,<span class="number">.14</span>,<span class="number">.12</span>,<span class="number">.12</span>,<span class="number">.09</span>,<span class="number">.10</span>,<span class="number">.11</span>,<span class="number">.09</span>,<span class="number">.11</span>,<span class="number">.13</span>,<span class="number">.14</span>,<span class="number">.13</span>) <span class="comment">#第三節觸角</span></span><br><span class="line">data.frame(sex,species,thorax,wing,femur,eye,ant)</span><br><span class="line">summary(prcomp(~thorax+wing+femur+eye+ant, scale= <span class="built_in">T</span>)) <span class="comment">#以prcomp()或princomp()皆可執行，結果也很相似，再來是定義主成分分析的變數(thorax, wing,femur, eye, ant)，但是分組變數不能輸入(species, sex)主成分分析中，最後加上「scale=T」讓個效果總合等於1。</span></span><br><span class="line"><span class="comment">#輸出結果顯示各主成分解釋多少比例的變異數: 「PCA1」解釋68.4%; 「PCA2」解釋19.8%</span></span><br><span class="line"></span><br><span class="line">Importance of components:</span><br><span class="line"> PC1 PC2 PC3 PC4 PC5</span><br><span class="line">Standard deviation <span class="number">1.8491</span> <span class="number">0.9941</span> <span class="number">0.61878</span> <span class="number">0.43913</span> <span class="number">0.12914</span></span><br><span class="line">Proportion of Variance <span class="number">0.6839</span> <span class="number">0.1976</span> <span class="number">0.07658</span> <span class="number">0.03857</span> <span class="number">0.00334</span></span><br><span class="line">Cumulative Proportion <span class="number">0.6839</span> <span class="number">0.8815</span> <span class="number">0.95810</span> <span class="number">0.99666</span> <span class="number">1.00000</span></span><br><span class="line">print(prcomp(~thorax+wing+femur+eye+ant, scale= <span class="built_in">T</span>)) <span class="comment">#顯示各主成分中各變數項目的權重</span></span><br><span class="line"></span><br><span class="line">Standard deviations (<span class="number">1</span>, .., p=<span class="number">5</span>):</span><br><span class="line">[<span class="number">1</span>] <span class="number">1.8491400</span> <span class="number">0.9941184</span> <span class="number">0.6187849</span> <span class="number">0.4391321</span> <span class="number">0.1291438</span></span><br><span class="line"></span><br><span class="line">Rotation (n x k) = (<span class="number">5</span> x <span class="number">5</span>):</span><br><span class="line"> PC1 PC2 PC3 PC4 PC5</span><br><span class="line">thorax <span class="number">0.5185966</span> -<span class="number">0.11303213</span> <span class="number">0.1408875</span> -<span class="number">0.5248445</span> <span class="number">0.65036167</span></span><br><span class="line">wing <span class="number">0.5150173</span> -<span class="number">0.17934884</span> -<span class="number">0.2514674</span> -<span class="number">0.3870185</span> -<span class="number">0.69969423</span></span><br><span class="line">femur <span class="number">0.4818698</span> <span class="number">0.01774549</span> -<span class="number">0.5946408</span> <span class="number">0.6000820</span> <span class="number">0.23192783</span></span><br><span class="line">eye <span class="number">0.1236216</span> <span class="number">0.97599696</span> -<span class="number">0.0548311</span> -<span class="number">0.1635158</span> -<span class="number">0.04902823</span></span><br><span class="line">ant -<span class="number">0.4672622</span> -<span class="number">0.04661295</span> -<span class="number">0.7485390</span> -<span class="number">0.4334964</span> <span class="number">0.17681459</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#第一個主成分(PCA1)給予前四項變數正向的權重；ant則是負向權重。第二個主成分(PCA2)的權重顯示eye是最重要的。</span></span><br><span class="line">biplot(prcomp(~thorax+wing+femur+eye+ant, scale= <span class="built_in">T</span>)) <span class="comment">#視覺化</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://pic.pimg.tw/alex59638/1535435572-3823596276.png" alt="PCA.png" title="PCA.png"></p>
+<h2 id="典型變量分析-Canonical-variate-analysis"><a href="#典型變量分析-Canonical-variate-analysis" class="headerlink" title="典型變量分析 (Canonical variate analysis):"></a>典型變量分析 (Canonical variate analysis):</h2><p>與PCA的運作模式大致相同，執行該分析前必須把所有個體分組。其算出的變相權重是極大化的各組差異，而非PCA的個體差異。其產生的變數權重可以判斷哪些變數差異最大，那些無差異。進行本分析時盡量使用有現實意義的分組而非人為分組。</p>
+<h2 id="區別函數分析-Discriminant-function-analysis"><a href="#區別函數分析-Discriminant-function-analysis" class="headerlink" title="區別函數分析 (Discriminant function analysis):"></a>區別函數分析 (Discriminant function analysis):</h2><p>和典型變量分析一樣需先將個體分組。該分析的想法是先計算出能夠分辨各組的權重，並把這組權重套用到尚未被分組的個體，以求得這些個體屬於個別組的機率。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">install.packages(MASS)</span><br><span class="line">library(MASS)</span><br><span class="line">fit&lt;- lda(species~thorax+wing+femur+eye+ant, CV=<span class="built_in">T</span>) <span class="comment">#將species定義為辨別目標</span></span><br><span class="line">fit <span class="comment">#輸出結果中，「$class」給出各個體的分組狀況。「$posterior」給出各個體分屬各組的機率。如第一個個體有0.99.92被分配到品種1</span></span><br><span class="line">ct&lt;- table(species, fit$<span class="built_in">class</span>)</span><br><span class="line">diag(prop.table(ct,<span class="number">1</span>))<span class="comment">#顯示各品種被正確分配的機率</span></span><br><span class="line"><span class="built_in">sum</span>(diag(prop.table(ct))) <span class="comment">#總分組正確率</span></span><br></pre></td></tr></table></figure>
+<h2 id="多變量變異數分析-Multivariate-analysis-of-variance-MANOVA"><a href="#多變量變異數分析-Multivariate-analysis-of-variance-MANOVA" class="headerlink" title="多變量變異數分析 (Multivariate analysis of variance) (MANOVA)"></a>多變量變異數分析 (Multivariate analysis of variance) (MANOVA)</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">y&lt;- cbind(thorax,wing) <span class="comment">#合併兩個應變數</span></span><br><span class="line">fit&lt;- manova(y~species) </span><br><span class="line">summary.aov(fit) <span class="comment">#以單變量分析結果顯示thorax和物種關係不顯著，wing則顯著</span></span><br><span class="line">summary.aov(fit,test= wilks) <span class="comment">#指定以Wilks版本做多變量分析，具有顯著差異。其他版本還有Roy和Pillai，結果大同小異。</span></span><br><span class="line">summary(fit, test= Wilks)</span><br></pre></td></tr></table></figure>
+
+<h2 id="多變量共變數分析-Multivariate-analysis-of-covariance-MANCOVA"><a href="#多變量共變數分析-Multivariate-analysis-of-covariance-MANCOVA" class="headerlink" title="多變量共變數分析 (Multivariate analysis of covariance) (MANCOVA):"></a>多變量共變數分析 (Multivariate analysis of covariance) (MANCOVA):</h2><p>如果有大於一個觀測項目，一個以上分組方法，且已經有另一個變數會影響觀測項目，則可以使用該分析移除干擾變數。</p>
+<h2 id="集群分析-Cluster-analysis"><a href="#集群分析-Cluster-analysis" class="headerlink" title="集群分析 (Cluster analysis):"></a>集群分析 (Cluster analysis):</h2><p>一群個體分類法的統稱。隨著對DNA序列分析對統計的需求越來越精細，這些方法也越來越重要。集群分析可以畫出樹狀圖親緣關係，藉以顯示可能的親緣關係，或至少把各個體分成數個可能有分類學意義的組別。集群分析應用範圍不只限於分子序列分析。除了分類學領域也可以應用於集群生態學，近年來更成為研究基因表現和基因家族的關鍵方法。</p>
+<p>最單純的集群分析可視為一種按部就班的迴圈過程。先將</p>
+<ol>
+<li>各個體資料轉化為散佈的資料點 </li>
+<li>找尋最相近的兩個個體，將其相似度紀錄為兩點的距離 </li>
+<li>將這兩點合併成一點，位置取在兩點正中間 </li>
+<li>再去找最近的兩點合併，不斷重複直到剩下一個點。<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">y&lt;- cbind(thorax,wing,eye,femur,ant) <span class="comment">#將要用到的變數綁定到同一件</span></span><br><span class="line">d&lt;- dist(y, method = euclidean) <span class="comment">#dist()求出各個體的[歐幾里得距離](https://zh.wikipedia.org/wiki/%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E8%B7%9D%E7%A6%BB)，並存在d</span></span><br><span class="line">fit&lt;- hclust(d, method = ward.D2) <span class="comment">#hclust()執行階層集群分析，使用方法為Waed</span></span><br><span class="line">plot(fit) <span class="comment">#匯出樹狀圖</span></span><br><span class="line">groups&lt;- cutree(fit, k=<span class="number">4</span>)</span><br><span class="line">rect.hclust(fit, k=<span class="number">4</span>, border = red) <span class="comment">#添加四個紅色框框分群</span></span><br></pre></td></tr></table></figure>
+<img src="https://pic.pimg.tw/alex59638/1535435545-4262172769.png" alt="cluster.png" title="cluster.png"></li>
+</ol>
+<h2 id="降趨勢對應分析-DECORANA-和雙向指標物種分析-TWINSPAN"><a href="#降趨勢對應分析-DECORANA-和雙向指標物種分析-TWINSPAN" class="headerlink" title="降趨勢對應分析(DECORANA)和雙向指標物種分析 (TWINSPAN):"></a>降趨勢對應分析(DECORANA)和雙向指標物種分析 (TWINSPAN):</h2><p>為當今族群的物種豐富度資料分析和生態資料的分析均廣為使用本方法<br>目前尚未更新，似乎需要在3.5.0版本才能使用</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">data(varespec)</span><br><span class="line">vare.dca &lt;- decorana(varespec)</span><br><span class="line">vare.dca</span><br><span class="line">summary(vare.dca)</span><br><span class="line">plot(vare.dca)</span><br></pre></td></tr></table></figure>
+
+<p>參考來源: <a target="_blank" rel="noopener" href="http://sanmin.com.tw/product/index/006191466"><strong>生物統計學：如何選擇與應用</strong></a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/R/" rel="tag"># R</a>
+              <a href="/tags/biostatistics/" rel="tag"># biostatistics</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/08/28/%E9%9B%99%E5%9B%A0%E5%AD%90%E8%AE%8A%E7%95%B0%E6%95%B8%E5%88%86%E6%9E%90(Two-way%20ANOVA)/" rel="prev" title="雙因子變異數分析(Two-way ANOVA)">
+                  <i class="fa fa-chevron-left"></i> 雙因子變異數分析(Two-way ANOVA)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/08/30/%E5%9F%BA%E5%9B%A0%E5%AF%8C%E9%9B%86%E5%88%86%E6%9E%90%20(gene%20set%20enrichment%20set%20analysis)/" rel="next" title="基因富集分析 (gene set enrichment set analysis)">
+                  基因富集分析 (gene set enrichment set analysis) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hugnlin Chen</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '.page-configurations',
+    '.main-inner',
+    '.post-toc-wrap',
+    '.languages',
+    '.pjax'
+  ],
+  analytics: false,
+  cacheBust: false,
+  scrollRestoration: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  const hasTOC = document.querySelector('.post-toc');
+  document.querySelector('.sidebar-inner').classList.toggle('sidebar-nav-active', hasTOC);
+  document.querySelector(hasTOC ? '.sidebar-nav-toc' : '.sidebar-nav-overview').click();
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+
+
+
+    <div class="pjax">
+
+
+    </div>
+</body>
+</html>

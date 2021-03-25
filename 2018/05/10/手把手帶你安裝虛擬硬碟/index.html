@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hunglin59638.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="進入virtualbox下載網頁https:&#x2F;&#x2F;www.virtualbox.org&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手把手帶你安裝虛擬硬碟">
+<meta property="og:url" content="https://hunglin59638.github.io/2018/05/10/%E6%89%8B%E6%8A%8A%E6%89%8B%E5%B8%B6%E4%BD%A0%E5%AE%89%E8%A3%9D%E8%99%9B%E6%93%AC%E7%A1%AC%E7%A2%9F/index.html">
+<meta property="og:site_name" content="MengDoggy">
+<meta property="og:description" content="進入virtualbox下載網頁https:&#x2F;&#x2F;www.virtualbox.org&#x2F;">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017138-2841789896_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017138-59844138_m.jpg?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017138-3190950142_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017138-2011039333_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017139-4220594059_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017139-3079146961_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017139-3889924346_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017139-2211651013_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017140-4255794914_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017140-2049717042_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017140-1700935211_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017140-1977077750_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017140-2500000575_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017141-3289657668_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017141-2761657904_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017141-1973416623_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017141-2669034248_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017142-1992373014_m.jpg?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017143-3022464641_m.jpg?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017143-2291030687_m.jpg?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017143-2207316616_m.jpg?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017144-2587991765_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017144-3132977744_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017144-691970349_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017145-129289191_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017145-777416358_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017145-1134974917_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017145-578000838_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017146-2246305603_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017147-3671736518_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017147-910456103_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017147-2271474672_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017147-453539255_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017147-4169943923_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017148-2097939863_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017148-263563088_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017148-3601421622_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017149-463703467_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017149-627452826_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017149-2479322259_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017149-2215756439_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017149-1267820659_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017149-499193051_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017150-3754551924_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017150-3448634561_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017150-3676850002_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017151-4223623702_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017151-2943993389_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017151-2171684398_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017152-2953293664_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017152-2802177115_m.png?v=1526017159">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017153-47966100_m.png">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017153-1010250840_m.png">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526017153-1938302362_m.png">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1526548517-2319450419_l.png">
+<meta property="article:published_time" content="2018-05-09T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-03-25T17:01:58.058Z">
+<meta property="article:author" content="Hugnlin Chen">
+<meta property="article:tag" content="technology">
+<meta property="article:tag" content="freeBSD">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic.pimg.tw/alex59638/1526017138-2841789896_m.png?v=1526017159">
+
+
+<link rel="canonical" href="https://hunglin59638.github.io/2018/05/10/%E6%89%8B%E6%8A%8A%E6%89%8B%E5%B8%B6%E4%BD%A0%E5%AE%89%E8%A3%9D%E8%99%9B%E6%93%AC%E7%A1%AC%E7%A2%9F/">
+
+
+<script data-pjax class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-tw'
+  };
+</script>
+<title>手把手帶你安裝虛擬硬碟 | MengDoggy</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">MengDoggy</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">風中一匹狼</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hugnlin Chen"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Hugnlin Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hunglin59638" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hunglin59638" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hunglin59638@gmail.com" title="E-Mail → mailto:hunglin59638@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://discord.gg/4WpdhECsXq" title="Discord → https:&#x2F;&#x2F;discord.gg&#x2F;4WpdhECsXq" rel="noopener" target="_blank"><i class="fab fa-discord fa-fw"></i>Discord</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-tw">
+    <link itemprop="mainEntityOfPage" href="https://hunglin59638.github.io/2018/05/10/%E6%89%8B%E6%8A%8A%E6%89%8B%E5%B8%B6%E4%BD%A0%E5%AE%89%E8%A3%9D%E8%99%9B%E6%93%AC%E7%A1%AC%E7%A2%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Hugnlin Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MengDoggy">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          手把手帶你安裝虛擬硬碟
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-05-10 00:00:00" itemprop="dateCreated datePublished" datetime="2018-05-10T00:00:00+08:00">2018-05-10</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-03-26 01:01:58" itemprop="dateModified" datetime="2021-03-26T01:01:58+08:00">2021-03-26</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <ol>
+<li><p>進入virtualbox下載網頁<br><a target="_blank" rel="noopener" href="https://www.virtualbox.org/">https://www.virtualbox.org/</a></p>
+<span id="more"></span></li>
+<li><p> 按下Download</p>
+</li>
+</ol>
+<p>  <img src="https://pic.pimg.tw/alex59638/1526017138-2841789896_m.png?v=1526017159" alt="1.PNG" title="1.PNG"></p>
+<ol start="3">
+<li>點選現在這台電腦的作業系統(我的是windows)<br><img src="https://pic.pimg.tw/alex59638/1526017138-59844138_m.jpg?v=1526017159" alt="2.jpg" title="2.jpg"></li>
+<li>下載好後點開檔案安裝virtualBox</li>
+</ol>
+<p><img src="https://pic.pimg.tw/alex59638/1526017138-3190950142_m.png?v=1526017159" alt="3-1.PNG" title="3-1.PNG"></p>
+<p>  <img src="https://pic.pimg.tw/alex59638/1526017138-2011039333_m.png?v=1526017159" alt="3-2.PNG" title="3-2.PNG"></p>
+<p>  <img src="https://pic.pimg.tw/alex59638/1526017139-4220594059_m.png?v=1526017159" alt="3-3.PNG" title="3-3.PNG"></p>
+<p>  <img src="https://pic.pimg.tw/alex59638/1526017139-3079146961_m.png?v=1526017159" alt="3-4.PNG" title="3-4.PNG"></p>
+<p>  <img src="https://pic.pimg.tw/alex59638/1526017139-3889924346_m.png?v=1526017159" alt="3-5.PNG" title="3-5.PNG"></p>
+<p>  點選[安裝]</p>
+<p>  <img src="https://pic.pimg.tw/alex59638/1526017139-2211651013_m.png?v=1526017159" alt="3-6.PNG" title="3-6.PNG"></p>
+<p>  <img src="https://pic.pimg.tw/alex59638/1526017140-4255794914_m.png?v=1526017159" alt="3-7.PNG" title="3-7.PNG"></p>
+<ol start="5">
+<li>重新啟動電腦<br><img src="https://pic.pimg.tw/alex59638/1526017140-2049717042_m.png?v=1526017159" alt="3-8.PNG" title="3-8.PNG"></li>
+<li>雙擊點開VirtualBox並按[新增]新增虛擬機器<br><img src="https://pic.pimg.tw/alex59638/1526017140-1700935211_m.png?v=1526017159" alt="4.png" title="4.png"></li>
+<li>設定基本資料，名稱我自己命名為[canu]，類型選擇[BSD]，版本[freeBSD 64-bit]。</li>
+</ol>
+<p>  <img src="https://pic.pimg.tw/alex59638/1526017140-1977077750_m.png?v=1526017159" alt="4-2.png" title="4-2.png"></p>
+<ol start="8">
+<li>記憶體大小設為6G (6144MB)，可以自行調整，但不建議設定太低。</li>
+</ol>
+<p>  <img src="https://pic.pimg.tw/alex59638/1526017140-2500000575_m.png?v=1526017159" alt="4-3.PNG" title="4-3.PNG"></p>
+<ol start="9">
+<li>設定裝置類型與配置，按照預設即可</li>
+</ol>
+<p><img src="https://pic.pimg.tw/alex59638/1526017141-3289657668_m.png?v=1526017159" alt="4-4.PNG" title="4-4.PNG"></p>
+<p>  <img src="https://pic.pimg.tw/alex59638/1526017141-2761657904_m.png?v=1526017159" alt="4-5.PNG" title="4-5.PNG"></p>
+<p>  <img src="https://pic.pimg.tw/alex59638/1526017141-1973416623_m.png?v=1526017159" alt="4-6.PNG" title="4-6.PNG"><br>10. 設定硬碟位置與大小，大小設定為100GB，當然也可以自行調整<br>  <img src="https://pic.pimg.tw/alex59638/1526017141-2669034248_m.png?v=1526017159" alt="4-7.PNG" title="4-7.PNG"></p>
+<ol start="11">
+<li>接下來要先另外到freeBSD網站下載BSD的驅動檔，不然等下無法打開系統</li>
+</ol>
+<p>  <a target="_blank" rel="noopener" href="https://www.freebsd.org/">https://www.freebsd.org/</a><img src="https://pic.pimg.tw/alex59638/1526017142-1992373014_m.jpg?v=1526017159" alt="5-1.jpg" title="5-1.jpg"></p>
+<p>  點選amd64</p>
+<p>  <img src="https://pic.pimg.tw/alex59638/1526017143-3022464641_m.jpg?v=1526017159" alt="5-2.jpg" title="5-2.jpg"></p>
+<p>  下載 </p>
+<p>  <a target="_blank" rel="noopener" href="https://download.freebsd.org/ftp/releases/amd64/amd64/ISO-IMAGES/11.1/FreeBSD-11.1-RELEASE-amd64-disc1.iso" title="FreeBSD-11.1-RELEASE-amd64-disc1.iso">FreeBSD-11.1-RELEASE-amd64-disc1.iso</a></p>
+<p>  <img src="https://pic.pimg.tw/alex59638/1526017143-2291030687_m.jpg?v=1526017159" alt="5-3.jpg" title="5-3.jpg"></p>
+<ol start="12">
+<li>下載完成後啟動虛擬機器</li>
+</ol>
+<p>  <img src="https://pic.pimg.tw/alex59638/1526017143-2207316616_m.jpg?v=1526017159" alt="6.jpg" title="6.jpg"></p>
+<ol start="13">
+<li>選擇啟動光碟，就是剛剛下載的光碟檔 <img src="https://pic.pimg.tw/alex59638/1526017144-2587991765_m.png?v=1526017159" alt="6-2.PNG" title="6-2.PNG"></li>
+</ol>
+<p>  <img src="https://pic.pimg.tw/alex59638/1526017144-3132977744_m.png?v=1526017159" alt="6-3.PNG" title="6-3.PNG"></p>
+<p>  <img src="https://pic.pimg.tw/alex59638/1526017144-691970349_m.png?v=1526017159" alt="6-5.PNG" title="6-5.PNG"></p>
+<ol start="14">
+<li><p>跑完後就會進入BSD介面了，這裡要說明一下，當滑鼠點這個視窗後就會進入這個虛擬機裡面了，這時候滑鼠也會不見，如果要出來到原本的工作系統(windows)的話按一下鍵盤的[Hme]鍵即可，也就是windows logo的那個四個區塊 <img src="https://pic.pimg.tw/alex59638/1526017145-129289191_m.png?v=1526017159" alt="7.PNG" title="7.PNG"></p>
+</li>
+<li><p>如果覺得視窗太小的話可以點選[檢視]&gt;[縮放係數]，選擇到適合的大小</p>
+</li>
+</ol>
+<p>  <img src="https://pic.pimg.tw/alex59638/1526017145-777416358_m.png?v=1526017159" alt="7-2.png" title="7-2.png"></p>
+<ol start="16">
+<li>程式自動跑完後會進入這個頁面，按Enter，進入<Install></li>
+</ol>
+<p> <img src="https://pic.pimg.tw/alex59638/1526017145-1134974917_m.png?v=1526017159" alt="7-3.PNG" title="7-3.PNG"></p>
+<ol start="17">
+<li>接下來就是一直按Enter，大多都只要遵照預設即可，不過還是有些會微調喔<br>選擇鍵盤類型，直接按Enter</li>
+</ol>
+<p>  <img src="https://pic.pimg.tw/alex59638/1526017145-578000838_m.png?v=1526017159" alt="7-4.PNG" title="7-4.PNG"><br>  輸入管理者名稱，我自己輸入canu</p>
+<p>  <img src="https://pic.pimg.tw/alex59638/1526017146-2246305603_m.png?v=1526017159" alt="7-5.PNG" title="7-5.PNG"><br>  Enter</p>
+<p>  <img src="https://pic.pimg.tw/alex59638/1526017147-3671736518_m.png?v=1526017159" alt="7-7.PNG" title="7-7.PNG"><br>18. Enter<br>  <img src="https://pic.pimg.tw/alex59638/1526017147-910456103_m.png?v=1526017159" alt="7-8.PNG" title="7-8.PNG"><br>  Enter，選MBR，之後還能以windows系統調整</p>
+<p>  <img src="https://pic.pimg.tw/alex59638/1526017147-2271474672_m.png?v=1526017159" alt="7-9.PNG" title="7-9.PNG"><br>  Enter</p>
+<p>  <img src="https://pic.pimg.tw/alex59638/1526017147-453539255_m.png?v=1526017159" alt="7-10.PNG" title="7-10.PNG"><br>  Enter</p>
+<p>  <img src="https://pic.pimg.tw/alex59638/1526017147-4169943923_m.png?v=1526017159" alt="7-11.PNG" title="7-11.PNG"><br>  等它跑個1-2分鐘</p>
+<p>  <img src="https://pic.pimg.tw/alex59638/1526017148-2097939863_m.png?v=1526017159" alt="7-12.PNG" title="7-12.PNG"><br>  輸入管理者密碼，輸入時不會出現*****，但她其實有輸入進去喔</p>
+<p>  <img src="https://pic.pimg.tw/alex59638/1526017148-263563088_m.png?v=1526017159" alt="7-13.PNG" title="7-13.PNG"><br>  選擇網卡，直接Enter</p>
+<p>  <img src="https://pic.pimg.tw/alex59638/1526017148-3601421622_m.png?v=1526017159" alt="7-14.PNG" title="7-14.PNG"><br>19. IPv4選擇<yes><br>  <img src="https://pic.pimg.tw/alex59638/1526017149-463703467_m.png?v=1526017159" alt="7-15.PNG" title="7-15.PNG"><br>  DHCP <yes></p>
+<p>  <img src="https://pic.pimg.tw/alex59638/1526017149-627452826_m.png?v=1526017159" alt="7-16.PNG" title="7-16.PNG"><br>  在台灣用不到IPv6 所以就選擇<No>吧</p>
+<p>  <img src="https://pic.pimg.tw/alex59638/1526017149-2479322259_m.png?v=1526017159" alt="7-17.PNG" title="7-17.PNG"><br>  IP位置，它會抓取這台電腦的位置，也是直接Enter</p>
+<p>  <img src="https://pic.pimg.tw/alex59638/1526017149-2215756439_m.png?v=1526017159" alt="7-18.PNG" title="7-18.PNG"><br>  選擇時區，用方向鍵選到5Asia，按Enter</p>
+<p><img src="https://pic.pimg.tw/alex59638/1526017149-1267820659_m.png?v=1526017159" alt="7-19.PNG" title="7-19.PNG"><br>選42Taiwan，小感動，中國是無法改變我們的名字der!!!!</p>
+<p><img src="https://pic.pimg.tw/alex59638/1526017149-499193051_m.png?v=1526017159" alt="7-20.PNG" title="7-20.PNG"><br>Enter</p>
+<p><img src="https://pic.pimg.tw/alex59638/1526017150-3754551924_m.png?v=1526017159" alt="7-21.PNG" title="7-21.PNG"></p>
+<p><img src="https://pic.pimg.tw/alex59638/1526017150-3448634561_m.png?v=1526017159" alt="7-22.PNG" title="7-22.PNG"></p>
+<p><img src="https://pic.pimg.tw/alex59638/1526017150-3676850002_m.png?v=1526017159" alt="7-23.PNG" title="7-23.PNG"><br>這裡選到dumpdev，然後按空白鍵取消*，這個功能是你電腦出問題時他會回傳一堆程式碼給你看，如果你需要就留著吧</p>
+<p><img src="https://pic.pimg.tw/alex59638/1526017151-4223623702_m.png?v=1526017159" alt="7-27.PNG" title="7-27.PNG"></p>
+<p><img src="https://pic.pimg.tw/alex59638/1526017151-2943993389_m.png?v=1526017159" alt="7-25.PNG" title="7-25.PNG"></p>
+<p><img src="https://pic.pimg.tw/alex59638/1526017151-2171684398_m.png?v=1526017159" alt="7-26.PNG" title="7-26.PNG"></p>
+<p>再來就是最複雜的部份了，要設定使用者資料，但其實也還好啦<br>要輸入的有  </p>
+<ol>
+<li><p> <strong>Full name</strong> 我還是輸入canu</p>
+</li>
+<li><p> <strong>Uid</strong>，使用者編號 直接按Enter</p>
+</li>
+<li><p> <strong>Login Group</strong>，預設登入群組 直接按Enter</p>
+</li>
+<li><p>加入其他群組 直接按Enter</p>
+</li>
+<li><p><strong>Login class</strong>，登入類別 直接按Enter</p>
+</li>
+<li><p><strong>Shell</strong> 直接按Enter</p>
+</li>
+<li><p><strong>Home Directory</strong> 直接按Enter</p>
+</li>
+<li><p><strong>Home Directory Permissions</strong> 直接按Enter</p>
+</li>
+<li><p><strong>Use password-based authentication?</strong> 直接按Enter</p>
+</li>
+<li><p><strong>Use an empty password?</strong> 直接按Enter</p>
+</li>
+<li><p><strong>Use a random password?</strong> 直接按Enter</p>
+</li>
+<li><p><strong>Enter password</strong> 輸入自訂的密碼，輸入後按 <em><strong>Enter</strong></em></p>
+</li>
+<li><p><strong>Enter password again</strong> 再次輸入密碼後按 <em><strong>Enter</strong></em></p>
+</li>
+<li><p><strong>Lock out the account after creation?</strong> 直接按Enter</p>
+</li>
+</ol>
+<p>最後確認資料是否正確，正確請輸入 <em><strong>yes</strong></em> 、有錯還需要修改請輸入 <em><strong>no</strong></em> ，確認好後按Enter</p>
+<p><img src="https://pic.pimg.tw/alex59638/1526017152-2953293664_m.png?v=1526017159" alt="8-2.PNG" title="8-2.PNG"><br>不要加入其他使用者 輸入no 按Enter</p>
+<p><img src="https://pic.pimg.tw/alex59638/1526017152-2802177115_m.png?v=1526017159" alt="8-3.PNG" title="8-3.PNG"><br>選擇No ，按Enter</p>
+<p><img src="https://pic.pimg.tw/alex59638/1526017153-47966100_m.png" alt="8-4.PNG" title="8-4.PNG"><br>選擇<Reboot>，按Enter</p>
+<p><img src="https://pic.pimg.tw/alex59638/1526017153-1010250840_m.png" alt="8-5.PNG" title="8-5.PNG"><br>到這邊就告一段落了，可以點視窗的右上方叉叉關閉，它你關閉的方式，因為之後還要使用，我就選擇[儲存機器狀態]，下次打開時會直接到我關閉時的狀態</p>
+<p><img src="https://pic.pimg.tw/alex59638/1526017153-1938302362_m.png" alt="8-6.png" title="8-6.png"></p>
+<p>喔對了 忘了說 下次開啟時要把虛擬光碟檔退出 不然他會又回到安裝的介面</p>
+<p><img src="https://pic.pimg.tw/alex59638/1526548517-2319450419_l.png" alt="螢幕擷取畫面" title="螢幕擷取畫面"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/technology/" rel="tag"># technology</a>
+              <a href="/tags/freeBSD/" rel="tag"># freeBSD</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/05/09/Reading%20and%20Writing%20Data%20%E6%8A%93%E5%87%BA%E6%8C%87%E5%AE%9A%E8%AE%8A%E6%95%B8%E6%88%96%E8%A7%80%E6%B8%AC%E5%80%BC/" rel="prev" title="Reading and Writing Data 抓出指定變數或觀測值">
+                  <i class="fa fa-chevron-left"></i> Reading and Writing Data 抓出指定變數或觀測值
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/05/17/freeBSD%20%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4%E4%BB%8B%E7%B4%B9/" rel="next" title="freeBSD 基本指令介紹">
+                  freeBSD 基本指令介紹 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hugnlin Chen</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '.page-configurations',
+    '.main-inner',
+    '.post-toc-wrap',
+    '.languages',
+    '.pjax'
+  ],
+  analytics: false,
+  cacheBust: false,
+  scrollRestoration: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  const hasTOC = document.querySelector('.post-toc');
+  document.querySelector('.sidebar-inner').classList.toggle('sidebar-nav-active', hasTOC);
+  document.querySelector(hasTOC ? '.sidebar-nav-toc' : '.sidebar-nav-overview').click();
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+
+
+
+    <div class="pjax">
+
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hunglin59638.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="比較兩品系豬種在10間豬場檢定的平均日增重有沒有差別?1234lineA&lt;- c(.70,.80,.65,.78,.62,.67,.78,.61,.76,.64)lineB&lt;- c(.72,.82,.67,.83,.67,.67,.80,.64,.78,.64)lineAB&lt;- lineA-lineB #去除各檢定豬場差異t.test(lineAB)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在R中執行 SAS的glm lsmeans">
+<meta property="og:url" content="https://hunglin59638.github.io/2018/12/15/%E4%BB%A5R%E8%AA%9E%E8%A8%80%E8%A7%A3%E7%AD%94%E5%8B%95%E7%89%A9%E7%A7%91%E5%AD%B8%E7%B5%B1%E8%A8%88%E7%BF%92%E9%A1%8C-%20%E7%BF%92%E9%A1%8C%E5%85%AD%20%E6%AF%94%E8%BC%83%E5%85%A9%E5%80%8B%E8%AE%8A%E6%95%B8%E7%9A%84%E5%B9%B3%E5%9D%87%E5%80%BC%E8%88%87%E8%AE%8A%E6%96%B9/index.html">
+<meta property="og:site_name" content="MengDoggy">
+<meta property="og:description" content="比較兩品系豬種在10間豬場檢定的平均日增重有沒有差別?1234lineA&lt;- c(.70,.80,.65,.78,.62,.67,.78,.61,.76,.64)lineB&lt;- c(.72,.82,.67,.83,.67,.67,.80,.64,.78,.64)lineAB&lt;- lineA-lineB #去除各檢定豬場差異t.test(lineAB)">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2018-12-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-03-25T16:00:43.271Z">
+<meta property="article:author" content="Hugnlin Chen">
+<meta property="article:tag" content="R">
+<meta property="article:tag" content="biostatistics">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://hunglin59638.github.io/2018/12/15/%E4%BB%A5R%E8%AA%9E%E8%A8%80%E8%A7%A3%E7%AD%94%E5%8B%95%E7%89%A9%E7%A7%91%E5%AD%B8%E7%B5%B1%E8%A8%88%E7%BF%92%E9%A1%8C-%20%E7%BF%92%E9%A1%8C%E5%85%AD%20%E6%AF%94%E8%BC%83%E5%85%A9%E5%80%8B%E8%AE%8A%E6%95%B8%E7%9A%84%E5%B9%B3%E5%9D%87%E5%80%BC%E8%88%87%E8%AE%8A%E6%96%B9/">
+
+
+<script data-pjax class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-tw'
+  };
+</script>
+<title>在R中執行 SAS的glm lsmeans | MengDoggy</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">MengDoggy</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">風中一匹狼</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AF%94%E8%BC%83%E5%85%A9%E5%93%81%E7%B3%BB%E8%B1%AC%E7%A8%AE%E5%9C%A810%E9%96%93%E8%B1%AC%E5%A0%B4%E6%AA%A2%E5%AE%9A%E7%9A%84%E5%B9%B3%E5%9D%87%E6%97%A5%E5%A2%9E%E9%87%8D%E6%9C%89%E6%B2%92%E6%9C%89%E5%B7%AE%E5%88%A5"><span class="nav-number">1.</span> <span class="nav-text">比較兩品系豬種在10間豬場檢定的平均日增重有沒有差別?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%B1%E7%A8%AE%E8%B1%AC%E7%99%BB%E9%8C%84%E8%B3%87%E6%96%99%E9%80%A2%E9%9B%9E%E5%8F%96%E5%BE%97%E5%93%81%E7%B3%BBA%E8%88%87B%E5%90%84%E5%8D%81%E5%80%8B%E8%B1%AC%E5%A0%B4%E7%9A%84%E6%AA%A2%E5%AE%9A%E8%B3%87%E6%96%99%EF%BC%8C%E5%BE%97%E5%88%B0%E5%85%B6%E5%B9%B3%E5%9D%87%E6%97%A5%E5%A2%9E%E9%87%8D%EF%BC%8C%E5%85%A9%E5%93%81%E7%B3%BB%E7%A8%AE%E8%B1%AC%E9%9A%BB%E5%B9%B3%E5%9D%87%E6%97%A5%E5%A2%9E%E9%87%8D%E6%98%AF%E5%90%A6%E6%9C%89%E5%B7%AE%E5%88%A5"><span class="nav-number">2.</span> <span class="nav-text">由種豬登錄資料逢雞取得品系A與B各十個豬場的檢定資料，得到其平均日增重，兩品系種豬隻平均日增重是否有差別?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B0%B4%E6%BC%BE%E8%82%89%E8%88%87%E6%9A%97%E4%B9%BE%E8%82%89%E4%B9%8B%E6%AD%A4%E9%A1%9E%E5%9B%BA%E9%86%87%E5%B9%B3%E5%9D%87%E5%90%AB%E9%87%8F%E6%98%AF%E5%90%A6%E6%9C%89%E5%B7%AE%E7%95%B0"><span class="nav-number">3.</span> <span class="nav-text">水漾肉與暗乾肉之此類固醇平均含量是否有差異?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E5%B9%B3%E5%9D%87%E5%80%BC%E5%B7%AE%E7%95%B0%E5%9C%A82%CE%B3-100ml%E4%BB%A5%E4%B8%8A%EF%BC%8C%E5%B8%8C%E6%9C%9B%E6%9C%890-9%E7%9A%84%E6%A9%9F%E7%8E%87%E9%A1%AF%E8%91%97%E5%9C%B0%E6%AA%A2%E5%AE%9A%E5%87%BA%E5%85%B6%E5%B7%AE%E7%95%B0%EF%BC%8C%E9%9C%80%E8%A6%81%E5%A4%9A%E5%A4%A7%E7%9A%84%E6%A8%A3%E6%9C%AC"><span class="nav-number">4.</span> <span class="nav-text">如果平均值差異在2γ&#x2F;100ml以上，希望有0.9的機率顯著地檢定出其差異，需要多大的樣本?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%B2%E7%9F%A5%E9%A4%B5%E9%A3%BC%E5%B0%8F%E9%9B%9E%E7%94%9F%E5%A4%A7%E8%B1%86%E5%9B%A0%E5%90%AB%E6%9C%89trpsin-inhibitor%E8%80%8C%E9%80%A0%E6%88%90%E8%83%B0%E8%87%9F%E8%85%AB%E5%A4%A7%EF%BC%8C%E7%82%BA%E4%BA%86%E8%A7%A3%E9%85%B8%E8%99%95%E7%90%86%E9%99%A4%E5%8E%BB%E6%8A%91%E5%88%B6%E5%9B%A0%E5%AD%90%E7%9A%84%E6%95%88%E6%9E%9C%EF%BC%8C%E4%BB%A520%E9%9A%BB%E9%A4%B5%E9%A3%BC%E6%9C%AA%E8%99%95%E7%90%86%E7%9A%84%E5%A4%A7%E8%B1%86%E8%88%8710%E9%9A%BB%E9%A4%B5%E9%A3%BC%E9%85%B8%E8%99%95%E7%90%86%E5%A4%A7%E8%B1%86%E4%BE%86%E6%AF%94%E8%BC%83%EF%BC%8C%E6%B8%AC%E5%BE%97%E5%85%B6%E8%83%B0%E8%87%9F%E4%BD%94%E9%AB%94%E9%87%8D%E7%99%BE%E5%88%86%E6%AF%94%E5%A6%82%E4%B8%8B%EF%BC%8C%E9%85%B8%E8%99%95%E7%90%86%E6%98%AF%E5%90%A6%E6%9C%89%E6%95%88"><span class="nav-number">5.</span> <span class="nav-text">已知餵飼小雞生大豆因含有trpsin inhibitor而造成胰臟腫大，為了解酸處理除去抑制因子的效果，以20隻餵飼未處理的大豆與10隻餵飼酸處理大豆來比較，測得其胰臟佔體重百分比如下，酸處理是否有效?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%82%BA%E4%BA%86%E8%A7%A3%E4%B8%8D%E5%90%8C%E5%8A%91%E9%87%8F%E5%9B%9B%E6%B0%AF%E5%8C%96%E7%A2%B3%E9%A9%85%E9%99%A4%E9%BC%A0%E9%89%A4%E8%9F%B2%E7%9A%84%E6%95%88%E6%9E%9C%EF%BC%8C%E5%B0%87%E6%AF%8F%E9%9A%BB%E5%A4%A7%E9%BC%A0%E7%81%8C%E5%85%A5500%E5%80%8B%E6%BA%9D%E8%9F%B2%E5%8D%B5%EF%BC%8C%E5%85%AB%E5%A4%A9%E5%BE%8C%E5%88%86%E5%88%A5%E7%B5%A6%E4%BA%880-03ml%E8%88%870-06ml%E5%90%AB%E5%9B%9B%E6%B0%AF%E5%8C%96%E7%A2%B3%E7%A4%A6%E7%89%A9%E6%B2%B9%E3%80%82%E5%85%A9%E5%A4%A9%E5%BE%8C%E5%B0%87%E4%B9%8B%E7%8A%A7%E7%89%B2%E4%BB%A5%E8%A8%88%E7%AE%97%E9%BC%A0%E9%89%A4%E8%9F%B2%E6%88%90%E8%9F%B2%E6%95%B8%E7%9B%AE%E3%80%82%E4%BB%A5%E4%B8%8B%E6%95%B8%E6%93%9A%E7%82%BA%E6%AE%BA%E6%AD%BB%E9%89%A4%E8%9F%B2%E7%99%BE%E5%88%86%E6%AF%94"><span class="nav-number">6.</span> <span class="nav-text">為了解不同劑量四氯化碳驅除鼠鉤蟲的效果，將每隻大鼠灌入500個溝蟲卵，八天後分別給予0.03ml與0.06ml含四氯化碳礦物油。兩天後將之犧牲以計算鼠鉤蟲成蟲數目。以下數據為殺死鉤蟲百分比:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%82%BA%E4%BA%86%E8%A7%A3reserpine%E5%B0%8D%E8%A1%80%E6%BC%BFserotonin%E7%9A%84%E5%BD%B1%E9%9F%BF%EF%BC%8C%E6%B8%AC%E9%87%8F10%E4%BD%8D%E5%81%A5%E5%BA%B7%E6%88%90%E4%BA%BA%E5%9C%A8%E6%B3%A8%E5%B0%842-5ml-reserpine%E4%BB%A5%E5%89%8D%E8%88%87%E4%B8%80%E5%B0%8F%E6%99%82%E4%BB%A5%E5%BE%8C%E8%A1%80%E6%BC%BFserotonin%E6%BF%83%E5%BA%A6-%CE%BCg-10-9%E8%A1%80%E5%B0%8F%E6%9D%BF-%E5%A6%82%E4%B8%8B"><span class="nav-number">7.</span> <span class="nav-text">為了解reserpine對血漿serotonin的影響，測量10位健康成人在注射2.5ml reserpine以前與一小時以後血漿serotonin濃度 (μg&#x2F;10^9血小板)如下:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%82%BA%E6%B8%AC%E5%AE%9A%E6%9F%90%E9%A3%BC%E6%96%99%E6%B7%BB%E5%8A%A0%E5%8A%91%E5%B0%8D%E7%94%9F%E9%95%B7%E8%B1%AC%E5%A2%9E%E9%87%8D%E7%9A%84%E5%BD%B1%E9%9F%BF-%E5%B7%B2%E7%9F%A5%E7%B5%95%E4%B8%8D%E6%9C%83%E5%B0%8D%E5%A2%9E%E9%87%8D%E6%9C%89%E8%B2%A0%E9%9D%A2%E5%BD%B1%E9%9F%BF-%EF%BC%8C%E4%BD%BF%E7%94%A810%E5%B0%8D%E5%90%8C%E7%AA%A9%E5%85%AC%E4%BB%94%E8%B1%AC%E4%BE%86%E5%81%9A%E8%A9%A6%E9%A9%97%EF%BC%8C%E6%AF%8F%E4%B8%80%E7%AA%A9%E5%90%84%E4%B8%80%E9%A0%AD%E9%A3%BC%E4%BA%88%E5%B0%8D%E7%85%A7%E6%97%A5%E7%B3%A7%E8%88%87%E6%B7%BB%E5%8A%A0%E6%97%A5%E7%B3%A7%EF%BC%8C%E8%A9%A6%E9%A9%97%E6%9C%9F%E9%96%93%E5%A2%9E%E9%87%8D-kg-%E5%A6%82%E4%B8%8B"><span class="nav-number">8.</span> <span class="nav-text">為測定某飼料添加劑對生長豬增重的影響(已知絕不會對增重有負面影響)，使用10對同窩公仔豬來做試驗，每一窩各一頭飼予對照日糧與添加日糧，試驗期間增重(kg)如下:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AA%A2%E5%AE%9A%E7%AB%99%E4%B8%8A%E6%9C%88%E4%BB%BD%E6%AA%A2%E5%AE%9A%E4%BA%86%E8%97%8D%E7%91%9E%E6%96%AF%E6%AF%8D%E8%B1%AC52%E9%A0%AD%E8%88%87%E6%9D%9C%E6%B4%9B%E5%85%8B24%E9%A0%AD%EF%BC%8C%E5%85%B690%E5%85%AC%E6%96%A4%E9%AB%94%E9%87%8D%E6%99%82%E8%83%8C%E8%84%82%E5%8E%9A%E5%BA%A6%E6%A8%99%E6%BA%96%E5%81%8F%E5%B7%AE%E5%88%86%E5%88%A5%E7%82%BA0-24cm%E8%88%870-36cm%EF%BC%8C%E9%80%99%E5%85%A9%E5%93%81%E7%A8%AE%E8%83%8C%E8%84%82%E5%8E%9A%E5%BA%A6%E7%9A%84%E6%95%B4%E9%BD%8A%E5%BA%A6%E6%98%AF%E5%90%A6%E6%9C%89%E9%A1%AF%E8%91%97%E5%B7%AE%E7%95%B0"><span class="nav-number">9.</span> <span class="nav-text">檢定站上月份檢定了藍瑞斯母豬52頭與杜洛克24頭，其90公斤體重時背脂厚度標準偏差分別為0.24cm與0.36cm，這兩品種背脂厚度的整齊度是否有顯著差異?</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hugnlin Chen"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Hugnlin Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hunglin59638" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hunglin59638" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hunglin59638@gmail.com" title="E-Mail → mailto:hunglin59638@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://discord.gg/4WpdhECsXq" title="Discord → https:&#x2F;&#x2F;discord.gg&#x2F;4WpdhECsXq" rel="noopener" target="_blank"><i class="fab fa-discord fa-fw"></i>Discord</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-tw">
+    <link itemprop="mainEntityOfPage" href="https://hunglin59638.github.io/2018/12/15/%E4%BB%A5R%E8%AA%9E%E8%A8%80%E8%A7%A3%E7%AD%94%E5%8B%95%E7%89%A9%E7%A7%91%E5%AD%B8%E7%B5%B1%E8%A8%88%E7%BF%92%E9%A1%8C-%20%E7%BF%92%E9%A1%8C%E5%85%AD%20%E6%AF%94%E8%BC%83%E5%85%A9%E5%80%8B%E8%AE%8A%E6%95%B8%E7%9A%84%E5%B9%B3%E5%9D%87%E5%80%BC%E8%88%87%E8%AE%8A%E6%96%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Hugnlin Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MengDoggy">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          在R中執行 SAS的glm lsmeans
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-12-15 00:00:00" itemprop="dateCreated datePublished" datetime="2018-12-15T00:00:00+08:00">2018-12-15</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-03-26 00:00:43" itemprop="dateModified" datetime="2021-03-26T00:00:43+08:00">2021-03-26</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/biostatistics/" itemprop="url" rel="index"><span itemprop="name">biostatistics</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="比較兩品系豬種在10間豬場檢定的平均日增重有沒有差別"><a href="#比較兩品系豬種在10間豬場檢定的平均日增重有沒有差別" class="headerlink" title="比較兩品系豬種在10間豬場檢定的平均日增重有沒有差別?"></a>比較兩品系豬種在10間豬場檢定的平均日增重有沒有差別?</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">lineA&lt;- <span class="built_in">c</span>(<span class="number">.70</span>,<span class="number">.80</span>,<span class="number">.65</span>,<span class="number">.78</span>,<span class="number">.62</span>,<span class="number">.67</span>,<span class="number">.78</span>,<span class="number">.61</span>,<span class="number">.76</span>,<span class="number">.64</span>)</span><br><span class="line">lineB&lt;- <span class="built_in">c</span>(<span class="number">.72</span>,<span class="number">.82</span>,<span class="number">.67</span>,<span class="number">.83</span>,<span class="number">.67</span>,<span class="number">.67</span>,<span class="number">.80</span>,<span class="number">.64</span>,<span class="number">.78</span>,<span class="number">.64</span>)</span><br><span class="line">lineAB&lt;- lineA-lineB <span class="comment">#去除各檢定豬場差異</span></span><br><span class="line">t.test(lineAB)</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<h2 id="由種豬登錄資料逢雞取得品系A與B各十個豬場的檢定資料，得到其平均日增重，兩品系種豬隻平均日增重是否有差別"><a href="#由種豬登錄資料逢雞取得品系A與B各十個豬場的檢定資料，得到其平均日增重，兩品系種豬隻平均日增重是否有差別" class="headerlink" title="由種豬登錄資料逢雞取得品系A與B各十個豬場的檢定資料，得到其平均日增重，兩品系種豬隻平均日增重是否有差別?"></a>由種豬登錄資料逢雞取得品系A與B各十個豬場的檢定資料，得到其平均日增重，兩品系種豬隻平均日增重是否有差別?</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">lineA&lt;- <span class="built_in">c</span>(<span class="number">.64</span>,<span class="number">.61</span>,<span class="number">.62</span>,<span class="number">.67</span>,<span class="number">.65</span>,<span class="number">.70</span>,<span class="number">.80</span>,<span class="number">.78</span>,<span class="number">.76</span>,<span class="number">.78</span>)</span><br><span class="line">lineB&lt;- <span class="built_in">c</span>(<span class="number">.64</span>,<span class="number">.64</span>,<span class="number">.67</span>,<span class="number">.67</span>,<span class="number">.80</span>,<span class="number">.83</span>,<span class="number">.82</span>,<span class="number">.72</span>,<span class="number">.78</span>,<span class="number">.67</span>)</span><br><span class="line">var.test(lineA,lineB)</span><br><span class="line">t.test(lineA,lineB)</span><br></pre></td></tr></table></figure>
+
+<h2 id="水漾肉與暗乾肉之此類固醇平均含量是否有差異"><a href="#水漾肉與暗乾肉之此類固醇平均含量是否有差異" class="headerlink" title="水漾肉與暗乾肉之此類固醇平均含量是否有差異?"></a>水漾肉與暗乾肉之此類固醇平均含量是否有差異?</h2><p>以外觀將豬肉分成正常肉、水漾肉與暗乾肉三類，測定此三類里脊肉血漿某固醇量各120個樣本。所測得水漾肉與暗乾肉平均值差異為-3.3γ/100ml，均方分別為S1^2=128.88與S2^2=136.31。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">L&lt;- -<span class="number">3.3</span> ;S1&lt;- <span class="number">128.88</span>; S2&lt;-<span class="number">136.31</span> ;n&lt;- <span class="number">120</span></span><br><span class="line">S_pooled&lt;- <span class="built_in">sqrt</span>(((n-<span class="number">1</span>)*(S1+S2))/(n*<span class="number">2</span>-<span class="number">2</span>))*<span class="built_in">sqrt</span>(<span class="number">1</span>/n*<span class="number">2</span>)</span><br><span class="line">pt(<span class="built_in">abs</span>(L/S_pooled), (n*<span class="number">2</span>-<span class="number">2</span>),lower.tail = <span class="built_in">F</span>)*<span class="number">2</span></span><br></pre></td></tr></table></figure>
+<h2 id="如果平均值差異在2γ-100ml以上，希望有0-9的機率顯著地檢定出其差異，需要多大的樣本"><a href="#如果平均值差異在2γ-100ml以上，希望有0-9的機率顯著地檢定出其差異，需要多大的樣本" class="headerlink" title="如果平均值差異在2γ/100ml以上，希望有0.9的機率顯著地檢定出其差異，需要多大的樣本?"></a>如果平均值差異在2γ/100ml以上，希望有0.9的機率顯著地檢定出其差異，需要多大的樣本?</h2><p>若要估計所需樣本數，我們需要知道變方。假設所得估計值(132.6)為其變方。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">L&lt;- <span class="number">2</span></span><br><span class="line">n&lt;- ((qnorm(<span class="number">0.05</span>/<span class="number">2</span>,lower.tail = <span class="built_in">F</span>)+qnorm(<span class="number">0.9</span>))^<span class="number">2</span>)*(((n-<span class="number">1</span>)*(S1+S2))/(n*<span class="number">2</span>-<span class="number">2</span>))*<span class="number">2</span>/L^<span class="number">2</span></span><br><span class="line">n</span><br></pre></td></tr></table></figure>
+<h2 id="已知餵飼小雞生大豆因含有trpsin-inhibitor而造成胰臟腫大，為了解酸處理除去抑制因子的效果，以20隻餵飼未處理的大豆與10隻餵飼酸處理大豆來比較，測得其胰臟佔體重百分比如下，酸處理是否有效"><a href="#已知餵飼小雞生大豆因含有trpsin-inhibitor而造成胰臟腫大，為了解酸處理除去抑制因子的效果，以20隻餵飼未處理的大豆與10隻餵飼酸處理大豆來比較，測得其胰臟佔體重百分比如下，酸處理是否有效" class="headerlink" title="已知餵飼小雞生大豆因含有trpsin inhibitor而造成胰臟腫大，為了解酸處理除去抑制因子的效果，以20隻餵飼未處理的大豆與10隻餵飼酸處理大豆來比較，測得其胰臟佔體重百分比如下，酸處理是否有效?"></a>已知餵飼小雞生大豆因含有trpsin inhibitor而造成胰臟腫大，為了解酸處理除去抑制因子的效果，以20隻餵飼未處理的大豆與10隻餵飼酸處理大豆來比較，測得其胰臟佔體重百分比如下，酸處理是否有效?</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ctrl&lt;- <span class="built_in">c</span>(<span class="number">.75</span>,<span class="number">.97</span>,<span class="number">.60</span>,<span class="number">.82</span>,<span class="number">.84</span>,<span class="number">.98</span>,<span class="number">.71</span>,<span class="number">.78</span>,<span class="number">.88</span>,<span class="number">.55</span>,<span class="number">.79</span>,<span class="number">1.03</span>,<span class="number">.91</span>,<span class="number">.63</span>,<span class="number">1.10</span>,<span class="number">.83</span>,<span class="number">.95</span>,<span class="number">.74</span>,<span class="number">.87</span>,<span class="number">.67</span>)</span><br><span class="line">trt&lt;- <span class="built_in">c</span>(<span class="number">.32</span>,<span class="number">.74</span>,<span class="number">1.05</span>,<span class="number">.53</span>,<span class="number">.27</span>,<span class="number">.40</span>,<span class="number">.97</span>,<span class="number">.65</span>,<span class="number">.89</span>,<span class="number">.68</span>)</span><br><span class="line">t.test(ctrl,trt,var.equal = <span class="built_in">T</span>)</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">## 產品規格要求標準偏差在0.5以下，若測量36個產品，其標準偏差估計值為4.5，是否有足夠理由認為此產品之規格符合上述標準?</span><br><span class="line">```R</span><br><span class="line">df&lt;- <span class="number">36</span>-<span class="number">1</span></span><br><span class="line">pchisq((df*<span class="number">4.5</span>^<span class="number">2</span>)/<span class="number">5</span>^<span class="number">2</span>,df)</span><br></pre></td></tr></table></figure>
+<h2 id="為了解不同劑量四氯化碳驅除鼠鉤蟲的效果，將每隻大鼠灌入500個溝蟲卵，八天後分別給予0-03ml與0-06ml含四氯化碳礦物油。兩天後將之犧牲以計算鼠鉤蟲成蟲數目。以下數據為殺死鉤蟲百分比"><a href="#為了解不同劑量四氯化碳驅除鼠鉤蟲的效果，將每隻大鼠灌入500個溝蟲卵，八天後分別給予0-03ml與0-06ml含四氯化碳礦物油。兩天後將之犧牲以計算鼠鉤蟲成蟲數目。以下數據為殺死鉤蟲百分比" class="headerlink" title="為了解不同劑量四氯化碳驅除鼠鉤蟲的效果，將每隻大鼠灌入500個溝蟲卵，八天後分別給予0.03ml與0.06ml含四氯化碳礦物油。兩天後將之犧牲以計算鼠鉤蟲成蟲數目。以下數據為殺死鉤蟲百分比:"></a>為了解不同劑量四氯化碳驅除鼠鉤蟲的效果，將每隻大鼠灌入500個溝蟲卵，八天後分別給予0.03ml與0.06ml含四氯化碳礦物油。兩天後將之犧牲以計算鼠鉤蟲成蟲數目。以下數據為殺死鉤蟲百分比:</h2><p>trt1&lt;- c(25.8,17.6,30.0,34.4,27.4)<br>trt2&lt;- c(58.6,67.6,47.6,85.2,76.8)<br>var.test(trt1,trt2)<br>t.test(trt1,trt2,var.equal = T)</p>
+<h2 id="為了解reserpine對血漿serotonin的影響，測量10位健康成人在注射2-5ml-reserpine以前與一小時以後血漿serotonin濃度-μg-10-9血小板-如下"><a href="#為了解reserpine對血漿serotonin的影響，測量10位健康成人在注射2-5ml-reserpine以前與一小時以後血漿serotonin濃度-μg-10-9血小板-如下" class="headerlink" title="為了解reserpine對血漿serotonin的影響，測量10位健康成人在注射2.5ml reserpine以前與一小時以後血漿serotonin濃度 (μg/10^9血小板)如下:"></a>為了解reserpine對血漿serotonin的影響，測量10位健康成人在注射2.5ml reserpine以前與一小時以後血漿serotonin濃度 (μg/10^9血小板)如下:</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">before&lt;- <span class="built_in">c</span>(<span class="number">.61</span>,<span class="number">.59</span>,<span class="number">.68</span>,<span class="number">.67</span>,<span class="number">.70</span>,<span class="number">.54</span>,<span class="number">.64</span>,<span class="number">.59</span>,<span class="number">.64</span>,<span class="number">.64</span>)</span><br><span class="line">after&lt;- <span class="built_in">c</span>(<span class="number">.56</span>,<span class="number">.46</span>,<span class="number">.60</span>,<span class="number">.53</span>,<span class="number">.77</span>,<span class="number">.50</span>,<span class="number">.54</span>,<span class="number">.52</span>,<span class="number">.72</span>,<span class="number">.60</span>)</span><br><span class="line">serotonin&lt;- data.frame(before,after)</span><br><span class="line">t.test(serotonin$before,serotonin$after, paired = <span class="built_in">T</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="為測定某飼料添加劑對生長豬增重的影響-已知絕不會對增重有負面影響-，使用10對同窩公仔豬來做試驗，每一窩各一頭飼予對照日糧與添加日糧，試驗期間增重-kg-如下"><a href="#為測定某飼料添加劑對生長豬增重的影響-已知絕不會對增重有負面影響-，使用10對同窩公仔豬來做試驗，每一窩各一頭飼予對照日糧與添加日糧，試驗期間增重-kg-如下" class="headerlink" title="為測定某飼料添加劑對生長豬增重的影響(已知絕不會對增重有負面影響)，使用10對同窩公仔豬來做試驗，每一窩各一頭飼予對照日糧與添加日糧，試驗期間增重(kg)如下:"></a>為測定某飼料添加劑對生長豬增重的影響(已知絕不會對增重有負面影響)，使用10對同窩公仔豬來做試驗，每一窩各一頭飼予對照日糧與添加日糧，試驗期間增重(kg)如下:</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">trt&lt;- <span class="built_in">c</span>(<span class="number">40</span>,<span class="number">36</span>,<span class="number">36</span>,<span class="number">39</span>,<span class="number">43</span>,<span class="number">30</span>,<span class="number">35</span>,<span class="number">41</span>,<span class="number">48</span>,<span class="number">40</span>)</span><br><span class="line">ctrl&lt;- <span class="built_in">c</span>(<span class="number">37</span>,<span class="number">35</span>,<span class="number">34</span>,<span class="number">41</span>,<span class="number">39</span>,<span class="number">27</span>,<span class="number">35</span>,<span class="number">40</span>,<span class="number">48</span>,<span class="number">36</span>)</span><br><span class="line">test&lt;-t.test(trt, ctrl, alternative = greater,var.equal = <span class="built_in">T</span>,paired = <span class="built_in">T</span>)</span><br><span class="line">1-<span class="number">0.01466</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>我們有多少把握認為添加劑可以增加平均體重?<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t.test(trt, ctrl, alternative = greater,var.equal = <span class="built_in">T</span>)</span><br></pre></td></tr></table></figure></li>
+<li>如果添加劑可能也有負面影響，我們有多少把握認為添加劑有利於平均體重?<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t.test(trt, ctrl, alternative = two.sided,var.equal = <span class="built_in">T</span>,paired = <span class="built_in">T</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="檢定站上月份檢定了藍瑞斯母豬52頭與杜洛克24頭，其90公斤體重時背脂厚度標準偏差分別為0-24cm與0-36cm，這兩品種背脂厚度的整齊度是否有顯著差異"><a href="#檢定站上月份檢定了藍瑞斯母豬52頭與杜洛克24頭，其90公斤體重時背脂厚度標準偏差分別為0-24cm與0-36cm，這兩品種背脂厚度的整齊度是否有顯著差異" class="headerlink" title="檢定站上月份檢定了藍瑞斯母豬52頭與杜洛克24頭，其90公斤體重時背脂厚度標準偏差分別為0.24cm與0.36cm，這兩品種背脂厚度的整齊度是否有顯著差異?"></a>檢定站上月份檢定了藍瑞斯母豬52頭與杜洛克24頭，其90公斤體重時背脂厚度標準偏差分別為0.24cm與0.36cm，這兩品種背脂厚度的整齊度是否有顯著差異?</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">n1&lt;- <span class="number">52</span>;n2&lt;-<span class="number">24</span></span><br><span class="line">sd1&lt;-<span class="number">0.24</span>;sd2&lt;-<span class="number">0.36</span></span><br><span class="line"><span class="built_in">F</span>&lt;- (sd2^<span class="number">2</span>/sd1^<span class="number">2</span>)</span><br><span class="line"><span class="built_in">F</span>&gt;qf(<span class="number">1</span>-<span class="number">0.05</span>/<span class="number">2</span>,<span class="number">23</span>,<span class="number">51</span>) <span class="comment">#邏輯判斷</span></span><br><span class="line">pf(<span class="built_in">F</span>,n1-<span class="number">1</span>,n2-<span class="number">1</span>)</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/R/" rel="tag"># R</a>
+              <a href="/tags/biostatistics/" rel="tag"># biostatistics</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/12/09/%E6%8A%8A%E6%99%82%E9%96%93%E7%95%B6%E4%BD%9C%E6%9C%8B%E5%8F%8B-%20%E8%A6%81%E7%AE%A1%E7%90%86%E7%9A%84%E4%B8%8D%E6%98%AF%E6%99%82%E9%96%93%EF%BC%8C%E8%80%8C%E6%98%AF%E8%87%AA%E5%B7%B1/" rel="prev" title="把時間當作朋友- 要管理的不是時間，而是自己">
+                  <i class="fa fa-chevron-left"></i> 把時間當作朋友- 要管理的不是時間，而是自己
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/02/02/%E6%88%91%E4%B8%8D%E8%A6%81%E7%95%B6%E7%A4%BE%E7%95%9C%20-%20%E5%A6%82%E6%9E%9C%E5%B7%A5%E4%BD%9C%E5%8F%AA%E7%82%BA%E6%BA%AB%E9%A3%BD%EF%BC%8C%E9%82%A3%E8%B7%9F%E7%A4%BE%E7%95%9C%E6%9C%89%E4%BB%80%E9%BA%BC%E5%85%A9%E6%A8%A3/" rel="next" title="我不要當社畜 - 如果工作只為溫飽，那跟社畜有什麼兩樣">
+                  我不要當社畜 - 如果工作只為溫飽，那跟社畜有什麼兩樣 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hugnlin Chen</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '.page-configurations',
+    '.main-inner',
+    '.post-toc-wrap',
+    '.languages',
+    '.pjax'
+  ],
+  analytics: false,
+  cacheBust: false,
+  scrollRestoration: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  const hasTOC = document.querySelector('.post-toc');
+  document.querySelector('.sidebar-inner').classList.toggle('sidebar-nav-active', hasTOC);
+  document.querySelector(hasTOC ? '.sidebar-nav-toc' : '.sidebar-nav-overview').click();
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+
+
+
+    <div class="pjax">
+
+
+    </div>
+</body>
+</html>

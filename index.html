@@ -21,7 +21,7 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"hunglin59638.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+    var CONFIG = {"hostname":"hunglin59638.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 <meta property="og:type" content="website">
 <meta property="og:title" content="MengDoggy">
@@ -95,6 +95,9 @@
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
@@ -105,19 +108,55 @@
       <h1 class="site-title">MengDoggy</h1>
       <i class="logo-line"></i>
     </a>
+      <p class="site-subtitle" itemprop="description">風中一匹狼</p>
   </div>
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
 
 
 
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
         
@@ -148,6 +187,8 @@
 
         <div class="site-overview-wrap sidebar-panel">
           <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hugnlin Chen"
+      src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">Hugnlin Chen</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -155,18 +196,33 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-count">47</span>
           <span class="site-state-item-name">posts</span>
         </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
   <div class="links-of-author site-overview-item animated">
       <span class="links-of-author-item">
-        <a href="https://github.com/hunglin59638" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hunglin59638" rel="noopener" target="_blank">GitHub</a>
+        <a href="https://github.com/hunglin59638" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hunglin59638" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:hunglin59638@gmail.com" title="E-Mail → mailto:hunglin59638@gmail.com" rel="noopener" target="_blank">E-Mail</a>
+        <a href="mailto:hunglin59638@gmail.com" title="E-Mail → mailto:hunglin59638@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://discord.gg/4WpdhECsXq" title="Discord → https:&#x2F;&#x2F;discord.gg&#x2F;4WpdhECsXq" rel="noopener" target="_blank"><i class="fab fa-discord fa-fw"></i>Discord</a>
       </span>
   </div>
 
@@ -174,6 +230,10 @@
 
         </div>
       </div>
+        <div class="back-to-top animated" role="button">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
     </div>
   </aside>
   <div class="sidebar-dimmer"></div>
@@ -182,10 +242,6 @@
     </header>
 
     
-  <div class="back-to-top" role="button">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
 
 <noscript>
   <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
@@ -202,7 +258,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://hunglin59638.github.io/2021/03/19/hello-world/">
+    <link itemprop="mainEntityOfPage" href="https://hunglin59638.github.io/2020/12/16/%E5%B7%A5%E4%BD%9C%E5%8D%8A%E5%B9%B4%E5%A4%9A%E7%9A%84%E6%88%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -215,7 +271,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/03/19/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+          <a href="/2020/12/16/%E5%B7%A5%E4%BD%9C%E5%8D%8A%E5%B9%B4%E5%A4%9A%E7%9A%84%E6%88%91/" class="post-title-link" itemprop="url">工作半年多的我</a>
         </h2>
 
         <div class="post-meta-container">
@@ -226,7 +282,23 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2021-03-19 06:24:38" itemprop="dateCreated datePublished" datetime="2021-03-19T06:24:38+08:00">2021-03-19</time>
+      <time title="Created: 2020-12-16 00:00:00" itemprop="dateCreated datePublished" datetime="2020-12-16T00:00:00+08:00">2020-12-16</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-03-26 00:09:04" itemprop="dateModified" datetime="2021-03-26T00:09:04+08:00">2021-03-26</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/life/" itemprop="url" rel="index"><span itemprop="name">life</span></a>
+        </span>
     </span>
 
   
@@ -239,19 +311,425 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+          <p>實驗室最近要聚餐了，老師要大家報告一下自己的工作<br>對於算是新鮮人的我們應該比較有可以說的東西<br>感覺之後再過三年還要再報告可能就會沒東西了<br>但想想如果真的沒東西可以說的話也是滿悲哀的<br>表示自己這三年都沒有甚麼變化或長進<br>居然沒有東西可以更新，頗可怕的  </p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/12/16/%E5%B7%A5%E4%BD%9C%E5%8D%8A%E5%B9%B4%E5%A4%9A%E7%9A%84%E6%88%91/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+    
+    
+    
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hunglin59638.github.io/2020/09/10/%E8%A6%81%E6%80%8E%E9%BA%BC%E5%A5%BD%E5%A5%BD%E4%BB%8B%E7%B4%B9%E8%87%AA%E5%B7%B1%E7%9A%84%E5%B7%A5%E4%BD%9C%20_%20%E7%94%9F%E7%89%A9%E8%B3%87%E8%A8%8A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Hugnlin Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MengDoggy">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/09/10/%E8%A6%81%E6%80%8E%E9%BA%BC%E5%A5%BD%E5%A5%BD%E4%BB%8B%E7%B4%B9%E8%87%AA%E5%B7%B1%E7%9A%84%E5%B7%A5%E4%BD%9C%20_%20%E7%94%9F%E7%89%A9%E8%B3%87%E8%A8%8A/" class="post-title-link" itemprop="url">要怎麼好好介紹自己的工作 | 生物資訊</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-09-10 00:00:00" itemprop="dateCreated datePublished" datetime="2020-09-10T00:00:00+08:00">2020-09-10</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-03-26 00:24:40" itemprop="dateModified" datetime="2021-03-26T00:24:40+08:00">2021-03-26</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/life/" itemprop="url" rel="index"><span itemprop="name">life</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="起源"><a href="#起源" class="headerlink" title="起源"></a>起源</h2><p>前幾天聚會的時候聊到各自的工作內容時<br>居然大家都不太理解我在做什麼<br>讓我感到很難過<br>明明生物資訊就已經算是顯學了<br>但有一點可能是我介紹的太艱深了<br>或許就說的簡單一點就好  </p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/09/10/%E8%A6%81%E6%80%8E%E9%BA%BC%E5%A5%BD%E5%A5%BD%E4%BB%8B%E7%B4%B9%E8%87%AA%E5%B7%B1%E7%9A%84%E5%B7%A5%E4%BD%9C%20_%20%E7%94%9F%E7%89%A9%E8%B3%87%E8%A8%8A/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hunglin59638.github.io/2020/09/09/%E6%A1%8C%E9%9B%BB%E7%B5%84%E8%A3%9D%E9%85%8D%E7%BD%AE%20|%20%E7%9C%81%E9%9B%BB%E3%80%81%E5%89%9B%E5%A5%BD%E5%8F%AF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Hugnlin Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MengDoggy">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/09/09/%E6%A1%8C%E9%9B%BB%E7%B5%84%E8%A3%9D%E9%85%8D%E7%BD%AE%20%7C%20%E7%9C%81%E9%9B%BB%E3%80%81%E5%89%9B%E5%A5%BD%E5%8F%AF%E7%94%A8/" class="post-title-link" itemprop="url">桌電組裝配置 | 省電、剛好可用</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-09-09 00:00:00" itemprop="dateCreated datePublished" datetime="2020-09-09T00:00:00+08:00">2020-09-09</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-03-26 00:51:36" itemprop="dateModified" datetime="2021-03-26T00:51:36+08:00">2021-03-26</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>預算1W左右</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/09/09/%E6%A1%8C%E9%9B%BB%E7%B5%84%E8%A3%9D%E9%85%8D%E7%BD%AE%20%7C%20%E7%9C%81%E9%9B%BB%E3%80%81%E5%89%9B%E5%A5%BD%E5%8F%AF%E7%94%A8/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hunglin59638.github.io/2020/06/17/microbiomes%20x%20nanopore%20x%20metagenome%20workflow/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Hugnlin Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MengDoggy">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/06/17/microbiomes%20x%20nanopore%20x%20metagenome%20workflow/" class="post-title-link" itemprop="url">microbiomes x nanopore x metagenome workflow</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-06-17 00:00:00" itemprop="dateCreated datePublished" datetime="2020-06-17T00:00:00+08:00">2020-06-17</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-03-26 00:48:24" itemprop="dateModified" datetime="2021-03-26T00:48:24+08:00">2021-03-26</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/short-review/" itemprop="url" rel="index"><span itemprop="name">short review</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41587-020-0422-6">Complete, closed bacterial genomes from microbiomes using nanopore sequencing</a></p>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>Microbial genomes can be assembled from short-read sequencing data, but the assembly contiguity of these metagenome-assembled genomes is constrained by repeat elements. Correct assignment of genomic positions of repeats is crucial for understanding the effect of genome structure on genome function.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/17/microbiomes%20x%20nanopore%20x%20metagenome%20workflow/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hunglin59638.github.io/2020/06/08/%E6%9E%B6%E8%A8%AD%E8%87%AA%E5%B7%B1%E7%9A%84WordPress%20with%20LAMP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Hugnlin Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MengDoggy">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/06/08/%E6%9E%B6%E8%A8%AD%E8%87%AA%E5%B7%B1%E7%9A%84WordPress%20with%20LAMP/" class="post-title-link" itemprop="url">架設自己的WordPress with LAMP</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-06-08 00:00:00" itemprop="dateCreated datePublished" datetime="2020-06-08T00:00:00+08:00">2020-06-08</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-03-26 01:16:31" itemprop="dateModified" datetime="2021-03-26T01:16:31+08:00">2021-03-26</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/wordpress/" itemprop="url" rel="index"><span itemprop="name">wordpress</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>第一篇文章就來寫這個主題吧，但也因為這樣被搞到超累</p>
+<p>本文就是個紀錄架設過程，所以很多理論就skip，還會小抱怨遇到的神奇問題哈  </p>
+<h2 id="註冊網域"><a href="#註冊網域" class="headerlink" title="註冊網域"></a>註冊網域</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://tw.godaddy.com/">Godaddy</a><br><code>.com</code>的網域大概落在150-300吧  </li>
+<li><a target="_blank" rel="noopener" href="https://www.freenom.com/">Freenom</a><br>結果居然可以註冊免費網域，只是後綴被限定<br>最後我選<code>hunglinchen.ga</code><br>哦哦如果開輸入欄位只有輸入<code>hunglinchen</code>的話，會跳出可用的網域<br>但是點選時會跳出不可用<br>但輸入完整的網域(hunglinchen.ga)就可以加到購物車嚕  </li>
+</ul>
+<p>進到DNS管理的頁面，先放著租好主機再回來<br>Services &gt; My Domains &gt; Manage Domain &gt; Manage Freenom DNS<br><img src="https://lh3.googleusercontent.com/TtYTCphmry3fSj6MQL6UXKPEqWszXX7BeyIMi5xav_rwvI_62Ku1-VIb0CR9icCmMqV8rANjAkpDf3cCUvRk2Iagj4ANfEtxHy7FxUFxfIjoa1mRg2tq4TzHcFOnvbsczawOGVn-dw=w1200"></img></p>
+<h2 id="租用伺服器主機"><a href="#租用伺服器主機" class="headerlink" title="租用伺服器主機"></a>租用伺服器主機</h2><p>伺服器主機商選google，有個平台叫<code>Google cloud platform (GCP)</code><br>首次註冊可以一年內有300美金使用，對於自己租用一台空機的價錢綽綽有餘<br>選<code>Compute Engine</code>建立一台虛擬主機<br>再來操做就看以下連結，人家寫得很完美XD<br>主機規格我選CPU 一核心，記憶體 3.75G ，硬碟30G SSD，作業系統選ubuntu 18.04<br>伺服器位置就選彰化那個機房，這樣一個月30幾塊而已(台幣)<br>當然以上規格只是我熟悉和喜歡的而已，可以自己客製化方案<br>哦哦還有把ip調為靜態ip，一開始是是臨時ip</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.yannyann.com/2018/02/wp-ssl-ubuntu-lamp-nginx-varnish-redis-2/">手把手教你用 Google Cloud Platform 安裝免費且快速的 WordPress 網站並使用 Ubuntu 18.04, LAMP, Nginx, Varnish 和 Redis 加速你的網站(一年 300 美金的免費額度可以使用) | WordPress</a>  </p>
+</blockquote>
+<h2 id="遠端操作"><a href="#遠端操作" class="headerlink" title="遠端操作"></a>遠端操作</h2><h3 id="Cloud-SDK"><a href="#Cloud-SDK" class="headerlink" title="Cloud SDK"></a>Cloud SDK</h3><p>要能夠遠端操作伺服器最常見的服務就是<code>ssh</code>了<br>google這方面功能也做好了，下載他們的<a target="_blank" rel="noopener" href="https://cloud.google.com/sdk/docs/downloads-versioned-archives?hl=zh-tw">Cloud SDK</a>，選自己電腦的作業系統，我手邊用windows</p>
+<blockquote>
+<p>Cloud SDK 是一組指令列工具，用於在 Google Cloud 中進行開發作業。您可以使用這些工具，直接透過指令列存取 Compute Engine、Cloud Storage、BigQuery 和其他 Google Cloud 服務。</p>
+</blockquote>
+<p>執行安裝檔後會跳出認證畫面，認證完自己的google帳號後就可以用ssh連接主機</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcloud compute --project &quot;專案的ID&quot; ssh --zone &quot;伺服器主機位置&quot; &quot;主機名稱&quot;</span><br></pre></td></tr></table></figure>
+<p>專案ID是GCP一開始要建立專案時的ID，名稱預設應該是<code>My First Project</code><br>    <img src="https://lh3.googleusercontent.com/a-K4iTjenGkDs-njGiDp83HDveG98zqk3a3QuhEN2ormS2LLAoIBHV--gw2PwtzGNny0Gf2oQ_FD0EYsgiULv2RWvEUT4BZWEeFX40qfqLzWK6R2Ie2lc9SBRzovm510O-vh7iFaFg=w1200"><img></p>
+<p>主機位置是剛剛租用哪個地區的主機，下圖<code>區域</code>的色塊<br><img src="https://lh3.googleusercontent.com/4f64woUWNM2mWuJvTGtsKr0XrovfRvKQGVhm3_mun-_qkA0Q-OIWI8p_c-7egYyfY1hesy8WYKMNPJDES_sq471KfoPJ9-W3t-P2sfGokb9HV5R8u1J9zdY5upVEbzrIT-FaK832NQ=w1200"></img></p>
+<p>主機名稱就是建立… 應該不用說了….</p>
+<p>沒意外就可以順利連上了，有意外的話我也不知道怎辦XD<br>第一次是誤以為主機位置是ip所以失敗<br>這時就會跳出眼熟的terminal畫面了  </p>
+<h3 id="在伺服器建立使用者以ssh連接"><a href="#在伺服器建立使用者以ssh連接" class="headerlink" title="在伺服器建立使用者以ssh連接"></a>在伺服器建立使用者以ssh連接</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo adduser [username]</span><br><span class="line">sudo usermod -a -G sudo [username]</span><br><span class="line">sudo su hunglin</span><br><span class="line">sudo passwd</span><br><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
+
+<p>退回本機電腦的遠端拿公開金鑰   </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -f ~/.ssh/mainsite.pem -C [username]</span><br><span class="line">chmod 400 ~/.ssh/mainsite.pem</span><br><span class="line">cat ~/.ssh/mainsite.pem.pub</span><br></pre></td></tr></table></figure>
+
+<p>到GCP &gt; Compute engine &gt; 中繼資料 &gt; 安全殼層金鑰<br>複製到compute engine的中繼資料後就可以用<code>username</code>登入了  </p>
+<h2 id="架設Wordpress網站"><a href="#架設Wordpress網站" class="headerlink" title="架設Wordpress網站"></a>架設Wordpress網站</h2><p>以上其實都在租用伺服器的連結都有詳細說明，我都是看著他一路過來XD<br>接下來則是要在伺服器安裝LAMP最後才是WordPress  </p>
+<p>阿忘記Freenom的DNS了<br>這時候可以回到Freenom DNS管理頁面在Target貼上伺服器的公開IP<br>Name則是網域名稱<br>Save Change之後等段時間應該就可以在瀏覽器輸入網域進到自己的網站了<br>不過現在還沒架設  </p>
+<h3 id="Apache2"><a href="#Apache2" class="headerlink" title="Apache2"></a>Apache2</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt upgrade -y</span><br><span class="line">sudo apt install apache2 apache2-utils -y</span><br><span class="line">sudo systemctl status apache2 <span class="comment">#確認運行</span></span><br></pre></td></tr></table></figure>
+
+<p>啟用服務  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> apache2</span><br><span class="line">sudo systemctl start apache2</span><br></pre></td></tr></table></figure>
+<p>如果Domain指向伺服器成功的話在瀏覽器輸入domain name就會看到apache的預設頁面<br>看到會感動一下  </p>
+<h3 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h3><p>我遇到的痛苦不想說了，簡單說就是要安裝最新版的php喔~<br>現在(2020-06)穩定運行版是7.4  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:ondrej/php</span><br><span class="line">sudo apt update</span><br><span class="line">sudo apt install php7.4</span><br><span class="line">sudo apt install php-mysql php-curl php-gd php-mbstring php-xml php-xmlrpc php-soap php-intl php-zip php-json</span><br></pre></td></tr></table></figure>
+<p>WordPress官方也有建議要安裝那些php的extensions，最好是看一下官網說要安裝那些<br>我覺得我上面可能有漏寫: )</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://make.wordpress.org/hosting/handbook/handbook/server-environment/#php-extensions">https://make.wordpress.org/hosting/handbook/handbook/server-environment/#php-extensions</a>  </p>
+</blockquote>
+<h3 id="Mysql"><a href="#Mysql" class="headerlink" title="Mysql"></a>Mysql</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install mysql-server mysql-client libmysqlclient-dev -y</span><br><span class="line">sudo netstat -tap | grep mysql</span><br><span class="line">sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf</span><br><span class="line"><span class="comment"># annotate bind-address = 127.0.0.1</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/mysql/debian.cnf</span><br></pre></td></tr></table></figure>
+<p>紀錄一下預設的帳號和密碼<br>帳號沒意外是<code>debian-sys-maint</code></p>
+<p>建立給Wordpress的資料庫<br>進入mysql服務  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">mysql -u debian-sys-maint -p</span><br><span class="line">Enter password: </span><br><span class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</span><br><span class="line">Your MySQL connection id is 2</span><br><span class="line">Server version: 5.7.29-0ubuntu0.18.04.1 (Ubuntu)</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.</span><br><span class="line"></span><br><span class="line">Oracle is a registered trademark of Oracle Corporation and/or its</span><br><span class="line">affiliates. Other names may be trademarks of their respective</span><br><span class="line">owners.</span><br><span class="line"></span><br><span class="line">Type <span class="string">&#x27;help;&#x27;</span> or <span class="string">&#x27;\h&#x27;</span> <span class="keyword">for</span> <span class="built_in">help</span>. Type <span class="string">&#x27;\c&#x27;</span> to clear the current input statement.</span><br><span class="line"></span><br><span class="line">mysql&gt; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>授權其他電腦登入  </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">CREATE</span> DATABASE [自己命名一個資料庫];</span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> [databasename].<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;debian-sys-maint&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;PASSWORD_input&#x27;</span>;</span><br><span class="line">mysql<span class="operator">&gt;</span> FLUSH PRIVILEGES;</span><br><span class="line">mysql<span class="operator">&gt;</span> EXIT;</span><br></pre></td></tr></table></figure>
+<p>重啟服務  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart mysql.service </span><br></pre></td></tr></table></figure>
+
+<h3 id="WordPress"><a href="#WordPress" class="headerlink" title="WordPress"></a>WordPress</h3><p>終於…<br>下載wordpress再移動到網頁伺服器顯示位置  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget -c http://wordpress.org/latest.tar.gz</span><br><span class="line">tar -xzvf latest.tar.gz</span><br><span class="line">sudo rsync -av wordpress/* /var/www/html/</span><br></pre></td></tr></table></figure>
+
+<p>把擁有者權限給apache  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R www-data:www-data &#x2F;var&#x2F;www&#x2F;html&#x2F;</span><br><span class="line">sudo chmod -R 755 &#x2F;var&#x2F;www&#x2F;html&#x2F;</span><br></pre></td></tr></table></figure>
+
+<p>編輯設定檔</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo mv wp-config-sample.php wp-config.php</span><br><span class="line">sudo vim wp-config.php</span><br></pre></td></tr></table></figure>
+
+<p>填入mysql的設定  </p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// ** MySQL 設定 - 您可以從主機服務提供商獲取相關資訊。 ** //</span><br><span class="line">/** WordPress 的資料庫名稱，請更改 <span class="string">&quot;database_name_here&quot;</span> */</span><br><span class="line">define(&#x27;DB_NAME&#x27;, &#x27;database name&#x27;);</span><br><span class="line"></span><br><span class="line">/** MySQL 資料庫使用者名稱，請更改 <span class="string">&quot;debian-sys-maint&quot;</span> */</span><br><span class="line">define(&#x27;DB_USER&#x27;, &#x27;&#x27;);</span><br><span class="line"></span><br><span class="line">/** MySQL 資料庫密碼，請更改 <span class="string">&quot;password_here&quot;</span> */</span><br><span class="line">define(&#x27;DB_PASSWORD&#x27;, &#x27;PASSWARD_INPUT&#x27;);</span><br></pre></td></tr></table></figure>
+
+<p>最後最後  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart apache2.service </span><br><span class="line">sudo systemctl restart mysql.service </span><br></pre></td></tr></table></figure>
+<p>然後在瀏覽器輸入網域名就可以進到wordpress的設定介面了  </p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.tecmint.com/install-wordpress-on-ubuntu-16-04-with-lamp/">How to Install WordPress 5 On Ubuntu 16.10/16.04 Using LAMP Stack</a></p>
+</blockquote>
+<p>沒想到這樣整理下來也是很累= =<br>之後再更新遇到奇葩的問題  </p>
 
       
     </div>
@@ -270,6 +748,449 @@
 
 
 
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hunglin59638.github.io/2020/06/08/%E7%94%B3%E8%AB%8BSSL%E8%AA%8D%E8%AD%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Hugnlin Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MengDoggy">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/06/08/%E7%94%B3%E8%AB%8BSSL%E8%AA%8D%E8%AD%89/" class="post-title-link" itemprop="url">申請SSL認證</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-06-08 00:00:00" itemprop="dateCreated datePublished" datetime="2020-06-08T00:00:00+08:00">2020-06-08</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-03-26 01:15:49" itemprop="dateModified" datetime="2021-03-26T01:15:49+08:00">2021-03-26</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/wordpress/" itemprop="url" rel="index"><span itemprop="name">wordpress</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>為了要讓<code>http</code>變成<code>https</code>差點不用睡了<br>不過流程也不是很難，就是卡住時會有無助感  </p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/08/%E7%94%B3%E8%AB%8BSSL%E8%AA%8D%E8%AD%89/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hunglin59638.github.io/2020/04/04/%E4%B8%AD%E8%88%88%E5%A4%A7%E5%AD%B8%20x%20%E7%94%9F%E7%89%A9%E8%B3%87%E8%A8%8A%20x%20%E6%9C%AA%E4%BE%86%E8%A6%8F%E5%8A%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Hugnlin Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MengDoggy">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/04/04/%E4%B8%AD%E8%88%88%E5%A4%A7%E5%AD%B8%20x%20%E7%94%9F%E7%89%A9%E8%B3%87%E8%A8%8A%20x%20%E6%9C%AA%E4%BE%86%E8%A6%8F%E5%8A%83/" class="post-title-link" itemprop="url">中興大學 x 生物資訊 x 未來規劃</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-04-04 00:00:00" itemprop="dateCreated datePublished" datetime="2020-04-04T00:00:00+08:00">2020-04-04</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-03-26 00:14:37" itemprop="dateModified" datetime="2021-03-26T00:14:37+08:00">2021-03-26</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/life/" itemprop="url" rel="index"><span itemprop="name">life</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>畢業後有位學弟傳了mail詢問一些生資的規劃，之後應該會愈來愈多人投入生資，所以就把他的問題跟我的經驗分享出來ㄅ  </p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/04/04/%E4%B8%AD%E8%88%88%E5%A4%A7%E5%AD%B8%20x%20%E7%94%9F%E7%89%A9%E8%B3%87%E8%A8%8A%20x%20%E6%9C%AA%E4%BE%86%E8%A6%8F%E5%8A%83/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hunglin59638.github.io/2020/03/15/%E7%94%9F%E8%B3%87%E9%9D%A2%E8%A9%A6%E7%B6%93%E9%A9%97%E7%AD%86%E8%A8%98(%E7%9B%8A%E8%BE%B2%E3%80%81%E6%B2%90%E6%81%A9%E3%80%81%E5%AE%89%E8%82%BD)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Hugnlin Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MengDoggy">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/03/15/%E7%94%9F%E8%B3%87%E9%9D%A2%E8%A9%A6%E7%B6%93%E9%A9%97%E7%AD%86%E8%A8%98(%E7%9B%8A%E8%BE%B2%E3%80%81%E6%B2%90%E6%81%A9%E3%80%81%E5%AE%89%E8%82%BD)/" class="post-title-link" itemprop="url">生資面試經驗筆記(益農、沐恩、安肽)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-03-15 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-15T00:00:00+08:00">2020-03-15</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-03-26 00:27:05" itemprop="dateModified" datetime="2021-03-26T00:27:05+08:00">2021-03-26</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/life/" itemprop="url" rel="index"><span itemprop="name">life</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>這是我在應徵過程中的筆記，所以寫得很隨興，想到甚麼就寫進去，分享給大家看看而已。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/03/15/%E7%94%9F%E8%B3%87%E9%9D%A2%E8%A9%A6%E7%B6%93%E9%A9%97%E7%AD%86%E8%A8%98(%E7%9B%8A%E8%BE%B2%E3%80%81%E6%B2%90%E6%81%A9%E3%80%81%E5%AE%89%E8%82%BD)/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hunglin59638.github.io/2020/02/07/NFC%20tag%E4%BD%BF%E7%94%A8%E7%B4%80%E9%8C%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Hugnlin Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MengDoggy">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/02/07/NFC%20tag%E4%BD%BF%E7%94%A8%E7%B4%80%E9%8C%84/" class="post-title-link" itemprop="url">NFC tag使用紀錄</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-02-07 00:00:00" itemprop="dateCreated datePublished" datetime="2020-02-07T00:00:00+08:00">2020-02-07</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-03-26 00:52:51" itemprop="dateModified" datetime="2021-03-26T00:52:51+08:00">2021-03-26</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>最近發現原來NFC感應也可以讓使用者設定要執行的指令  </p>
+<center><iframe width="560" height="315" src="https://www.youtube.com/embed/LMW1voE-d2w" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>  
+
+<p>首先要先準備nfc tag作為手機感應的媒介  </p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/02/07/NFC%20tag%E4%BD%BF%E7%94%A8%E7%B4%80%E9%8C%84/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hunglin59638.github.io/2019/12/21/Automounting%20google%20drive%20in%20Unbuntu%2018.04/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Hugnlin Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MengDoggy">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/12/21/Automounting%20google%20drive%20in%20Unbuntu%2018.04/" class="post-title-link" itemprop="url">Automounting google drive in Unbuntu 18.04</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-12-21 00:00:00" itemprop="dateCreated datePublished" datetime="2019-12-21T00:00:00+08:00">2019-12-21</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-03-26 00:34:39" itemprop="dateModified" datetime="2021-03-26T00:34:39+08:00">2021-03-26</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2>Conclusion</h2>
+<p>方法一:應該要是正確的設定，可惜還是需要開機後在terminal掛載</p>
+<p>方法二：內建程式Startup Applications設定開機時欲執行指令即可</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/12/21/Automounting%20google%20drive%20in%20Unbuntu%2018.04/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
 
 
 <script>
@@ -308,8 +1229,6 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Hugnlin Chen</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
-  </div>
 
     </div>
   </footer>
@@ -353,6 +1272,7 @@ document.addEventListener('pjax:success', () => {
 
 
   
+<script src="/js/local-search.js"></script>
 
 
 

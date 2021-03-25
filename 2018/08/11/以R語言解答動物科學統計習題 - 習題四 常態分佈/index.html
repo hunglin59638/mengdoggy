@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hunglin59638.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="若X為一個常態分佈，其平均值為5，標準偏差為2。當X&#x3D;3時，其密度函數曲線之高度為多少?1dnorm(3, mean &#x3D; 5, sd&#x3D; 2)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="以R語言解答動物科學統計習題 - 習題四 常態分佈">
+<meta property="og:url" content="https://hunglin59638.github.io/2018/08/11/%E4%BB%A5R%E8%AA%9E%E8%A8%80%E8%A7%A3%E7%AD%94%E5%8B%95%E7%89%A9%E7%A7%91%E5%AD%B8%E7%B5%B1%E8%A8%88%E7%BF%92%E9%A1%8C%20-%20%E7%BF%92%E9%A1%8C%E5%9B%9B%20%E5%B8%B8%E6%85%8B%E5%88%86%E4%BD%88/index.html">
+<meta property="og:site_name" content="MengDoggy">
+<meta property="og:description" content="若X為一個常態分佈，其平均值為5，標準偏差為2。當X&#x3D;3時，其密度函數曲線之高度為多少?1dnorm(3, mean &#x3D; 5, sd&#x3D; 2)">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2018-08-10T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-03-25T16:05:06.373Z">
+<meta property="article:author" content="Hugnlin Chen">
+<meta property="article:tag" content="R">
+<meta property="article:tag" content="biostatistics">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://hunglin59638.github.io/2018/08/11/%E4%BB%A5R%E8%AA%9E%E8%A8%80%E8%A7%A3%E7%AD%94%E5%8B%95%E7%89%A9%E7%A7%91%E5%AD%B8%E7%B5%B1%E8%A8%88%E7%BF%92%E9%A1%8C%20-%20%E7%BF%92%E9%A1%8C%E5%9B%9B%20%E5%B8%B8%E6%85%8B%E5%88%86%E4%BD%88/">
+
+
+<script data-pjax class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-tw'
+  };
+</script>
+<title>以R語言解答動物科學統計習題 - 習題四 常態分佈 | MengDoggy</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">MengDoggy</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">風中一匹狼</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8B%A5X%E7%82%BA%E4%B8%80%E5%80%8B%E5%B8%B8%E6%85%8B%E5%88%86%E4%BD%88%EF%BC%8C%E5%85%B6%E5%B9%B3%E5%9D%87%E5%80%BC%E7%82%BA5%EF%BC%8C%E6%A8%99%E6%BA%96%E5%81%8F%E5%B7%AE%E7%82%BA2%E3%80%82%E7%95%B6X-3%E6%99%82%EF%BC%8C%E5%85%B6%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B8%E6%9B%B2%E7%B7%9A%E4%B9%8B%E9%AB%98%E5%BA%A6%E7%82%BA%E5%A4%9A%E5%B0%91"><span class="nav-number">1.</span> <span class="nav-text">若X為一個常態分佈，其平均值為5，標準偏差為2。當X&#x3D;3時，其密度函數曲線之高度為多少?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%81%87%E8%A8%AD%E5%8F%B0%E7%81%A3%E8%82%89%E9%9B%9E%E8%85%B9%E9%83%A8%E8%84%82%E8%82%AA-abdominal-fat-%E7%AB%99%E6%B4%BB%E9%AB%94%E9%87%8D%E7%9A%84%E7%99%BE%E5%88%86%E6%AF%94%E5%91%88%E5%B8%B8%E6%85%8B%E5%88%86%E4%BD%88%EF%BC%8C%E5%85%B6%E5%B9%B3%E5%9D%87%E5%80%BC%E7%82%BA5-%EF%BC%8C%E6%A8%99%E6%BA%96%E5%81%8F%E5%B7%AE%E7%82%BA1-5-%E3%80%82%E8%8B%A5%E5%9C%A8%E5%B8%82%E5%A0%B4%E9%9A%A8%E6%84%8F%E8%B2%B7%E4%B8%80%E9%9A%BB%E8%82%89%E9%9B%9E%EF%BC%8C%E6%9C%89%E5%A4%9A%E5%B0%91%E5%8F%AF%E8%83%BD%E5%85%B6%E8%85%B9%E8%84%82%E4%BD%94%E6%B4%BB%E9%AB%94%E7%A8%AE%E7%99%BE%E5%88%86%E6%AF%94%E6%98%AF"><span class="nav-number">2.</span> <span class="nav-text">假設台灣肉雞腹部脂肪(abdominal fat)站活體重的百分比呈常態分佈，其平均值為5%，標準偏差為1.5%。若在市場隨意買一隻肉雞，有多少可能其腹脂佔活體種百分比是</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8B%A5%E6%9C%8D%E5%BD%B9%E5%B9%B4%E9%BD%A1%E7%94%B7%E5%AD%90%E8%BA%AB%E9%AB%98%E4%B9%8B%E5%88%86%E5%B8%83%E5%91%88%E5%B8%B8%E6%85%8B%EF%BC%8C%E5%B9%B3%E5%9D%87%E8%BA%AB%E9%AB%98%E7%82%BA172%E5%85%AC%E5%88%86%EF%BC%8C%E6%A8%99%E6%BA%96%E5%81%8F%E5%B7%AE%E7%82%BA6%E5%85%AC%E5%88%86%E3%80%82%E5%A6%82%E6%9E%9C%E5%8D%B3%E9%BD%A1%E5%BD%B9%E7%94%B7%E6%9C%8950%E8%90%AC%E4%BA%BA%EF%BC%8C190%E5%85%AC%E5%88%86%E4%BB%A5%E4%B8%8A%E5%9B%A0%E8%A3%9D%E5%82%99%E5%95%8F%E9%A1%8C%E8%80%8C%E4%B8%8D%E5%BE%B5%E5%8F%AC%EF%BC%8C%E9%9C%80%E8%A6%81%E5%BE%B5%E5%8F%AC30%E8%90%AC%E5%85%B5%E5%93%A1%EF%BC%8C%E8%BA%AB%E9%AB%98%E5%B9%BE%E5%85%AC%E5%88%86%E4%BB%A5%E4%B8%8A%E7%9A%84%E5%8D%B3%E9%BD%A1%E7%94%B7%E5%AD%90%E9%9C%80%E8%A6%81%E7%95%B6%E5%85%B5"><span class="nav-number">3.</span> <span class="nav-text">若服役年齡男子身高之分布呈常態，平均身高為172公分，標準偏差為6公分。如果即齡役男有50萬人，190公分以上因裝備問題而不徵召，需要徵召30萬兵員，身高幾公分以上的即齡男子需要當兵?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%AE%E9%9B%9E%E6%AF%8F%E6%97%A5%E5%B9%B3%E5%9D%87%E6%8E%A1%E9%A3%9F%E9%87%8F%E7%82%BA98g%EF%BC%8C%E6%A8%99%E6%BA%96%E5%81%8F%E5%B7%AE%E7%82%BA10g%E3%80%82%E8%8B%A5%E9%9B%9E%E5%A0%B4%E6%9C%8910000%E9%9A%BB%E8%9B%8B%E7%A8%AE%E9%9B%9E%EF%BC%8C%E6%AF%8F%E6%97%A5%E8%87%B3%E5%A4%9A%E4%BE%9B%E7%B5%A6%E5%A4%9A%E5%B0%91%E9%A3%BC%E6%96%99%EF%BC%8C%E6%89%8D%E6%9C%8990-%E6%A9%9F%E7%8E%87%E8%AE%93%E9%A3%BC%E6%A7%BD%E4%B8%8D%E5%89%A9%E9%A3%BC%E6%96%99"><span class="nav-number">4.</span> <span class="nav-text">種雞每日平均採食量為98g，標準偏差為10g。若雞場有10000隻蛋種雞，每日至多供給多少飼料，才有90%機率讓飼槽不剩飼料?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%9B%8B%E6%AE%BC%E5%BC%B7%E5%BA%A6%E4%B9%8B%E5%B9%B3%E5%9D%87%E5%80%BC%E7%82%BA3-8kg-%E8%AE%8A%E7%95%B0%E4%BF%82%E6%95%B8%E7%82%BA19-5-%E3%80%82%E8%8B%A5%E5%B8%8C%E6%9C%9B%E4%BC%B0%E8%A8%88%E5%B9%B3%E5%9D%87%E5%80%BC%E8%88%87%E5%AF%A6%E9%9A%9B%E5%B9%B3%E5%9D%87%E5%80%BC%E7%9A%84%E5%B7%AE%E7%95%B0%E8%B6%85%E9%81%8E0-5kg%E7%9A%84%E6%A9%9F%E7%8E%87%E8%B6%85%E9%81%8E-a-1-b-5-%EF%BC%8C%E9%9C%80%E8%A6%81%E6%B8%AC%E9%87%8F%E5%B9%BE%E6%9E%9A%E8%9B%8B"><span class="nav-number">5.</span> <span class="nav-text">蛋殼強度之平均值為3.8kg,變異係數為19.5%。若希望估計平均值與實際平均值的差異超過0.5kg的機率超過(a)1% (b)5%，需要測量幾枚蛋?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E6%B8%AC%E9%87%8F10%E6%9E%9A%E8%9B%8B%EF%BC%8C%E4%BC%B0%E8%A8%88%E5%B9%B3%E5%9D%87%E5%80%BC%E8%88%87%E5%AF%A6%E9%9A%9B%E5%B9%B3%E5%9D%87%E5%80%BC%E5%B7%AE%E7%95%B0%E8%B6%85%E9%81%8E0-3kg%E7%9A%84%E6%A9%9F%E7%8E%87%E6%9C%89%E5%A4%9A%E5%B0%91"><span class="nav-number">6.</span> <span class="nav-text">如果測量10枚蛋，估計平均值與實際平均值差異超過0.3kg的機率有多少?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%A7%E5%A0%B4%E5%9C%8D%E7%B1%AC%E5%B7%A5%E4%BD%9C%EF%BC%8C%E6%AF%8F%E5%85%AC%E9%87%8C%E5%B9%B3%E5%9D%87%E9%9C%80400%E5%B7%A5%E6%99%82%EF%BC%8C%E6%A8%99%E6%BA%96%E5%81%8F%E5%B7%AE%E7%82%BA40%E5%B7%A5%E6%99%82%E3%80%82%E8%8B%A5%E7%89%A7%E5%A0%B4%E9%9C%80%E5%9C%8D%E7%B1%AC1%E5%85%AC%E9%87%8C%EF%BC%8C%E4%B8%8D%E8%B6%85%E9%81%8E300%E5%B7%A5%E6%99%82%E5%B0%B1%E8%83%BD%E5%AE%8C%E6%88%90%E5%9C%8D%E7%B1%AC%E7%9A%84%E5%AE%8C%E6%88%90%E6%A9%9F%E7%8E%87%E6%9C%89%E5%A4%9A%E5%B0%91"><span class="nav-number">7.</span> <span class="nav-text">牧場圍籬工作，每公里平均需400工時，標準偏差為40工時。若牧場需圍籬1公里，不超過300工時就能完成圍籬的完成機率有多少?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%8B%95%E8%B2%A9%E8%B3%A3%E9%A3%B2%E6%96%99%E6%A9%9F%E8%B3%A3%E5%87%BA%E4%B9%8B%E9%A3%B2%E6%96%99%E9%87%8F%E5%91%88%E5%B8%B8%E6%85%8B%E5%88%86%E4%BD%88%EF%BC%8C%E5%8F%AF%E4%BB%A5%E8%AA%BF%E6%95%B4%E6%AF%8F%E6%9D%AF%E9%A3%B2%E6%96%99%E9%87%8F%E7%9A%84%E5%B9%B3%E5%9D%87%E5%80%BC%EF%BC%8C%E8%80%8C%E6%A0%B9%E6%93%9A%E4%BB%A5%E5%BE%80%E7%B6%93%E9%A9%97%EF%BC%8C%E5%85%B6%E6%A8%99%E6%BA%96%E5%81%8F%E5%B7%AE%E7%82%BA6ml%EF%BC%8C%E4%BD%86%E7%84%A1%E6%B3%95%E8%AA%BF%E6%95%B4%E3%80%82%E7%9B%AE%E5%89%8D%E4%BD%BF%E7%94%A8300ml%E7%9A%84%E7%B4%99%E6%9D%AF%EF%BC%8C%E8%AB%8B%E4%BD%A0%E8%AA%BF%E6%95%B4%E5%B9%B3%E5%9D%87%E9%A3%B2%E6%96%99%E9%87%8F%E4%BD%BF%E5%8F%AA%E6%9C%890-5-%E7%9A%84%E6%A9%9F%E7%8E%87%E9%A3%B2%E6%96%99%E6%9C%83%E6%BA%A2%E5%87%BA%E4%BE%86-%E8%B6%85%E9%81%8E300ml-%E3%80%82"><span class="nav-number">8.</span> <span class="nav-text">自動販賣飲料機賣出之飲料量呈常態分佈，可以調整每杯飲料量的平均值，而根據以往經驗，其標準偏差為6ml，但無法調整。目前使用300ml的紙杯，請你調整平均飲料量使只有0.5%的機率飲料會溢出來(超過300ml)。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E7%BE%8E%E5%9C%8B%E5%B9%BE%E4%B9%8E%E6%89%80%E6%9C%89%E5%95%86%E5%AD%B8%E9%99%A2%E7%A0%94%E7%A9%B6%E6%89%80%E9%83%BD%E8%A6%81%E6%B1%82%E5%85%A5%E5%AD%B8%E7%94%B3%E8%AB%8B%E8%80%85%E9%83%BD%E5%BF%85%E9%A0%88%E7%B9%B3%E4%BA%A4%E7%AE%A1%E7%90%86%E5%AD%B8%E7%A0%94%E7%A9%B6%E6%89%80%E5%85%A5%E5%AD%B8%E6%B8%AC%E8%A9%A6-GMAT-%E3%80%82%E5%85%B6%E5%85%AC%E5%8F%B8%E5%B8%8C%E6%9C%9B%E4%BA%86%E8%A7%A3%E6%AD%A4%E6%B8%AC%E8%A9%A6%E7%9A%84%E5%B9%B3%E5%9D%87%E6%88%90%E7%B8%BE%E3%80%82%E9%80%A2%E6%A9%9F%E6%8E%A1%E6%A8%A3100%E5%80%8B%E6%B8%AC%E9%A9%97%E6%88%90%E7%B8%BE%E6%A8%A3%E6%9C%AC%EF%BC%8C%E5%B9%B3%E5%9D%87%E4%BC%B0%E8%A8%88%E5%80%BC%E7%82%BA564%EF%BC%8C%E6%A8%99%E6%BA%96%E5%B7%AE%E4%BC%B0%E8%A8%88%E5%80%BC%E7%82%BA70%E3%80%82"><span class="nav-number">9.</span> <span class="nav-text">在美國幾乎所有商學院研究所都要求入學申請者都必須繳交管理學研究所入學測試(GMAT)。其公司希望了解此測試的平均成績。逢機採樣100個測驗成績樣本，平均估計值為564，標準差估計值為70。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8B%A5%E5%B8%8C%E6%9C%9BGMAT%E4%B9%8B%E5%B9%B3%E5%9D%87%E6%88%90%E7%B8%BE97-%E4%BF%A1%E8%B3%B4%E5%8D%80%E9%96%93%E5%9C%A810%E5%88%86%E4%BB%A5%E5%85%A7%EF%BC%8C%E6%A8%99%E6%BA%96%E5%81%8F%E5%B7%AE%E7%82%BA90%E5%88%86%EF%BC%8C%E5%89%87%E9%9C%80%E5%8F%96%E5%A4%9A%E5%B0%91%E6%A8%A3%E6%9C%AC%E5%B7%B2%E9%81%94%E9%9C%80%E6%B1%82"><span class="nav-number">10.</span> <span class="nav-text">若希望GMAT之平均成績97%信賴區間在10分以內，標準偏差為90分，則需取多少樣本已達需求?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%81%87%E4%BD%BF%E8%82%89%E8%B1%AC%E5%87%BA%E5%94%AE%E6%99%82%E7%9A%84%E9%AB%94%E9%87%8D%E5%91%88%E5%B8%B8%E6%85%8B%E5%88%86%E4%BD%88%EF%BC%8C%E6%A8%99%E6%BA%96%E5%81%8F%E5%B7%AE%E7%82%BA5%E5%85%AC%E6%96%A4%E3%80%82%E4%B8%8D%E5%B8%8C%E6%9C%9B%E8%B6%85%E9%81%8E10-%E7%9A%84%E8%82%89%E8%B1%AC%E5%87%BA%E5%94%AE%E9%AB%94%E9%87%8D%E4%BD%8E%E6%96%BC90%E5%85%AC%E6%96%A4%EF%BC%8C%E8%82%89%E8%B1%AC%E5%B9%B3%E5%9D%87%E8%A6%81%E9%A3%BC%E9%A4%8A%E8%87%B3%E5%83%85%E5%85%AC%E6%96%A4%E6%89%8D%E5%8F%AF%E5%87%BA%E5%94%AE"><span class="nav-number">11.</span> <span class="nav-text">假使肉豬出售時的體重呈常態分佈，標準偏差為5公斤。不希望超過10%的肉豬出售體重低於90公斤，肉豬平均要飼養至僅公斤才可出售?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BA%E5%94%AE10000%E9%A0%AD%E8%B1%AC%EF%BC%8C%E9%9C%80%E8%A6%81%E7%A3%85%E5%A4%9A%E5%B0%91%E9%A0%AD%E8%B1%AC%E6%89%8D%E5%8F%AF%E4%BB%A5%E4%BC%B0%E8%A8%88%E9%80%99%E7%BE%A4%E8%B1%AC%E7%9A%84%E5%B9%B3%E5%9D%87%E9%AB%94%E9%87%8D%E8%88%87%E5%AF%A6%E9%9A%9B%E5%B9%B3%E5%9D%87%E9%AB%94%E9%87%8D%E5%B7%AE%E7%95%B0%E8%B6%85%E9%81%8E0-5%E5%85%AC%E6%96%A4%E7%9A%84%E6%A9%9F%E7%8E%87%E5%B0%8F%E6%96%BC5"><span class="nav-number">12.</span> <span class="nav-text">出售10000頭豬，需要磅多少頭豬才可以估計這群豬的平均體重與實際平均體重差異超過0.5公斤的機率小於5%?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20%E5%80%8B%E6%88%90%E5%B9%B4%E4%BA%BA%E8%A1%80%E6%B8%85%E9%88%A3%E6%BF%83%E5%BA%A6%E8%B3%87%E6%96%99%E5%A6%82%E4%B8%8B"><span class="nav-number">13.</span> <span class="nav-text">20個成年人血清鈣濃度資料如下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%82%B8%E9%9B%9E%E5%BA%97%E8%A6%81%E6%B1%82%E8%82%89%E9%9B%9E%E5%B1%A0%E9%AB%94%E8%A6%8F%E6%A0%BC%E9%9C%80%E5%9C%A81-2-1-36kg%E4%B9%8B%E9%96%93%E3%80%82%E8%8B%A5A%E9%9B%BB%E5%AE%B0%E5%BB%A0%E5%87%BA%E5%94%AE%E4%B8%80%E6%89%B9%E8%82%89%E9%9B%9E%E5%B1%A0%E9%AB%94%EF%BC%8C%E5%B9%B3%E5%9D%87%E9%87%8D1-28kg-%E4%BA%A6%E5%91%88%E5%B8%B8%E6%85%8B%E5%88%86%E4%BD%88%EF%BC%8C%E6%A8%99%E6%BA%96%E5%B7%AE%E9%9C%80%E5%A4%9A%E5%B0%91%E4%BB%A5%E4%B8%8B%E6%89%8D%E5%8F%AF%E4%BD%BF95-%E7%9A%84%E8%82%89%E9%9B%9E%E7%AC%A6%E5%90%88%E7%82%B8%E9%9B%9E%E5%BA%97%E7%9A%84%E8%A6%81%E6%B1%82"><span class="nav-number">14.</span> <span class="nav-text">炸雞店要求肉雞屠體規格需在1.2-1.36kg之間。若A電宰廠出售一批肉雞屠體，平均重1.28kg,亦呈常態分佈，標準差需多少以下才可使95%的肉雞符合炸雞店的要求?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A9%A6%E9%A9%97%E8%87%AA%E4%BA%94%E9%80%B1%E9%BD%A1%E9%96%8B%E5%A7%8B%E4%BD%BF%E7%94%A81000%E4%B9%8B%E5%B0%8F%E5%85%AC%E9%9B%9E%EF%BC%8C%E4%BB%8A%E8%B2%B7%E9%80%B2%E5%88%9D%E7%94%9F%E5%B0%8F%E5%85%AC%E9%9B%9E1500%E9%9A%BB%EF%BC%8C%E8%8B%A5%E9%A3%BC%E9%A4%8A%E8%87%B3%E4%BA%94%E5%91%A8%E9%BD%A1%E9%9A%BB%E8%82%B2%E6%88%90%E7%8E%87%E7%82%BA95-%EF%BC%8C%E8%80%8C%E4%BA%94%E9%80%B1%E9%BD%A1%E6%8C%BA%E7%A8%AE%E5%91%88%E5%B8%B8%E6%85%8B%E5%88%86%E4%BD%88%EF%BC%8C%E5%B9%B3%E5%9D%87%E7%82%BA400g%EF%BC%8C%E6%A8%99%E6%BA%96%E5%81%8F%E5%B7%AE%E7%82%BA40g%E3%80%82%E8%8B%A5%E8%A6%81%E4%BB%A5%E9%AB%94%E9%87%8D%E9%81%A9%E4%B8%AD%E8%80%85%E9%80%B2%E8%A1%8C%E8%A9%A6%E9%A9%97%E8%AB%8B%E4%BC%B0%E8%A8%88%E8%A9%A6%E9%A9%97%E9%96%8B%E5%A7%8B%E6%99%82%E5%B0%8F%E5%B7%A5%E9%9B%9E%E9%AB%94%E9%87%8D%E7%9A%84%E4%B8%8A%E4%B8%8B%E9%99%90"><span class="nav-number">15.</span> <span class="nav-text">試驗自五週齡開始使用1000之小公雞，今買進初生小公雞1500隻，若飼養至五周齡隻育成率為95%，而五週齡挺種呈常態分佈，平均為400g，標準偏差為40g。若要以體重適中者進行試驗請估計試驗開始時小工雞體重的上下限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E8%88%AC%E8%82%89%E9%9B%9E%E9%A3%BC%E9%A4%8A%E6%A8%99%E6%BA%96%E8%A6%81%E6%B1%82%E4%B8%8A%E5%B8%82%E9%AB%94%E9%87%8D%E4%B9%8B%E6%95%B4%E9%BD%8A%E5%BA%A6%E7%82%BA%E5%81%8F%E9%9B%A2%E5%B9%B3%E5%9D%87%E9%AB%94%E9%87%8D10-%E4%B9%8B%E9%9B%9E%E4%B9%8B%E6%95%B8%E7%9B%AE%E4%B8%8D%E8%B6%85%E9%81%8E20-%E3%80%82%E8%AB%8B%E5%95%8F-%E4%BB%A5%E6%AD%A4%E6%A8%99%E6%BA%96%E8%80%8C%E8%A8%80%EF%BC%8C%E8%8B%A5%E9%9B%9E%E7%BE%A4%E9%AB%94%E9%87%8D%E5%91%88%E5%B8%B8%E6%85%8B%E5%88%86%E4%BD%88%EF%BC%8C%E5%85%B6%E8%AE%8A%E7%95%B0%E4%BF%82%E6%95%B8%E6%87%89%E5%9C%A8%E5%A4%9A%E5%B0%91%E4%BB%A5%E4%B8%8B"><span class="nav-number">16.</span> <span class="nav-text">一般肉雞飼養標準要求上市體重之整齊度為偏離平均體重10%之雞之數目不超過20%。請問:以此標準而言，若雞群體重呈常態分佈，其變異係數應在多少以下?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E9%9B%9B%E9%9B%9E%E5%AD%B5%E5%8C%96%E6%99%82%E9%96%93%E5%91%88%E5%B8%B8%E6%85%8B%E5%88%86%E4%BD%88%EF%BC%8C%E5%85%B6%E5%B9%B3%E5%9D%87%E5%80%BC%E8%88%87%E6%A8%99%E6%BA%96%E5%81%8F%E5%B7%AE%E5%88%86%E5%88%A5%E7%82%BA500-5%E5%B0%8F%E6%99%82%E8%88%875-5%E5%B0%8F%E6%99%82%EF%BC%8C%E6%88%91%E5%80%91%E5%85%A5%E5%AD%B521-5%E6%97%A5-516%E5%B0%8F%E6%99%82-%E5%BE%8C%E5%87%BA%E9%9B%9B%EF%BC%8C%E9%82%84%E6%9C%AA%E5%AD%B5%E5%87%BA%E9%83%BD%E4%B8%8D%E8%A6%81%EF%BC%8C%E5%89%87%E6%9C%89%E5%A4%9A%E5%B0%91%E9%83%A8%E5%88%86%E7%9A%84%E9%9B%9B%E9%9B%9E%E5%8F%AF%E8%83%BD%E4%BE%86%E4%B8%8D%E5%8F%8A%E5%AD%B5%E5%87%BA"><span class="nav-number">17.</span> <span class="nav-text">如果雛雞孵化時間呈常態分佈，其平均值與標準偏差分別為500.5小時與5.5小時，我們入孵21.5日(516小時)後出雛，還未孵出都不要，則有多少部分的雛雞可能來不及孵出?</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hugnlin Chen"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Hugnlin Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hunglin59638" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hunglin59638" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hunglin59638@gmail.com" title="E-Mail → mailto:hunglin59638@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://discord.gg/4WpdhECsXq" title="Discord → https:&#x2F;&#x2F;discord.gg&#x2F;4WpdhECsXq" rel="noopener" target="_blank"><i class="fab fa-discord fa-fw"></i>Discord</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-tw">
+    <link itemprop="mainEntityOfPage" href="https://hunglin59638.github.io/2018/08/11/%E4%BB%A5R%E8%AA%9E%E8%A8%80%E8%A7%A3%E7%AD%94%E5%8B%95%E7%89%A9%E7%A7%91%E5%AD%B8%E7%B5%B1%E8%A8%88%E7%BF%92%E9%A1%8C%20-%20%E7%BF%92%E9%A1%8C%E5%9B%9B%20%E5%B8%B8%E6%85%8B%E5%88%86%E4%BD%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Hugnlin Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MengDoggy">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          以R語言解答動物科學統計習題 - 習題四 常態分佈
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-08-11 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-11T00:00:00+08:00">2018-08-11</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-03-26 00:05:06" itemprop="dateModified" datetime="2021-03-26T00:05:06+08:00">2021-03-26</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/biostatistics/" itemprop="url" rel="index"><span itemprop="name">biostatistics</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="若X為一個常態分佈，其平均值為5，標準偏差為2。當X-3時，其密度函數曲線之高度為多少"><a href="#若X為一個常態分佈，其平均值為5，標準偏差為2。當X-3時，其密度函數曲線之高度為多少" class="headerlink" title="若X為一個常態分佈，其平均值為5，標準偏差為2。當X=3時，其密度函數曲線之高度為多少?"></a>若X為一個常態分佈，其平均值為5，標準偏差為2。當X=3時，其密度函數曲線之高度為多少?</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnorm(3, mean &#x3D; 5, sd&#x3D; 2)</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<h3 id="假設台灣肉雞腹部脂肪-abdominal-fat-站活體重的百分比呈常態分佈，其平均值為5-，標準偏差為1-5-。若在市場隨意買一隻肉雞，有多少可能其腹脂佔活體種百分比是"><a href="#假設台灣肉雞腹部脂肪-abdominal-fat-站活體重的百分比呈常態分佈，其平均值為5-，標準偏差為1-5-。若在市場隨意買一隻肉雞，有多少可能其腹脂佔活體種百分比是" class="headerlink" title="假設台灣肉雞腹部脂肪(abdominal fat)站活體重的百分比呈常態分佈，其平均值為5%，標準偏差為1.5%。若在市場隨意買一隻肉雞，有多少可能其腹脂佔活體種百分比是"></a>假設台灣肉雞腹部脂肪(abdominal fat)站活體重的百分比呈常態分佈，其平均值為5%，標準偏差為1.5%。若在市場隨意買一隻肉雞，有多少可能其腹脂佔活體種百分比是</h3><ul>
+<li>大於8%<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pnorm(8, mean &#x3D; 5, sd&#x3D; 1.5,lower.tail &#x3D; F)</span><br></pre></td></tr></table></figure></li>
+<li>小於2%<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pnorm(2, mean &#x3D; 5, sd&#x3D; 1.5)</span><br></pre></td></tr></table></figure></li>
+<li>剛好5%<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pnorm(5, mean &#x3D; 5, sd&#x3D; 1.5)</span><br></pre></td></tr></table></figure></li>
+<li>介於3~6%<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pnorm(6, mean &#x3D; 5, sd&#x3D; 1.5)-pnorm(3, mean &#x3D; 5, sd&#x3D; 1.5)</span><br></pre></td></tr></table></figure>
+<h3 id="若服役年齡男子身高之分布呈常態，平均身高為172公分，標準偏差為6公分。如果即齡役男有50萬人，190公分以上因裝備問題而不徵召，需要徵召30萬兵員，身高幾公分以上的即齡男子需要當兵"><a href="#若服役年齡男子身高之分布呈常態，平均身高為172公分，標準偏差為6公分。如果即齡役男有50萬人，190公分以上因裝備問題而不徵召，需要徵召30萬兵員，身高幾公分以上的即齡男子需要當兵" class="headerlink" title="若服役年齡男子身高之分布呈常態，平均身高為172公分，標準偏差為6公分。如果即齡役男有50萬人，190公分以上因裝備問題而不徵召，需要徵召30萬兵員，身高幾公分以上的即齡男子需要當兵?"></a>若服役年齡男子身高之分布呈常態，平均身高為172公分，標準偏差為6公分。如果即齡役男有50萬人，190公分以上因裝備問題而不徵召，需要徵召30萬兵員，身高幾公分以上的即齡男子需要當兵?</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qnorm((pnorm(190, mean&#x3D; 172, sd&#x3D; 6)-30&#x2F;50),mean&#x3D;172, sd&#x3D;6)</span><br></pre></td></tr></table></figure>
+<h3 id="種雞每日平均採食量為98g，標準偏差為10g。若雞場有10000隻蛋種雞，每日至多供給多少飼料，才有90-機率讓飼槽不剩飼料"><a href="#種雞每日平均採食量為98g，標準偏差為10g。若雞場有10000隻蛋種雞，每日至多供給多少飼料，才有90-機率讓飼槽不剩飼料" class="headerlink" title="種雞每日平均採食量為98g，標準偏差為10g。若雞場有10000隻蛋種雞，每日至多供給多少飼料，才有90%機率讓飼槽不剩飼料?"></a>種雞每日平均採食量為98g，標準偏差為10g。若雞場有10000隻蛋種雞，每日至多供給多少飼料，才有90%機率讓飼槽不剩飼料?</h3></li>
+<li>10000隻，mean=98<em>10000=980kg,sd^2=10</em>10000,sd=1kg<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qnorm((1-0.9),mean&#x3D; 980 ,sd&#x3D; 1)</span><br></pre></td></tr></table></figure>
+<h3 id="蛋殼強度之平均值為3-8kg-變異係數為19-5-。若希望估計平均值與實際平均值的差異超過0-5kg的機率超過-a-1-b-5-，需要測量幾枚蛋"><a href="#蛋殼強度之平均值為3-8kg-變異係數為19-5-。若希望估計平均值與實際平均值的差異超過0-5kg的機率超過-a-1-b-5-，需要測量幾枚蛋" class="headerlink" title="蛋殼強度之平均值為3.8kg,變異係數為19.5%。若希望估計平均值與實際平均值的差異超過0.5kg的機率超過(a)1% (b)5%，需要測量幾枚蛋?"></a>蛋殼強度之平均值為3.8kg,變異係數為19.5%。若希望估計平均值與實際平均值的差異超過0.5kg的機率超過(a)1% (b)5%，需要測量幾枚蛋?</h3></li>
+<li>(a)1%<br>C.V.=sd/mean, sd=19.5%*3.8=0.741<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(qnorm(0.01&#x2F;2)*0.741&#x2F;0.5)^2</span><br></pre></td></tr></table></figure></li>
+<li>(b)5%<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(qnorm(0.05&#x2F;2)*0.741&#x2F;0.5)^2</span><br></pre></td></tr></table></figure>
+<h3 id="如果測量10枚蛋，估計平均值與實際平均值差異超過0-3kg的機率有多少"><a href="#如果測量10枚蛋，估計平均值與實際平均值差異超過0-3kg的機率有多少" class="headerlink" title="如果測量10枚蛋，估計平均值與實際平均值差異超過0.3kg的機率有多少?"></a>如果測量10枚蛋，估計平均值與實際平均值差異超過0.3kg的機率有多少?</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pnorm((10*0.3^2&#x2F;(0.741^2))^0.5,lower.tail &#x3D; F)*2</span><br></pre></td></tr></table></figure>
+<h3 id="牧場圍籬工作，每公里平均需400工時，標準偏差為40工時。若牧場需圍籬1公里，不超過300工時就能完成圍籬的完成機率有多少"><a href="#牧場圍籬工作，每公里平均需400工時，標準偏差為40工時。若牧場需圍籬1公里，不超過300工時就能完成圍籬的完成機率有多少" class="headerlink" title="牧場圍籬工作，每公里平均需400工時，標準偏差為40工時。若牧場需圍籬1公里，不超過300工時就能完成圍籬的完成機率有多少?"></a>牧場圍籬工作，每公里平均需400工時，標準偏差為40工時。若牧場需圍籬1公里，不超過300工時就能完成圍籬的完成機率有多少?</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pnorm(300,mean &#x3D; 400,sd&#x3D; 40)</span><br></pre></td></tr></table></figure></li>
+<li>以350-490工時完成工作的機率<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pnorm(490,mean &#x3D; 400, sd&#x3D; 40)-pnorm(350,mean &#x3D; 400, sd&#x3D; 40)</span><br></pre></td></tr></table></figure></li>
+<li>2公里，以720小時完成之機率?<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pnorm(720,mean&#x3D;400*2,sd&#x3D;(2^0.5)*40)</span><br></pre></td></tr></table></figure>
+<h3 id="自動販賣飲料機賣出之飲料量呈常態分佈，可以調整每杯飲料量的平均值，而根據以往經驗，其標準偏差為6ml，但無法調整。目前使用300ml的紙杯，請你調整平均飲料量使只有0-5-的機率飲料會溢出來-超過300ml-。"><a href="#自動販賣飲料機賣出之飲料量呈常態分佈，可以調整每杯飲料量的平均值，而根據以往經驗，其標準偏差為6ml，但無法調整。目前使用300ml的紙杯，請你調整平均飲料量使只有0-5-的機率飲料會溢出來-超過300ml-。" class="headerlink" title="自動販賣飲料機賣出之飲料量呈常態分佈，可以調整每杯飲料量的平均值，而根據以往經驗，其標準偏差為6ml，但無法調整。目前使用300ml的紙杯，請你調整平均飲料量使只有0.5%的機率飲料會溢出來(超過300ml)。"></a>自動販賣飲料機賣出之飲料量呈常態分佈，可以調整每杯飲料量的平均值，而根據以往經驗，其標準偏差為6ml，但無法調整。目前使用300ml的紙杯，請你調整平均飲料量使只有0.5%的機率飲料會溢出來(超過300ml)。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qnorm(0.005&#x2F;2,mean&#x3D;300, sd&#x3D;6)</span><br></pre></td></tr></table></figure>
+<h3 id="在美國幾乎所有商學院研究所都要求入學申請者都必須繳交管理學研究所入學測試-GMAT-。其公司希望了解此測試的平均成績。逢機採樣100個測驗成績樣本，平均估計值為564，標準差估計值為70。"><a href="#在美國幾乎所有商學院研究所都要求入學申請者都必須繳交管理學研究所入學測試-GMAT-。其公司希望了解此測試的平均成績。逢機採樣100個測驗成績樣本，平均估計值為564，標準差估計值為70。" class="headerlink" title="在美國幾乎所有商學院研究所都要求入學申請者都必須繳交管理學研究所入學測試(GMAT)。其公司希望了解此測試的平均成績。逢機採樣100個測驗成績樣本，平均估計值為564，標準差估計值為70。"></a>在美國幾乎所有商學院研究所都要求入學申請者都必須繳交管理學研究所入學測試(GMAT)。其公司希望了解此測試的平均成績。逢機採樣100個測驗成績樣本，平均估計值為564，標準差估計值為70。</h3></li>
+<li>GMPT平均值97%信賴區間<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">xbar &lt;-564; sd&lt;- 70; n&lt;- 100</span><br><span class="line">alpha &#x3D; .03</span><br><span class="line">tscore &lt;- qt(1-alpha&#x2F;2, df&#x3D;n-1)</span><br><span class="line">SE&lt;- sd&#x2F;sqrt(n)</span><br><span class="line">c(xbar-tscore*SE, xbar+tscore*SE)</span><br></pre></td></tr></table></figure>
+<h3 id="若希望GMAT之平均成績97-信賴區間在10分以內，標準偏差為90分，則需取多少樣本已達需求"><a href="#若希望GMAT之平均成績97-信賴區間在10分以內，標準偏差為90分，則需取多少樣本已達需求" class="headerlink" title="若希望GMAT之平均成績97%信賴區間在10分以內，標準偏差為90分，則需取多少樣本已達需求?"></a>若希望GMAT之平均成績97%信賴區間在10分以內，標準偏差為90分，則需取多少樣本已達需求?</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#2*Zscore*sd&#x2F;sqrt(n)&lt;10</span><br><span class="line">Zscore&lt;-qnorm(0.03&#x2F;2,lower.tail &#x3D; F)</span><br><span class="line">sd&lt;-90</span><br><span class="line">(2*Zscore*sd&#x2F;10)^2</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="假使肉豬出售時的體重呈常態分佈，標準偏差為5公斤。不希望超過10-的肉豬出售體重低於90公斤，肉豬平均要飼養至僅公斤才可出售"><a href="#假使肉豬出售時的體重呈常態分佈，標準偏差為5公斤。不希望超過10-的肉豬出售體重低於90公斤，肉豬平均要飼養至僅公斤才可出售" class="headerlink" title="假使肉豬出售時的體重呈常態分佈，標準偏差為5公斤。不希望超過10%的肉豬出售體重低於90公斤，肉豬平均要飼養至僅公斤才可出售?"></a>假使肉豬出售時的體重呈常態分佈，標準偏差為5公斤。不希望超過10%的肉豬出售體重低於90公斤，肉豬平均要飼養至僅公斤才可出售?</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qnorm(0.1,mean &#x3D; 90,sd&#x3D;5,lower.tail &#x3D; F)</span><br></pre></td></tr></table></figure>
+<h3 id="出售10000頭豬，需要磅多少頭豬才可以估計這群豬的平均體重與實際平均體重差異超過0-5公斤的機率小於5"><a href="#出售10000頭豬，需要磅多少頭豬才可以估計這群豬的平均體重與實際平均體重差異超過0-5公斤的機率小於5" class="headerlink" title="出售10000頭豬，需要磅多少頭豬才可以估計這群豬的平均體重與實際平均體重差異超過0.5公斤的機率小於5%?"></a>出售10000頭豬，需要磅多少頭豬才可以估計這群豬的平均體重與實際平均體重差異超過0.5公斤的機率小於5%?</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">n&lt;- 10000 ;alpha&lt;-0.05; L&lt;-0.5; sd&lt;-5</span><br><span class="line">N&lt;- (qnorm(1-alpha&#x2F;2)*sd&#x2F;L)^2</span><br></pre></td></tr></table></figure>
+<h3 id="20個成年人血清鈣濃度資料如下"><a href="#20個成年人血清鈣濃度資料如下" class="headerlink" title="20個成年人血清鈣濃度資料如下"></a>20個成年人血清鈣濃度資料如下</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Ca&lt;- c(10.46, 10.20, 12.46, 10.21, 11.39, 10.77, 9.49, 10.08, 11.37, 9.37, 11.68, 11.39, 10.63, 11.28, 9.74, 9.46, 9.72, 10.42, 7.99, 9.56)</span><br><span class="line">mean.range&lt;- function(x, alpha&#x3D;0.1) &#123;</span><br><span class="line"> n &#x3D; length(x) # n &#x3D; 樣本數</span><br><span class="line"> mx &#x3D; mean(x) # mx 即為平均值 mu 的點估計</span><br><span class="line"> S &#x3D; sqrt(var(x)) # S 即為標準差的點估計</span><br><span class="line"> r1 &#x3D; qt(alpha&#x2F;2, df&#x3D;n-1) # 信賴區間，下半截掉 alpha&#x2F;2</span><br><span class="line"> r2 &#x3D; qt(1-alpha&#x2F;2, df&#x3D;n-1) # 信賴區間，上半截掉 alpha&#x2F;2</span><br><span class="line"> L1 &#x3D; mx+r1*S&#x2F;sqrt(n) # 信賴區間下限</span><br><span class="line"> L2 &#x3D; mx+r2*S&#x2F;sqrt(n) # 信賴區間上限</span><br><span class="line"> range &#x3D; c(L1, mx, L2)</span><br><span class="line">&#125;</span><br><span class="line">r&lt;- mean.range(Ca,alpha&#x3D;0.1)</span><br><span class="line">r</span><br></pre></td></tr></table></figure>
+<h3 id="炸雞店要求肉雞屠體規格需在1-2-1-36kg之間。若A電宰廠出售一批肉雞屠體，平均重1-28kg-亦呈常態分佈，標準差需多少以下才可使95-的肉雞符合炸雞店的要求"><a href="#炸雞店要求肉雞屠體規格需在1-2-1-36kg之間。若A電宰廠出售一批肉雞屠體，平均重1-28kg-亦呈常態分佈，標準差需多少以下才可使95-的肉雞符合炸雞店的要求" class="headerlink" title="炸雞店要求肉雞屠體規格需在1.2-1.36kg之間。若A電宰廠出售一批肉雞屠體，平均重1.28kg,亦呈常態分佈，標準差需多少以下才可使95%的肉雞符合炸雞店的要求?"></a>炸雞店要求肉雞屠體規格需在1.2-1.36kg之間。若A電宰廠出售一批肉雞屠體，平均重1.28kg,亦呈常態分佈，標準差需多少以下才可使95%的肉雞符合炸雞店的要求?</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mx&lt;-1.28</span><br><span class="line">1.2&lt;-mx+qnorm(0.05&#x2F;2)*sd</span><br><span class="line">sd&lt;- (1.2-mx)&#x2F;qnorm(0.05&#x2F;2)</span><br><span class="line">sd</span><br></pre></td></tr></table></figure>
+<h3 id="試驗自五週齡開始使用1000之小公雞，今買進初生小公雞1500隻，若飼養至五周齡隻育成率為95-，而五週齡挺種呈常態分佈，平均為400g，標準偏差為40g。若要以體重適中者進行試驗請估計試驗開始時小工雞體重的上下限"><a href="#試驗自五週齡開始使用1000之小公雞，今買進初生小公雞1500隻，若飼養至五周齡隻育成率為95-，而五週齡挺種呈常態分佈，平均為400g，標準偏差為40g。若要以體重適中者進行試驗請估計試驗開始時小工雞體重的上下限" class="headerlink" title="試驗自五週齡開始使用1000之小公雞，今買進初生小公雞1500隻，若飼養至五周齡隻育成率為95%，而五週齡挺種呈常態分佈，平均為400g，標準偏差為40g。若要以體重適中者進行試驗請估計試驗開始時小工雞體重的上下限"></a>試驗自五週齡開始使用1000之小公雞，今買進初生小公雞1500隻，若飼養至五周齡隻育成率為95%，而五週齡挺種呈常態分佈，平均為400g，標準偏差為40g。若要以體重適中者進行試驗請估計試驗開始時小工雞體重的上下限</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">livability&lt;- 1500*0.95</span><br><span class="line">Retention&lt;-1000&#x2F;livability</span><br><span class="line">culling&lt;- 1-Retention</span><br><span class="line">R1&lt;-qnorm(1-culling&#x2F;2,mean&#x3D;400,sd&#x3D;40)</span><br><span class="line">R2&lt;-qnorm(culling&#x2F;2,mean&#x3D;400,sd&#x3D;40)</span><br></pre></td></tr></table></figure>
+<h3 id="一般肉雞飼養標準要求上市體重之整齊度為偏離平均體重10-之雞之數目不超過20-。請問-以此標準而言，若雞群體重呈常態分佈，其變異係數應在多少以下"><a href="#一般肉雞飼養標準要求上市體重之整齊度為偏離平均體重10-之雞之數目不超過20-。請問-以此標準而言，若雞群體重呈常態分佈，其變異係數應在多少以下" class="headerlink" title="一般肉雞飼養標準要求上市體重之整齊度為偏離平均體重10%之雞之數目不超過20%。請問:以此標準而言，若雞群體重呈常態分佈，其變異係數應在多少以下?"></a>一般肉雞飼養標準要求上市體重之整齊度為偏離平均體重10%之雞之數目不超過20%。請問:以此標準而言，若雞群體重呈常態分佈，其變異係數應在多少以下?</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mean&#x2F;sd&lt;-qnorm(1-0.2&#x2F;2)&#x2F;0.1</span><br><span class="line">CV&lt;-1&#x2F;&#96;mean&#x2F;sd&#96;</span><br></pre></td></tr></table></figure>
+<h3 id="如果雛雞孵化時間呈常態分佈，其平均值與標準偏差分別為500-5小時與5-5小時，我們入孵21-5日-516小時-後出雛，還未孵出都不要，則有多少部分的雛雞可能來不及孵出"><a href="#如果雛雞孵化時間呈常態分佈，其平均值與標準偏差分別為500-5小時與5-5小時，我們入孵21-5日-516小時-後出雛，還未孵出都不要，則有多少部分的雛雞可能來不及孵出" class="headerlink" title="如果雛雞孵化時間呈常態分佈，其平均值與標準偏差分別為500.5小時與5.5小時，我們入孵21.5日(516小時)後出雛，還未孵出都不要，則有多少部分的雛雞可能來不及孵出?"></a>如果雛雞孵化時間呈常態分佈，其平均值與標準偏差分別為500.5小時與5.5小時，我們入孵21.5日(516小時)後出雛，還未孵出都不要，則有多少部分的雛雞可能來不及孵出?</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pnorm(516,mean&#x3D;500.5,sd&#x3D;5.5,lower.tail &#x3D; F)</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/R/" rel="tag"># R</a>
+              <a href="/tags/biostatistics/" rel="tag"># biostatistics</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/07/24/Win10%20freeBSD%20%E9%81%A0%E7%AB%AF%E7%99%BB%E5%85%A5%E5%82%B3%E8%BC%B8%E6%AA%94%E6%A1%88%20sftp/" rel="prev" title="Win10 freeBSD 遠端登入傳輸檔案 sftp">
+                  <i class="fa fa-chevron-left"></i> Win10 freeBSD 遠端登入傳輸檔案 sftp
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/08/14/%E4%BB%A5R%E8%AA%9E%E8%A8%80%E8%A7%A3%E7%AD%94%E5%8B%95%E7%89%A9%E7%A7%91%E5%AD%B8%E7%B5%B1%E8%A8%88%E7%BF%92%E9%A1%8C-%20%E7%BF%92%E9%A1%8C%E4%BA%94%20%E5%81%87%E8%AA%AA%E7%9A%84%E6%AA%A2%E5%AE%9A/" rel="next" title="以R語言解答動物科學統計習題- 習題五 假說的檢定">
+                  以R語言解答動物科學統計習題- 習題五 假說的檢定 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hugnlin Chen</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '.page-configurations',
+    '.main-inner',
+    '.post-toc-wrap',
+    '.languages',
+    '.pjax'
+  ],
+  analytics: false,
+  cacheBust: false,
+  scrollRestoration: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  const hasTOC = document.querySelector('.post-toc');
+  document.querySelector('.sidebar-inner').classList.toggle('sidebar-nav-active', hasTOC);
+  document.querySelector(hasTOC ? '.sidebar-nav-toc' : '.sidebar-nav-overview').click();
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+
+
+
+    <div class="pjax">
+
+
+    </div>
+</body>
+</html>

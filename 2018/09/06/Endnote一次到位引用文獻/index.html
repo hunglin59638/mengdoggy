@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hunglin59638.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="Endnote目前更新到X9版本了 也是走最近的簡約風格，變美很多 如果不想每次都要手打一遍文獻這個軟體就會是個很好的助手 最近有種感慨，不是軟體不好，而是人不會使用而已">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Endnote一次到位引用文獻">
+<meta property="og:url" content="https://hunglin59638.github.io/2018/09/06/Endnote%E4%B8%80%E6%AC%A1%E5%88%B0%E4%BD%8D%E5%BC%95%E7%94%A8%E6%96%87%E7%8D%BB/index.html">
+<meta property="og:site_name" content="MengDoggy">
+<meta property="og:description" content="Endnote目前更新到X9版本了 也是走最近的簡約風格，變美很多 如果不想每次都要手打一遍文獻這個軟體就會是個很好的助手 最近有種感慨，不是軟體不好，而是人不會使用而已">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1540632450-1935321528_l.jpg">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1540633451-2353741800.jpg">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1540634067-3050199778_l.jpg">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1540634460-1896758689.jpg">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1540634552-3961686163.jpg">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1540635187-1857843884.jpg">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1540635969-2749360639.jpg">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1540636147-353824673_l.jpg">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1540635388-941749087.jpg">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1540635557-3260915611.jpg">
+<meta property="og:image" content="https://pic.pimg.tw/alex59638/1540635542-169718008.jpg">
+<meta property="article:published_time" content="2018-09-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-03-25T16:47:28.290Z">
+<meta property="article:author" content="Hugnlin Chen">
+<meta property="article:tag" content="technology">
+<meta property="article:tag" content="endnote">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic.pimg.tw/alex59638/1540632450-1935321528_l.jpg">
+
+
+<link rel="canonical" href="https://hunglin59638.github.io/2018/09/06/Endnote%E4%B8%80%E6%AC%A1%E5%88%B0%E4%BD%8D%E5%BC%95%E7%94%A8%E6%96%87%E7%8D%BB/">
+
+
+<script data-pjax class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-tw'
+  };
+</script>
+<title>Endnote一次到位引用文獻 | MengDoggy</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">MengDoggy</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">風中一匹狼</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#I-%E4%B8%8B%E8%BC%89Endnote"><span class="nav-number">1.</span> <span class="nav-text">I. 下載Endnote</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#II-%E5%BE%9E%E5%AD%B8%E8%A1%93%E7%B6%B2%E7%AB%99%E4%B8%8A%E4%B8%8B%E8%BC%89%E5%BC%95%E7%94%A8%E6%AA%94"><span class="nav-number">2.</span> <span class="nav-text">II. 從學術網站上下載引用檔</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#III-%E9%96%8B%E5%95%9F%E6%96%B0%E7%9A%84reference-library"><span class="nav-number">3.</span> <span class="nav-text">III. 開啟新的reference library</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IV-%E5%8C%AF%E5%85%A5%E5%BC%95%E7%94%A8%E6%AA%94"><span class="nav-number">4.</span> <span class="nav-text">IV. 匯入引用檔</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E7%B6%B2%E7%AB%99"><span class="nav-number">5.</span> <span class="nav-text">參考網站</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hugnlin Chen"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Hugnlin Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hunglin59638" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hunglin59638" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hunglin59638@gmail.com" title="E-Mail → mailto:hunglin59638@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://discord.gg/4WpdhECsXq" title="Discord → https:&#x2F;&#x2F;discord.gg&#x2F;4WpdhECsXq" rel="noopener" target="_blank"><i class="fab fa-discord fa-fw"></i>Discord</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-tw">
+    <link itemprop="mainEntityOfPage" href="https://hunglin59638.github.io/2018/09/06/Endnote%E4%B8%80%E6%AC%A1%E5%88%B0%E4%BD%8D%E5%BC%95%E7%94%A8%E6%96%87%E7%8D%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Hugnlin Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MengDoggy">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Endnote一次到位引用文獻
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-09-06 00:00:00" itemprop="dateCreated datePublished" datetime="2018-09-06T00:00:00+08:00">2018-09-06</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-03-26 00:47:28" itemprop="dateModified" datetime="2021-03-26T00:47:28+08:00">2021-03-26</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>Endnote目前更新到X9版本了</p>
+<p>也是走最近的簡約風格，變美很多</p>
+<p>如果不想每次都要手打一遍文獻這個軟體就會是個很好的助手</p>
+<p>最近有種感慨，不是軟體不好，而是人不會使用而已</p>
+<span id="more"></span>
+
+<h2 id="I-下載Endnote"><a href="#I-下載Endnote" class="headerlink" title="I. 下載Endnote"></a>I. 下載Endnote</h2><p>獲得Endnote的方法通常是從學校線上資源下載</p>
+<p>附上<a target="_blank" rel="noopener" href="http://endnote.lib.nchu.edu.tw/selectdb.jsp?id=1&sta=%EF%BF%BD%E4%A5%A6">中興大學連結</a>，但需要連上學校wifi或使用虛擬伺服器</p>
+<h2 id="II-從學術網站上下載引用檔"><a href="#II-從學術網站上下載引用檔" class="headerlink" title="II. 從學術網站上下載引用檔"></a>II. 從學術網站上下載引用檔</h2><p>通常選擇RIS或Endnote file</p>
+<p>這次以google scholar作為示範</p>
+<p><img src="https://pic.pimg.tw/alex59638/1540632450-1935321528_l.jpg" alt="1540632385141.jpg" title="1540632385141.jpg"></p>
+<p>點選 引用的圖標   ’ ’  ，點選Endnote或是RefMan，下載引用檔</p>
+<h2 id="III-開啟新的reference-library"><a href="#III-開啟新的reference-library" class="headerlink" title="III. 開啟新的reference library"></a>III. 開啟新的reference library</h2><p>全部下載完所需的引用文獻後，打開Endnote</p>
+<p>按 file&gt; New… 開啟一個新的reference library</p>
+<h2 id="IV-匯入引用檔"><a href="#IV-匯入引用檔" class="headerlink" title="IV. 匯入引用檔"></a>IV. 匯入引用檔</h2><p>雙擊檔案就即可匯入</p>
+<p>或按Inport<img src="https://pic.pimg.tw/alex59638/1540633451-2353741800.jpg" alt="1540633419010.jpg" title="1540633419010.jpg">匯入，記得檔案類型要選對</p>
+<p>V. 選擇引用格式</p>
+<p>雖然軟體已經列出期刊的引用格式，但可能還是會不符合你的需求</p>
+<p>可以再進一步編輯</p>
+<p>Edit &gt; Output styles &gt; Open style manager</p>
+<p>選擇自己所需的期刊格式，這裡以 J Animal Scienece</p>
+<p>勾選後按右下角的 Edit</p>
+<p>VI. 編輯期刊格式</p>
+<p>進入後看到下方的介面，在論文後引用的文獻是在 Bibliography 編輯</p>
+<p><img src="https://pic.pimg.tw/alex59638/1540634067-3050199778_l.jpg" alt="1540634033390.jpg" title="1540634033390.jpg"></p>
+<p>進入 Author Lists，確認 Abrreviated Author List選項是 List All author names</p>
+<p>如果沒有，另外一個選擇預設在超過6位作者就會用 et al.簡寫</p>
+<p><img src="https://pic.pimg.tw/alex59638/1540634460-1896758689.jpg" alt="1540634436920.jpg" title="1540634436920.jpg"></p>
+<p>Author Name，第一位作者開頭是姓再來是名，其他作者先列名再列姓</p>
+<p>Capitalization選擇 Normal，表示每個字第一個字大寫，之後小寫</p>
+<p>Initials縮寫格式為 A. B.</p>
+<p><img src="https://pic.pimg.tw/alex59638/1540634552-3961686163.jpg" alt="name.jpg" title="name.jpg"></p>
+<p>Title Capitalization 選擇 sentence style capitalization</p>
+<p>表示文獻標題只有第一格單字第一個字母會大寫，其餘單字小寫</p>
+<p><img src="https://pic.pimg.tw/alex59638/1540635187-1857843884.jpg" alt="Title.jpg" title="Title.jpg"></p>
+<p>關閉儲存修改結果</p>
+<p>VII. 匯入期刊縮寫</p>
+<p>如果這時直接匯出會發現引用的期刊名稱顯示全名沒有縮寫</p>
+<p>Endnote有內建多種領域的期刊縮寫清單</p>
+<p>按 Tools &gt; Open Terms Lists &gt; Journals Term list</p>
+<p>先把子項目 Terms 中的期刊名(你匯入的期刊) 用 Delete Term 篩除</p>
+<p>換到子項目 List ，選擇 Import List…</p>
+<p><img src="https://pic.pimg.tw/alex59638/1540635969-2749360639.jpg" alt="Term" title="Term"></p>
+<p>沒有移動安裝位置的話應該會在 C:\Program Files (x86)\EndNote X9\Terms Lists</p>
+<p>可以看到有很多txt文字檔</p>
+<p>選擇自己期刊領域的文字檔，這裡選擇Zoological Records</p>
+<p><img src="https://pic.pimg.tw/alex59638/1540636147-353824673_l.jpg" alt="Zoology.jpg" title="Zoology.jpg"></p>
+<p>回到Term可以看到相關領域期刊的全名跟縮寫都已匯入</p>
+<p>VIII. 匯出引用文獻</p>
+<p>在左上方下拉式選擇修改後的期刊格式</p>
+<p><img src="https://pic.pimg.tw/alex59638/1540635388-941749087.jpg" alt="list.jpg" title="list.jpg"></p>
+<p>按Import<img src="https://pic.pimg.tw/alex59638/1540635557-3260915611.jpg" alt="import.jpg" title="import.jpg"></p>
+<p>選擇匯出存檔類型為 Rich Text Format (*rtf)</p>
+<p><img src="https://pic.pimg.tw/alex59638/1540635542-169718008.jpg" alt="RTF.jpg" title="RTF.jpg"></p>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><p><a target="_blank" rel="noopener" href="http://tul.blog.ntu.edu.tw/archives/6096">臺大圖書館參考服務部落格</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.xuite.net/wendyhg40/90833952/44724010-EndNote%E5%8C%AF%E5%87%BA%E5%8F%83%E8%80%83%E6%96%87%E7%8D%BB%E8%87%B3word%28%E6%94%B9%E6%A0%BC%E5%BC%8F%29">EndNote匯出參考文獻至word(改格式)</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/technology/" rel="tag"># technology</a>
+              <a href="/tags/endnote/" rel="tag"># endnote</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/09/06/%E5%9C%A8R%E4%B8%AD%E5%9F%B7%E8%A1%8C%20SAS%E7%9A%84glm%20lsmeans/" rel="prev" title="在R中執行 SAS的glm lsmeans">
+                  <i class="fa fa-chevron-left"></i> 在R中執行 SAS的glm lsmeans
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/12/02/%E4%BB%A5%E5%8B%95%E7%89%A9%E7%82%BA%E9%8F%A1-%20%E4%BA%8C%E5%88%86%E6%B3%95%E5%88%87%E9%96%8B%E7%90%86%E6%80%A7%E8%88%87%E6%84%9F%E6%80%A7/" rel="next" title="以動物為鏡- 二分法切開理性與感性">
+                  以動物為鏡- 二分法切開理性與感性 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hugnlin Chen</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '.page-configurations',
+    '.main-inner',
+    '.post-toc-wrap',
+    '.languages',
+    '.pjax'
+  ],
+  analytics: false,
+  cacheBust: false,
+  scrollRestoration: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  const hasTOC = document.querySelector('.post-toc');
+  document.querySelector('.sidebar-inner').classList.toggle('sidebar-nav-active', hasTOC);
+  document.querySelector(hasTOC ? '.sidebar-nav-toc' : '.sidebar-nav-overview').click();
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+
+
+
+    <div class="pjax">
+
+
+    </div>
+</body>
+</html>
