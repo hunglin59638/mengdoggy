@@ -447,7 +447,7 @@ Ozone Solar.R Wind Temp Month Day</li>
 <p>*檔案的位置會儲存在你下指令的位置</p>
 <p>也可以用一串指令就完成傳輸</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sftp [遠端登入電腦之hostname]@[ip位置]: [檔案位置]</span><br></pre></td></tr></table></figure>
-<p>e.g. sftp <a href="mailto:&#85;&#x53;&#69;&#82;&#64;&#x31;&#52;&#48;&#x2e;&#49;&#49;&#x31;&#x2e;&#x32;&#50;&#x32;&#x2e;&#x31;&#50;&#51;">&#85;&#x53;&#69;&#82;&#64;&#x31;&#52;&#48;&#x2e;&#49;&#49;&#x31;&#x2e;&#x32;&#50;&#x32;&#x2e;&#x31;&#50;&#51;</a>: C/canu/barcode03.fastq</p>
+<p>e.g. sftp <a href="mailto:&#x55;&#83;&#69;&#82;&#64;&#x31;&#52;&#48;&#x2e;&#x31;&#49;&#49;&#x2e;&#x32;&#x32;&#50;&#46;&#x31;&#x32;&#x33;">&#x55;&#83;&#69;&#82;&#64;&#x31;&#52;&#48;&#x2e;&#x31;&#49;&#49;&#x2e;&#x32;&#x32;&#50;&#46;&#x31;&#x32;&#x33;</a>: C/canu/barcode03.fastq</p>
 <p>只是傳輸個檔案而已就花了幾天在研究呢….</p>
 ]]></content>
       <categories>
@@ -2610,6 +2610,8 @@ Ozone Solar.R Wind Temp Month Day</li>
     <url>/2020/06/08/%E6%9E%B6%E8%A8%AD%E8%87%AA%E5%B7%B1%E7%9A%84WordPress%20with%20LAMP/</url>
     <content><![CDATA[<p>第一篇文章就來寫這個主題吧，但也因為這樣被搞到超累</p>
 <p>本文就是個紀錄架設過程，所以很多理論就skip，還會小抱怨遇到的神奇問題哈  </p>
+<span id="more"></span>
+
 <h2 id="註冊網域"><a href="#註冊網域" class="headerlink" title="註冊網域"></a>註冊網域</h2><ul>
 <li><a href="https://tw.godaddy.com/">Godaddy</a><br><code>.com</code>的網域大概落在150-300吧  </li>
 <li><a href="https://www.freenom.com/">Freenom</a><br>結果居然可以註冊免費網域，只是後綴被限定<br>最後我選<code>hunglinchen.ga</code><br>哦哦如果開輸入欄位只有輸入<code>hunglinchen</code>的話，會跳出可用的網域<br>但是點選時會跳出不可用<br>但輸入完整的網域(hunglinchen.ga)就可以加到購物車嚕  </li>
