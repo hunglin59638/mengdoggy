@@ -290,6 +290,8 @@ a,
 </style>
 <h2 id="Install-PEAKS-on-Ubuntu"><a href="#Install-PEAKS-on-Ubuntu" class="headerlink" title="Install PEAKS on Ubuntu"></a>Install PEAKS on Ubuntu</h2><p>畢業前就有看到這篇文章現在才來玩，原本PEAKS只能安裝在Windows系統，由於他是java寫出的程式，所以可以在windows安裝後，複製程式資料夾到別的作業系統在用java執行  </p>
 <p>在Windows環境下下載檔案並安裝<br><a href="http://www.bioinfor.com/download-peaks-studio/"><img src="https://lh3.googleusercontent.com/ChShYP5C6-S8nlYqbl4C712qEQFb6fc_3ZxGtfs5scloM9kaN_FuxaXXAKwckuqKXm1-JMoIECh-rNANiMugy8a-YWyijSagCuOTpLMiWcJ0VnDDadnp97FniaACgiRyoWpMZWiPfA=w400"></a></p>
+<span id="more"></span>
+
 <p>現在的版本是PEAKS Studio X+<br>安裝完成後程式位置會在C：\PEAKSStudioXplus<br>將整個目錄複製到Ubuntu的<code>/opt/</code>  </p>
 <p>檢查java已安裝</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>

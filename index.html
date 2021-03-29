@@ -550,7 +550,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-03-29 23:27:07" itemprop="dateModified" datetime="2021-03-29T23:27:07+08:00">2021-03-29</time>
+        <time title="Modified: 2021-03-30 00:59:21" itemprop="dateModified" datetime="2021-03-30T00:59:21+08:00">2021-03-30</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -671,34 +671,14 @@ a,
 </style>
 <h2 id="Install-PEAKS-on-Ubuntu"><a href="#Install-PEAKS-on-Ubuntu" class="headerlink" title="Install PEAKS on Ubuntu"></a>Install PEAKS on Ubuntu</h2><p>畢業前就有看到這篇文章現在才來玩，原本PEAKS只能安裝在Windows系統，由於他是java寫出的程式，所以可以在windows安裝後，複製程式資料夾到別的作業系統在用java執行  </p>
 <p>在Windows環境下下載檔案並安裝<br><a target="_blank" rel="noopener" href="http://www.bioinfor.com/download-peaks-studio/"><img src="https://lh3.googleusercontent.com/ChShYP5C6-S8nlYqbl4C712qEQFb6fc_3ZxGtfs5scloM9kaN_FuxaXXAKwckuqKXm1-JMoIECh-rNANiMugy8a-YWyijSagCuOTpLMiWcJ0VnDDadnp97FniaACgiRyoWpMZWiPfA=w400"></a></p>
-<p>現在的版本是PEAKS Studio X+<br>安裝完成後程式位置會在C：\PEAKSStudioXplus<br>將整個目錄複製到Ubuntu的<code>/opt/</code>  </p>
-<p>檢查java已安裝</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
-<p>刪除原來windows安裝的jre目錄，以Ubuntu的java程式取代</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">cd /opt/PEAKSStudioXplus/</span><br><span class="line">rm -r -f jre # -r: 遞迴刪除子目錄 -f: 強制刪除</span><br><span class="line">mkdir jre</span><br><span class="line">cd jre</span><br><span class="line">mkdir bin</span><br><span class="line">cd bin</span><br><span class="line"><span class="meta">#</span><span class="bash"> ln -s: 建立symbolic link</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 建立指向/usr/bin/java的symbolic link並命名為java.exe</span></span><br><span class="line">ln -s /usr/bin/java java.exe </span><br><span class="line">cd /opt/PEAKSStudioXplus/</span><br><span class="line">jre/bin/java.exe -cp peaksstudio.jar com.bsi.tools.computenodenumber.PerformanceConfigDialog  </span><br><span class="line"></span><br><span class="line">Gtk-Message: 02:30:10.779: Failed to load module &quot;canberra-gtk-module&quot;</span><br><span class="line">Failed on verify signature!</span><br><span class="line"><span class="meta">#</span><span class="bash">執行該指令後會跳出下面視窗</span></span><br></pre></td></tr></table></figure>
-<p>跳出下面視窗後選取<code>Manually Confugure Performance</code>，確認<code>Start Client Separately</code>和<code>Start Compute Node Separately</code>都是未選取的(預設就沒勾選了)<br><img src="https://lh3.googleusercontent.com/-l37dMr8t1pjVgF3xASzmgoj5SGa36hHYwbrK5aGQ90Dc2raICHSvcJOp1ufgprF71GToZN8CL4XvFSJRvRCqwfwIiVHnIdw86aumSEPhFjzinPitVDRw1e5sPOjojftnanQ2_IkqQ=w800"><br>但Apply後會跳出這個視窗，即使用<code>sudo</code>也一樣<br><img src="https://lh3.googleusercontent.com/zwCQFF7Qh81dL6nlHUdkoA6_q_rBrMp7pBDuq6AiiSUu599Ee2_2pAzH9gCvoM0aeB4mE9AKQebZh1ttjWMwjrpH5GEhdRMDEZ_hw4VYdl5fy3E4blfSMlB0r6jW4vrIWHC-4UhChQ=w800"></p>
-<p>OK後terminal的log</p>
-<iframe src="https://docs.google.com/document/d/e/2PACX-1vRpF-4kjSMQnZRdeM8WgQmRbDUoN72ZRC6zFEZ1B654gBRKl-6qb0BWTt4CJ8BhJZJpykA1NYoS5PTQ/pub?embedded=true" width=600 height=400></iframe>
-
-<p>先忽略這個錯誤繼續往下<br>製作一個執行檔，並命名為<code>peaks.sh</code>，放在/opt/PEAKSStudioXplus/  </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line">cd /opt/PEAKSStudioXplus/ # 如果在本地啟用的話無需指定位置，因為製作捷徑時沒有先到該位置則無法啟動</span><br><span class="line">jre/bin/java.exe -Xmx12000m -splash:splash.png -jar peaksstudio.jar</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>The number 12000 means that PEAKS can use up to 12GB of RAM. You can change this value based on your computer configuration, but a higher amount is always preferred.</p>
-</blockquote>
-<p>啟動程式</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./peaks.sh</span><br></pre></td></tr></table></figure>
-<p>可以成功啟動！！<br>但打開project開啟結果後的summary介面的圖片無法顯示<br>介面格式也有些跑掉  </p>
-<img src="https://lh3.googleusercontent.com/OJQngNU5jdaAmE8UKiAl8ieSIgseyyB4wx7-WkWZJZaP3bffVoCx7AXdWQOJiv0AgbGjk_-6pi4t0jIMuCCyHKspZhVpjq7j3ckFjITqeJJ6VAgfdNHETDezJqOcFsEwZQ1ArX2mTA=w1200">
-
-<p>以後真的有需要再來找解決辦法吧~</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="http://peaksblog.bioinfor.com/2013/03/how-to-run-peaks-studioviewer-on-mac-os.html">How to run PEAKS Studio/Viewer on Mac OS X or Linux? | PEAKS Blog</a>   </p>
-</blockquote>
-<p>翻外篇<br>建立應用程式捷徑<img src="https://lh3.googleusercontent.com/_6AUBlV7KqIXmwn8uJfLsSdUGJlKW49v4jGJGrN5-X_jAWSfmcRMy9ndwiX3yiVg_1zNE6QGHXEVmWe-hlfhSsmU6-grwKPn2-bkmvSITy7rn3LhjF55sXsclPNYbHI-kwELPoxOAA=w40">  </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/share/applications/</span><br><span class="line">sudo vim PEAKSX+.desktop #正常要先在家目錄測試在移動過來較妥</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 腳本內容</span></span><br><span class="line">[Desktop Entry]</span><br><span class="line">Name=PEAKSX+</span><br><span class="line">Comment=Start up PEAKSX+</span><br><span class="line"><span class="meta">#</span><span class="bash">自己找icon，原本沒有</span></span><br><span class="line">Icon=/opt/PEAKSStudioXplus/images/peaksstudio.png</span><br><span class="line">Exec=sh /opt/PEAKSStudioXplus/peaks.sh</span><br><span class="line">Type=Application</span><br><span class="line">Encoding=UTF-8</span><br><span class="line">Terminal=false</span><br><span class="line">Categories=None;</span><br></pre></td></tr></table></figure>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/30/Install%20PEAKS%20Studio%20on%20Ubuntu/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
