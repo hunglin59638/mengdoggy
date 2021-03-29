@@ -196,7 +196,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-count">48</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -494,6 +494,211 @@
             </div>
           <!--/noindex-->
         
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hunglin59638.github.io/2020/08/30/Install%20PEAKS%20Studio%20on%20Ubuntu/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Hugnlin Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MengDoggy">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/08/30/Install%20PEAKS%20Studio%20on%20Ubuntu/" class="post-title-link" itemprop="url">Install PEAKS Studio on Ubuntu</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-08-30 00:00:00" itemprop="dateCreated datePublished" datetime="2020-08-30T00:00:00+08:00">2020-08-30</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-03-29 23:27:07" itemprop="dateModified" datetime="2021-03-29T23:27:07+08:00">2021-03-29</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/bioinformatics/" itemprop="url" rel="index"><span itemprop="name">bioinformatics</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <style>
+
+html, body, .ui-content {
+    background-color: #333;
+    color: #ddd;
+}
+
+body > .ui-infobar {
+    display: none;
+}
+
+.ui-view-area > .ui-infobar {
+    display: block;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+    color: #ddd;
+}
+
+.markdown-body h1,
+.markdown-body h2 {
+    border-bottom-color: #ffffff69;
+}
+
+.markdown-body h1 .octicon-link,
+.markdown-body h2 .octicon-link,
+.markdown-body h3 .octicon-link,
+.markdown-body h4 .octicon-link,
+.markdown-body h5 .octicon-link,
+.markdown-body h6 .octicon-link {
+    color: #fff;
+}
+
+.markdown-body img {
+    background-color: transparent;
+}
+
+.ui-toc-dropdown .nav>.active:focus>a, .ui-toc-dropdown .nav>.active:hover>a, .ui-toc-dropdown .nav>.active>a {
+    color: white;
+    border-left: 2px solid white;
+}
+
+.expand-toggle:hover, 
+.expand-toggle:focus, 
+.back-to-top:hover, 
+.back-to-top:focus, 
+.go-to-bottom:hover, 
+.go-to-bottom:focus {
+    color: white;
+}
+
+
+.ui-toc-dropdown {
+    background-color: #333;
+}
+
+.ui-toc-label.btn {
+    background-color: #191919;
+    color: white;
+}
+
+.ui-toc-dropdown .nav>li>a:focus, 
+.ui-toc-dropdown .nav>li>a:hover {
+    color: white;
+    border-left: 1px solid white;
+}
+
+.markdown-body blockquote {
+    color: #bcbcbc;
+}
+
+.markdown-body table tr {
+    background-color: #5f5f5f;
+}
+
+.markdown-body table tr:nth-child(2n) {
+    background-color: #4f4f4f;
+}
+
+.markdown-body code,
+.markdown-body tt {
+    color: #eee;
+    background-color: rgba(230, 230, 230, 0.36);
+}
+
+a,
+.open-files-container li.selected a {
+    color: #5EB7E0;
+}
+
+
+</style>
+<h2 id="Install-PEAKS-on-Ubuntu"><a href="#Install-PEAKS-on-Ubuntu" class="headerlink" title="Install PEAKS on Ubuntu"></a>Install PEAKS on Ubuntu</h2><p>畢業前就有看到這篇文章現在才來玩，原本PEAKS只能安裝在Windows系統，由於他是java寫出的程式，所以可以在windows安裝後，複製程式資料夾到別的作業系統在用java執行  </p>
+<p>在Windows環境下下載檔案並安裝<br><a target="_blank" rel="noopener" href="http://www.bioinfor.com/download-peaks-studio/"><img src="https://lh3.googleusercontent.com/ChShYP5C6-S8nlYqbl4C712qEQFb6fc_3ZxGtfs5scloM9kaN_FuxaXXAKwckuqKXm1-JMoIECh-rNANiMugy8a-YWyijSagCuOTpLMiWcJ0VnDDadnp97FniaACgiRyoWpMZWiPfA=w400"></a></p>
+<p>現在的版本是PEAKS Studio X+<br>安裝完成後程式位置會在C：\PEAKSStudioXplus<br>將整個目錄複製到Ubuntu的<code>/opt/</code>  </p>
+<p>檢查java已安裝</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
+<p>刪除原來windows安裝的jre目錄，以Ubuntu的java程式取代</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">cd /opt/PEAKSStudioXplus/</span><br><span class="line">rm -r -f jre # -r: 遞迴刪除子目錄 -f: 強制刪除</span><br><span class="line">mkdir jre</span><br><span class="line">cd jre</span><br><span class="line">mkdir bin</span><br><span class="line">cd bin</span><br><span class="line"><span class="meta">#</span><span class="bash"> ln -s: 建立symbolic link</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 建立指向/usr/bin/java的symbolic link並命名為java.exe</span></span><br><span class="line">ln -s /usr/bin/java java.exe </span><br><span class="line">cd /opt/PEAKSStudioXplus/</span><br><span class="line">jre/bin/java.exe -cp peaksstudio.jar com.bsi.tools.computenodenumber.PerformanceConfigDialog  </span><br><span class="line"></span><br><span class="line">Gtk-Message: 02:30:10.779: Failed to load module &quot;canberra-gtk-module&quot;</span><br><span class="line">Failed on verify signature!</span><br><span class="line"><span class="meta">#</span><span class="bash">執行該指令後會跳出下面視窗</span></span><br></pre></td></tr></table></figure>
+<p>跳出下面視窗後選取<code>Manually Confugure Performance</code>，確認<code>Start Client Separately</code>和<code>Start Compute Node Separately</code>都是未選取的(預設就沒勾選了)<br><img src="https://lh3.googleusercontent.com/-l37dMr8t1pjVgF3xASzmgoj5SGa36hHYwbrK5aGQ90Dc2raICHSvcJOp1ufgprF71GToZN8CL4XvFSJRvRCqwfwIiVHnIdw86aumSEPhFjzinPitVDRw1e5sPOjojftnanQ2_IkqQ=w800"><br>但Apply後會跳出這個視窗，即使用<code>sudo</code>也一樣<br><img src="https://lh3.googleusercontent.com/zwCQFF7Qh81dL6nlHUdkoA6_q_rBrMp7pBDuq6AiiSUu599Ee2_2pAzH9gCvoM0aeB4mE9AKQebZh1ttjWMwjrpH5GEhdRMDEZ_hw4VYdl5fy3E4blfSMlB0r6jW4vrIWHC-4UhChQ=w800"></p>
+<p>OK後terminal的log</p>
+<iframe src="https://docs.google.com/document/d/e/2PACX-1vRpF-4kjSMQnZRdeM8WgQmRbDUoN72ZRC6zFEZ1B654gBRKl-6qb0BWTt4CJ8BhJZJpykA1NYoS5PTQ/pub?embedded=true" width=600 height=400></iframe>
+
+<p>先忽略這個錯誤繼續往下<br>製作一個執行檔，並命名為<code>peaks.sh</code>，放在/opt/PEAKSStudioXplus/  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line">cd /opt/PEAKSStudioXplus/ # 如果在本地啟用的話無需指定位置，因為製作捷徑時沒有先到該位置則無法啟動</span><br><span class="line">jre/bin/java.exe -Xmx12000m -splash:splash.png -jar peaksstudio.jar</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>The number 12000 means that PEAKS can use up to 12GB of RAM. You can change this value based on your computer configuration, but a higher amount is always preferred.</p>
+</blockquote>
+<p>啟動程式</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./peaks.sh</span><br></pre></td></tr></table></figure>
+<p>可以成功啟動！！<br>但打開project開啟結果後的summary介面的圖片無法顯示<br>介面格式也有些跑掉  </p>
+<img src="https://lh3.googleusercontent.com/OJQngNU5jdaAmE8UKiAl8ieSIgseyyB4wx7-WkWZJZaP3bffVoCx7AXdWQOJiv0AgbGjk_-6pi4t0jIMuCCyHKspZhVpjq7j3ckFjITqeJJ6VAgfdNHETDezJqOcFsEwZQ1ArX2mTA=w1200">
+
+<p>以後真的有需要再來找解決辦法吧~</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://peaksblog.bioinfor.com/2013/03/how-to-run-peaks-studioviewer-on-mac-os.html">How to run PEAKS Studio/Viewer on Mac OS X or Linux? | PEAKS Blog</a>   </p>
+</blockquote>
+<p>翻外篇<br>建立應用程式捷徑<img src="https://lh3.googleusercontent.com/_6AUBlV7KqIXmwn8uJfLsSdUGJlKW49v4jGJGrN5-X_jAWSfmcRMy9ndwiX3yiVg_1zNE6QGHXEVmWe-hlfhSsmU6-grwKPn2-bkmvSITy7rn3LhjF55sXsclPNYbHI-kwELPoxOAA=w40">  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/share/applications/</span><br><span class="line">sudo vim PEAKSX+.desktop #正常要先在家目錄測試在移動過來較妥</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 腳本內容</span></span><br><span class="line">[Desktop Entry]</span><br><span class="line">Name=PEAKSX+</span><br><span class="line">Comment=Start up PEAKSX+</span><br><span class="line"><span class="meta">#</span><span class="bash">自己找icon，原本沒有</span></span><br><span class="line">Icon=/opt/PEAKSStudioXplus/images/peaksstudio.png</span><br><span class="line">Exec=sh /opt/PEAKSStudioXplus/peaks.sh</span><br><span class="line">Type=Application</span><br><span class="line">Encoding=UTF-8</span><br><span class="line">Terminal=false</span><br><span class="line">Categories=None;</span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -1016,95 +1221,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/02/07/NFC%20tag%E4%BD%BF%E7%94%A8%E7%B4%80%E9%8C%84/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://hunglin59638.github.io/2019/12/21/Automounting%20google%20drive%20in%20Unbuntu%2018.04/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Hugnlin Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MengDoggy">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/12/21/Automounting%20google%20drive%20in%20Unbuntu%2018.04/" class="post-title-link" itemprop="url">Automounting google drive in Unbuntu 18.04</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2019-12-21 00:00:00" itemprop="dateCreated datePublished" datetime="2019-12-21T00:00:00+08:00">2019-12-21</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-03-26 00:34:39" itemprop="dateModified" datetime="2021-03-26T00:34:39+08:00">2021-03-26</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2>Conclusion</h2>
-<p>方法一:應該要是正確的設定，可惜還是需要開機後在terminal掛載</p>
-<p>方法二：內建程式Startup Applications設定開機時欲執行指令即可</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/12/21/Automounting%20google%20drive%20in%20Unbuntu%2018.04/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
