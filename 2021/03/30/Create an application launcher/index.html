@@ -23,15 +23,15 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"hunglin59638.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="For example:   Create a launcher to open Spyder123456789101112131415gedit ~&#x2F;.local&#x2F;share&#x2F;applications&#x2F;spyder.destop&#96;&#96;&#96;  &lt;!--more--&gt;### edit spyder.desktop  &#96;&#96;&#96;vim#!&#x2F;usr&#x2F;bin&#x2F;env xdg-open[Desktop">
+<meta name="description" content="For example:   Create a launcher to open Spyder1234567gedit ~&#x2F;.local&#x2F;share&#x2F;applications&#x2F;spyder.destop&#96;&#96;&#96;  &lt;!--more--&gt;### edit spyder.desktop   #!&#x2F;usr&#x2F;bin&#x2F;env xdg-">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Create an application launcher">
 <meta property="og:url" content="https://hunglin59638.github.io/2021/03/30/Create%20an%20application%20launcher/index.html">
 <meta property="og:site_name" content="MengDoggy">
-<meta property="og:description" content="For example:   Create a launcher to open Spyder123456789101112131415gedit ~&#x2F;.local&#x2F;share&#x2F;applications&#x2F;spyder.destop&#96;&#96;&#96;  &lt;!--more--&gt;### edit spyder.desktop  &#96;&#96;&#96;vim#!&#x2F;usr&#x2F;bin&#x2F;env xdg-open[Desktop">
+<meta property="og:description" content="For example:   Create a launcher to open Spyder1234567gedit ~&#x2F;.local&#x2F;share&#x2F;applications&#x2F;spyder.destop&#96;&#96;&#96;  &lt;!--more--&gt;### edit spyder.desktop   #!&#x2F;usr&#x2F;bin&#x2F;env xdg-">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2021-03-30T13:57:00.000Z">
-<meta property="article:modified_time" content="2021-03-30T15:12:07.444Z">
+<meta property="article:modified_time" content="2021-03-30T15:13:12.721Z">
 <meta property="article:author" content="Hugnlin Chen">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="ubuntu">
@@ -188,7 +188,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Create-a-launcher-to-open-Spyder"><span class="nav-number">1.</span> <span class="nav-text">Create a launcher to open Spyder</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#change-its-permission-to-be-executable"><span class="nav-number">1.1.</span> <span class="nav-text">change its permission to be executable</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Create-a-launcher-to-open-Spyder"><span class="nav-number">1.</span> <span class="nav-text">Create a launcher to open Spyder</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -291,7 +291,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2021-03-30 21:57:00 / Modified: 23:12:07" itemprop="dateCreated datePublished" datetime="2021-03-30T21:57:00+08:00">2021-03-30</time>
+      <time title="Created: 2021-03-30 21:57:00 / Modified: 23:13:12" itemprop="dateCreated datePublished" datetime="2021-03-30T21:57:00+08:00">2021-03-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -314,10 +314,11 @@
     
     <div class="post-body" itemprop="articleBody">
         <p>For example:  </p>
-<h2 id="Create-a-launcher-to-open-Spyder"><a href="#Create-a-launcher-to-open-Spyder" class="headerlink" title="Create a launcher to open Spyder"></a>Create a launcher to open Spyder</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">gedit ~/.<span class="built_in">local</span>/share/applications/spyder.destop</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">### edit spyder.desktop  </span></span><br><span class="line"></span><br><span class="line">```vim</span><br><span class="line"><span class="meta">#!/usr/bin/env xdg-open</span></span><br><span class="line">[Desktop Entry]</span><br><span class="line">Type=Application</span><br><span class="line">Exec=/home/hunglin/anaconda3/bin/spyder <span class="comment"># your command</span></span><br><span class="line">Name=Spyder <span class="comment"># display on applicaion list</span></span><br><span class="line">Comment=Spyder <span class="comment"># display near the icon</span></span><br><span class="line">Icon=/home/hunglin/Pictures/Icons/spyder-icon <span class="comment"># input picture path</span></span><br></pre></td></tr></table></figure>
-<p>save the file  </p>
-<h3 id="change-its-permission-to-be-executable"><a href="#change-its-permission-to-be-executable" class="headerlink" title="change its permission to be executable"></a>change its permission to be executable</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod a+x ~&#x2F;.local&#x2F;share&#x2F;applications&#x2F;spyder.destop</span><br></pre></td></tr></table></figure>
-<p>Then, the laucher will show on Application list  </p>
+<h2 id="Create-a-launcher-to-open-Spyder"><a href="#Create-a-launcher-to-open-Spyder" class="headerlink" title="Create a launcher to open Spyder"></a>Create a launcher to open Spyder</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">gedit ~&#x2F;.local&#x2F;share&#x2F;applications&#x2F;spyder.destop</span><br><span class="line">&#96;&#96;&#96;  </span><br><span class="line"></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"></span><br><span class="line">### edit spyder.desktop  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>#!/usr/bin/env xdg-open<br>[Desktop Entry]<br>Type=Application<br>Exec=/home/hunglin/anaconda3/bin/spyder # your command<br>Name=Spyder # display on applicaion list<br>Comment=Spyder # display near the icon<br>Icon=/home/hunglin/Pictures/Icons/spyder-icon # input picture path</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">save the file  </span><br><span class="line"></span><br><span class="line">### change its permission to be executable  </span><br></pre></td></tr></table></figure>
+<p>chmod a+x ~/.local/share/applications/spyder.destop</p>
+<p>```<br>Then, the laucher will show on Application list  </p>
 <blockquote>
 <p><a target="_blank" rel="noopener" href="https://www.unixmen.com/create-a-launcher-in-ubuntu-using-bash/">https://www.unixmen.com/create-a-launcher-in-ubuntu-using-bash/</a></p>
 </blockquote>
