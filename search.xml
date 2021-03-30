@@ -73,6 +73,26 @@ sudo mount ~/Google-drive
       </tags>
   </entry>
   <entry>
+    <title>Create an application launcher</title>
+    <url>/2021/03/30/Create%20an%20application%20launcher/</url>
+    <content><![CDATA[<p>For example:  </p>
+<h2 id="Create-a-launcher-to-open-Spyder"><a href="#Create-a-launcher-to-open-Spyder" class="headerlink" title="Create a launcher to open Spyder"></a>Create a launcher to open Spyder</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gedit ~/.<span class="built_in">local</span>/share/applications/spyder.destop</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line"><span class="comment">### edit spyder.desktop</span></span><br><span class="line">```vim</span><br><span class="line"><span class="meta">#!/usr/bin/env xdg-open</span></span><br><span class="line">[Desktop Entry]</span><br><span class="line">Type=Application</span><br><span class="line">Exec=/home/hunglin/anaconda3/bin/spyder <span class="comment"># your command</span></span><br><span class="line">Name=Spyder <span class="comment"># display on applicaion list</span></span><br><span class="line">Comment=Spyder <span class="comment"># display near the icon</span></span><br><span class="line">Icon=/home/hunglin/Pictures/Icons/spyder-icon <span class="comment"># input picture path</span></span><br></pre></td></tr></table></figure>
+<p>save the file  </p>
+<h3 id="change-its-permission-to-be-executable"><a href="#change-its-permission-to-be-executable" class="headerlink" title="change its permission to be executable"></a>change its permission to be executable</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chmod a+x ~&#x2F;.local&#x2F;share&#x2F;applications&#x2F;spyder.destop</span><br></pre></td></tr></table></figure>
+<p>Then, the laucher will show on Application list  </p>
+<blockquote>
+<p><a href="https://www.unixmen.com/create-a-launcher-in-ubuntu-using-bash/">https://www.unixmen.com/create-a-launcher-in-ubuntu-using-bash/</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>ubuntu</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Endnote一次到位引用文獻</title>
     <url>/2018/09/06/Endnote%E4%B8%80%E6%AC%A1%E5%88%B0%E4%BD%8D%E5%BC%95%E7%94%A8%E6%96%87%E7%8D%BB/</url>
     <content><![CDATA[<p>Endnote目前更新到X9版本了</p>
@@ -385,6 +405,52 @@ sudo mount ~/Google-drive
       </tags>
   </entry>
   <entry>
+    <title>Reading and Writing Data 抓出指定變數或觀測值</title>
+    <url>/2018/05/09/Reading%20and%20Writing%20Data%20%E6%8A%93%E5%87%BA%E6%8C%87%E5%AE%9A%E8%AE%8A%E6%95%B8%E6%88%96%E8%A7%80%E6%B8%AC%E5%80%BC/</url>
+    <content><![CDATA[<p>Use the built-in data set airquality.</p>
+<span id="more"></span>
+
+<ol>
+<li>Extract the first 4 rows of the data frame and print them to the console.<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">write.table(airquality, airquality.txt)</span><br><span class="line">x &lt;- read.table(airquality.txt, nrow &#x3D; 4)</span><br><span class="line">x</span><br></pre></td></tr></table></figure>
+Ozone Solar.R Wind Temp Month Day</li>
+</ol>
+<p>1 41 190 7.4 67 5 1</p>
+<p>2 36 118 8.0 72 5 2</p>
+<p>3 12 149 12.6 74 5 3</p>
+<p>4 18 313 11.5 62 5 4</p>
+<p>方法二</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">head(airquality, n&#x3D;4)</span><br><span class="line"> Ozone Solar.R Wind Temp Month Day</span><br><span class="line">1 41 190 7.4 67 5 1</span><br><span class="line"></span><br><span class="line">2 36 118 8.0 72 5 2</span><br><span class="line"></span><br><span class="line">3 12 149 12.6 74 5 3</span><br><span class="line"></span><br><span class="line">4 18 313 11.5 62 5 4</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>Extract the last 3 rows of the data frame and print them to the console.</li>
+</ol>
+<p>方法一</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> x &lt;- read.table(airquality.txt, skip &#x3D; 151 , nrow &#x3D; 3)</span><br><span class="line">x</span><br><span class="line"></span><br><span class="line"> V1 V2 V3 V4 V5 V6 V7</span><br><span class="line"></span><br><span class="line">1 151 14 191 14.3 75 9 28</span><br><span class="line"></span><br><span class="line">2 152 18 131 8.0 76 9 29</span><br><span class="line"></span><br><span class="line">3 153 20 223 11.5 68 9 30</span><br></pre></td></tr></table></figure>
+<p>方法二</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tail(airquality, n&#x3D;3)</span><br><span class="line"></span><br><span class="line"> Ozone Solar.R Wind Temp Month Day</span><br><span class="line"></span><br><span class="line">151 14 191 14.3 75 9 28</span><br><span class="line"></span><br><span class="line">152 18 131 8.0 76 9 29</span><br><span class="line"></span><br><span class="line">153 20 223 11.5 68 9 30</span><br><span class="line"></span><br><span class="line">3. What is the value of Wind in the 24th row?</span><br><span class="line"></span><br><span class="line">x$Wind[24]</span><br><span class="line"></span><br><span class="line">[1] 12</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>What is the mean of Temp when Month is equal to 8?</li>
+</ol>
+<p>方法一</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">c&lt;- data.table(airquality)</span><br><span class="line">c[Month&#x3D;&#x3D;8,.(y&#x3D;mean(Temp))]</span><br><span class="line"> y</span><br><span class="line"></span><br><span class="line">1: 83.96774</span><br></pre></td></tr></table></figure>
+<p>方法二</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mean(x$Temp[x$Month&#x3D;&#x3D;8])</span><br><span class="line"></span><br><span class="line">[1] 83.96774</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li><p>Extract the subset of rows of the data frame where Ozone values are above 30 and Temp values are above 80. What is the mean of Solar.R in this subset?</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mean(x$Solar.R[x$Ozone&gt;30 &amp;x$Temp&gt;80], na.rm &#x3D; T)</span><br><span class="line"></span><br><span class="line">[1] 220.6512</span><br></pre></td></tr></table></figure></li>
+<li><p>How many missing values are in the Solar.R column of this data frame?</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">length(x$Solar.R[is.na(x$Solar.R)])</span><br><span class="line"></span><br><span class="line">[1] 7</span><br></pre></td></tr></table></figure></li>
+</ol>
+]]></content>
+      <categories>
+        <category>R</category>
+      </categories>
+      <tags>
+        <tag>R</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Win10 freeBSD 遠端登入傳輸檔案 sftp</title>
     <url>/2018/07/24/Win10%20freeBSD%20%E9%81%A0%E7%AB%AF%E7%99%BB%E5%85%A5%E5%82%B3%E8%BC%B8%E6%AA%94%E6%A1%88%20sftp/</url>
     <content><![CDATA[<p>要快速在不同工作系統間傳輸檔案</p>
@@ -444,7 +510,7 @@ sudo mount ~/Google-drive
 <p>*檔案的位置會儲存在你下指令的位置</p>
 <p>也可以用一串指令就完成傳輸</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sftp [遠端登入電腦之hostname]@[ip位置]: [檔案位置]</span><br></pre></td></tr></table></figure>
-<p>e.g. sftp <a href="mailto:&#85;&#x53;&#x45;&#x52;&#64;&#x31;&#52;&#48;&#x2e;&#49;&#49;&#49;&#x2e;&#50;&#50;&#x32;&#x2e;&#x31;&#x32;&#51;">&#85;&#x53;&#x45;&#x52;&#64;&#x31;&#52;&#48;&#x2e;&#49;&#49;&#49;&#x2e;&#50;&#50;&#x32;&#x2e;&#x31;&#x32;&#51;</a>: C/canu/barcode03.fastq</p>
+<p>e.g. sftp <a href="mailto:&#85;&#x53;&#69;&#x52;&#64;&#49;&#52;&#48;&#x2e;&#x31;&#x31;&#49;&#46;&#50;&#x32;&#50;&#x2e;&#49;&#50;&#51;">&#85;&#x53;&#69;&#x52;&#64;&#49;&#52;&#48;&#x2e;&#x31;&#x31;&#49;&#46;&#50;&#x32;&#50;&#x2e;&#49;&#50;&#51;</a>: C/canu/barcode03.fastq</p>
 <p>只是傳輸個檔案而已就花了幾天在研究呢….</p>
 ]]></content>
       <categories>
@@ -454,52 +520,6 @@ sudo mount ~/Google-drive
         <tag>technology</tag>
         <tag>freeBSD</tag>
         <tag>win10</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Reading and Writing Data 抓出指定變數或觀測值</title>
-    <url>/2018/05/09/Reading%20and%20Writing%20Data%20%E6%8A%93%E5%87%BA%E6%8C%87%E5%AE%9A%E8%AE%8A%E6%95%B8%E6%88%96%E8%A7%80%E6%B8%AC%E5%80%BC/</url>
-    <content><![CDATA[<p>Use the built-in data set airquality.</p>
-<span id="more"></span>
-
-<ol>
-<li>Extract the first 4 rows of the data frame and print them to the console.<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">write.table(airquality, airquality.txt)</span><br><span class="line">x &lt;- read.table(airquality.txt, nrow &#x3D; 4)</span><br><span class="line">x</span><br></pre></td></tr></table></figure>
-Ozone Solar.R Wind Temp Month Day</li>
-</ol>
-<p>1 41 190 7.4 67 5 1</p>
-<p>2 36 118 8.0 72 5 2</p>
-<p>3 12 149 12.6 74 5 3</p>
-<p>4 18 313 11.5 62 5 4</p>
-<p>方法二</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">head(airquality, n&#x3D;4)</span><br><span class="line"> Ozone Solar.R Wind Temp Month Day</span><br><span class="line">1 41 190 7.4 67 5 1</span><br><span class="line"></span><br><span class="line">2 36 118 8.0 72 5 2</span><br><span class="line"></span><br><span class="line">3 12 149 12.6 74 5 3</span><br><span class="line"></span><br><span class="line">4 18 313 11.5 62 5 4</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>Extract the last 3 rows of the data frame and print them to the console.</li>
-</ol>
-<p>方法一</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> x &lt;- read.table(airquality.txt, skip &#x3D; 151 , nrow &#x3D; 3)</span><br><span class="line">x</span><br><span class="line"></span><br><span class="line"> V1 V2 V3 V4 V5 V6 V7</span><br><span class="line"></span><br><span class="line">1 151 14 191 14.3 75 9 28</span><br><span class="line"></span><br><span class="line">2 152 18 131 8.0 76 9 29</span><br><span class="line"></span><br><span class="line">3 153 20 223 11.5 68 9 30</span><br></pre></td></tr></table></figure>
-<p>方法二</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tail(airquality, n&#x3D;3)</span><br><span class="line"></span><br><span class="line"> Ozone Solar.R Wind Temp Month Day</span><br><span class="line"></span><br><span class="line">151 14 191 14.3 75 9 28</span><br><span class="line"></span><br><span class="line">152 18 131 8.0 76 9 29</span><br><span class="line"></span><br><span class="line">153 20 223 11.5 68 9 30</span><br><span class="line"></span><br><span class="line">3. What is the value of Wind in the 24th row?</span><br><span class="line"></span><br><span class="line">x$Wind[24]</span><br><span class="line"></span><br><span class="line">[1] 12</span><br></pre></td></tr></table></figure>
-<ol start="4">
-<li>What is the mean of Temp when Month is equal to 8?</li>
-</ol>
-<p>方法一</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">c&lt;- data.table(airquality)</span><br><span class="line">c[Month&#x3D;&#x3D;8,.(y&#x3D;mean(Temp))]</span><br><span class="line"> y</span><br><span class="line"></span><br><span class="line">1: 83.96774</span><br></pre></td></tr></table></figure>
-<p>方法二</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mean(x$Temp[x$Month&#x3D;&#x3D;8])</span><br><span class="line"></span><br><span class="line">[1] 83.96774</span><br></pre></td></tr></table></figure>
-
-<ol start="5">
-<li><p>Extract the subset of rows of the data frame where Ozone values are above 30 and Temp values are above 80. What is the mean of Solar.R in this subset?</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mean(x$Solar.R[x$Ozone&gt;30 &amp;x$Temp&gt;80], na.rm &#x3D; T)</span><br><span class="line"></span><br><span class="line">[1] 220.6512</span><br></pre></td></tr></table></figure></li>
-<li><p>How many missing values are in the Solar.R column of this data frame?</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">length(x$Solar.R[is.na(x$Solar.R)])</span><br><span class="line"></span><br><span class="line">[1] 7</span><br></pre></td></tr></table></figure></li>
-</ol>
-]]></content>
-      <categories>
-        <category>R</category>
-      </categories>
-      <tags>
-        <tag>R</tag>
       </tags>
   </entry>
   <entry>
@@ -719,6 +739,42 @@ Ozone Solar.R Wind Temp Month Day</li>
       </tags>
   </entry>
   <entry>
+    <title>「捍衛 生命 史匹拉」 讀後感想</title>
+    <url>/2017/01/30/%E3%80%8C%E6%8D%8D%E8%A1%9B%20%E7%94%9F%E5%91%BD%20%E5%8F%B2%E5%8C%B9%E6%8B%89%E3%80%8D%20%E8%AE%80%E5%BE%8C%E6%84%9F%E6%83%B3/</url>
+    <content><![CDATA[<p>這本書的作者是Peter Singer(動物權利的哲學家)</p>
+<p>他為亨利 史匹拉這個人物寫了這本傳記</p>
+<p>這個人光是出生背景就很特別，出生於歐洲，爸媽的國籍又不同，長大的過程中，也不算是個一般的小家庭，可以說是為獨立的小孩。</p>
+<span id="more"></span>
+
+<p>長大後去跑船，我覺得這個時期是他對於往後人生發展的重要階段，在工會中，他看過很多組織的運作方式、權力鬥爭、人心。</p>
+<p>時代不同，他離開了船業，來到了美國，開始對於動物權利認識、了解，以至於想為動物發生，幫助被不合理利用的動物們。他對動物權利的觀念來自於種族歧視的衍伸，就像早期白人歧視黑奴一樣，人類對於動物的利用也是這樣的歧視。</p>
+<p>他的想法與很多動物組織不同，像是防止動物虐待協會、TEPA等等，他們的組織已成立百年，但對於動物的貢獻卻很少，為甚麼呢，因為他們總是視動物實驗機構、畜牧業等涉及動物權益的事業為敵人，定期放出可怕的影片，並請民眾捐錢支持他們，然後壯大自己組織，雇用更多員工但卻無法改變這些公司、研究機構的作法。</p>
+<p>直到亨利出現，他認為動物權利的組織在這百年之中都沒有打過一場勝仗，於是他找的目標是他很有把握，可以勝利的。一個國家博物館中的研究室以不人道的方式，測試貓在殘疾的狀態下性能力的表現，但這對於人類或是其他發展一點貢獻都沒有，他了解到，只要他公開這件事情，大多數的人都會支持他，果不其然他為動物打了一場勝仗，即使是只幫助到60隻的貓，但卻是一場動物權利興起的序幕。</p>
+<p>他沒有成立任何的組織或聯盟，也沒有龐大的組織支援，靠著他自己，還有一些支持他的人，找到要溝通的企業或研究單位後先去花數月的時間蒐集資料，最好是政府或是他們自己本身公布的資訊。很重要的一點是，他從來沒有將這些對象視為敵人，而是想要傾聽對方的聲音，試圖找到雙贏的可能，抱持這樣的觀念，讓他幫助到了無數的動物、生靈。</p>
+<p>隻身一人，挑戰當時著名的化妝品公司、美國最大的養雞產業、收容所拘提貓狗的法條、麥當勞等等，沒有顯赫出身世家、沒有強大組織、沒有地位權力，只是一位高中老師，用他工作外的時間為動物東奔西跑，還有一點很佩服他，他不會將人地位在某個地方，記者不只是記者、科學家不只是科學家，他們還有更多的發展可能，這讓他在社會運動的路上有著很多的助力。</p>
+<p>書中竟然還有提到Temple Grandin，一位我很尊敬的動物行為跟動物福利學者，她也幫助亨利幫麥當勞的供應商設計屠宰場的固定工具，使動物被屠宰時能快速、減少痛苦，在70-90年代感覺是現在動物權利的偉人聚集的時代呢~~</p>
+<p>最後，分享書中末段，亨利在世時分享給Peter Singer他在這些運動中的十大策略</p>
+<p>一、了解大眾，認清現實</p>
+<p>二、選對對抗目標</p>
+<p>三、設定訴求，慢慢前進</p>
+<p>四、建立可靠的資料來源</p>
+<p>五、不要將世界二分成好人和壞人</p>
+<p>六、尋求雙方的對話</p>
+<p>七、隨時做好抗爭的準備</p>
+<p>八、避免官僚體制</p>
+<p>九、不是只有立法或訴訟才能解決問題</p>
+<p>十、問問自己，這會行的通嗎?</p>
+<p>期望自己在動物福利的推動也能有所作為</p>
+<p><img src="https://pic.pimg.tw/alex59638/1485706055-3469515866_n.jpg" alt="product-cover.jpg" title="product-cover.jpg"></p>
+]]></content>
+      <categories>
+        <category>life</category>
+      </categories>
+      <tags>
+        <tag>life</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>一條網路線連接兩台電腦分享網路（win10 &amp; Ubuntu18.04）</title>
     <url>/2019/10/09/%E4%B8%80%E6%A2%9D%E7%B6%B2%E8%B7%AF%E7%B7%9A%E9%80%A3%E6%8E%A5%E5%85%A9%E5%8F%B0%E9%9B%BB%E8%85%A6%E5%88%86%E4%BA%AB%E7%B6%B2%E8%B7%AF%EF%BC%88win10%20&amp;%20Ubuntu18.04)/</url>
     <content><![CDATA[<p>使用情境：手邊沒有路由器或橋接器，網路來源是手機網路且只有一台電腦有無線網卡可接收wifi，另一台則只有有線網路孔（很可憐的情境…)。<br>實際上硬體配置如下圖一隻手機開熱點分享網路，主電腦接收wifi再透過網路線分享網路給客電腦  </p>
@@ -760,33 +816,24 @@ Ozone Solar.R Wind Temp Month Day</li>
       </tags>
   </entry>
   <entry>
-    <title>「捍衛 生命 史匹拉」 讀後感想</title>
-    <url>/2017/01/30/%E3%80%8C%E6%8D%8D%E8%A1%9B%20%E7%94%9F%E5%91%BD%20%E5%8F%B2%E5%8C%B9%E6%8B%89%E3%80%8D%20%E8%AE%80%E5%BE%8C%E6%84%9F%E6%83%B3/</url>
-    <content><![CDATA[<p>這本書的作者是Peter Singer(動物權利的哲學家)</p>
-<p>他為亨利 史匹拉這個人物寫了這本傳記</p>
-<p>這個人光是出生背景就很特別，出生於歐洲，爸媽的國籍又不同，長大的過程中，也不算是個一般的小家庭，可以說是為獨立的小孩。</p>
+    <title>中興大學 x 生物資訊 x 未來規劃</title>
+    <url>/2020/04/04/%E4%B8%AD%E8%88%88%E5%A4%A7%E5%AD%B8%20x%20%E7%94%9F%E7%89%A9%E8%B3%87%E8%A8%8A%20x%20%E6%9C%AA%E4%BE%86%E8%A6%8F%E5%8A%83/</url>
+    <content><![CDATA[<p>畢業後有位學弟傳了mail詢問一些生資的規劃，之後應該會愈來愈多人投入生資，所以就把他的問題跟我的經驗分享出來ㄅ  </p>
 <span id="more"></span>
 
-<p>長大後去跑船，我覺得這個時期是他對於往後人生發展的重要階段，在工會中，他看過很多組織的運作方式、權力鬥爭、人心。</p>
-<p>時代不同，他離開了船業，來到了美國，開始對於動物權利認識、了解，以至於想為動物發生，幫助被不合理利用的動物們。他對動物權利的觀念來自於種族歧視的衍伸，就像早期白人歧視黑奴一樣，人類對於動物的利用也是這樣的歧視。</p>
-<p>他的想法與很多動物組織不同，像是防止動物虐待協會、TEPA等等，他們的組織已成立百年，但對於動物的貢獻卻很少，為甚麼呢，因為他們總是視動物實驗機構、畜牧業等涉及動物權益的事業為敵人，定期放出可怕的影片，並請民眾捐錢支持他們，然後壯大自己組織，雇用更多員工但卻無法改變這些公司、研究機構的作法。</p>
-<p>直到亨利出現，他認為動物權利的組織在這百年之中都沒有打過一場勝仗，於是他找的目標是他很有把握，可以勝利的。一個國家博物館中的研究室以不人道的方式，測試貓在殘疾的狀態下性能力的表現，但這對於人類或是其他發展一點貢獻都沒有，他了解到，只要他公開這件事情，大多數的人都會支持他，果不其然他為動物打了一場勝仗，即使是只幫助到60隻的貓，但卻是一場動物權利興起的序幕。</p>
-<p>他沒有成立任何的組織或聯盟，也沒有龐大的組織支援，靠著他自己，還有一些支持他的人，找到要溝通的企業或研究單位後先去花數月的時間蒐集資料，最好是政府或是他們自己本身公布的資訊。很重要的一點是，他從來沒有將這些對象視為敵人，而是想要傾聽對方的聲音，試圖找到雙贏的可能，抱持這樣的觀念，讓他幫助到了無數的動物、生靈。</p>
-<p>隻身一人，挑戰當時著名的化妝品公司、美國最大的養雞產業、收容所拘提貓狗的法條、麥當勞等等，沒有顯赫出身世家、沒有強大組織、沒有地位權力，只是一位高中老師，用他工作外的時間為動物東奔西跑，還有一點很佩服他，他不會將人地位在某個地方，記者不只是記者、科學家不只是科學家，他們還有更多的發展可能，這讓他在社會運動的路上有著很多的助力。</p>
-<p>書中竟然還有提到Temple Grandin，一位我很尊敬的動物行為跟動物福利學者，她也幫助亨利幫麥當勞的供應商設計屠宰場的固定工具，使動物被屠宰時能快速、減少痛苦，在70-90年代感覺是現在動物權利的偉人聚集的時代呢~~</p>
-<p>最後，分享書中末段，亨利在世時分享給Peter Singer他在這些運動中的十大策略</p>
-<p>一、了解大眾，認清現實</p>
-<p>二、選對對抗目標</p>
-<p>三、設定訴求，慢慢前進</p>
-<p>四、建立可靠的資料來源</p>
-<p>五、不要將世界二分成好人和壞人</p>
-<p>六、尋求雙方的對話</p>
-<p>七、隨時做好抗爭的準備</p>
-<p>八、避免官僚體制</p>
-<p>九、不是只有立法或訴訟才能解決問題</p>
-<p>十、問問自己，這會行的通嗎?</p>
-<p>期望自己在動物福利的推動也能有所作為</p>
-<p><img src="https://pic.pimg.tw/alex59638/1485706055-3469515866_n.jpg" alt="product-cover.jpg" title="product-cover.jpg"></p>
+<h2 id="Q1：中興大學有哪些生資相關的課程"><a href="#Q1：中興大學有哪些生資相關的課程" class="headerlink" title="Q1：中興大學有哪些生資相關的課程"></a>Q1：中興大學有哪些生資相關的課程</h2><p>現在生物相關科系開設的生資課程應該會愈來愈多，還有基因體暨生物資訊研究所的課程很多也可以讓外系來修<br>由淺入深的課程主題從1. 使用線上生資工具和軟體 2. 程式語言(R, python, C, java…) 3. 演算法  </p>
+<p>程式語言的課程基資所我知道的就有開R跟python，老師們也會在生物人的角度授課，所以應該會比直接去修理工科系的課還要更親民<br>自己以前是教務系統看有哪個科系開跟生資相關的課就去選看看，自己的動科系以外還有去過生醫所、資基所、統計所，<br>現在大學部應該也很多生資課程了，至少動科系就有兩門吧~~  </p>
+<p>至於以前我修過哪些課程更早之前有寫過文章了，有興趣看我詳細修過哪些課就再去看看嚕<br><a href="http://hunglinchen.ga/?p=154">中興大學研究所生物資訊課程</a>  </p>
+<p><embed src="http://hunglinchen.ga/?p=154" width=800 height=600></embed></p>
+<h2 id="Q2：在學期間的學習規劃建議"><a href="#Q2：在學期間的學習規劃建議" class="headerlink" title="Q2：在學期間的學習規劃建議"></a>Q2：在學期間的學習規劃建議</h2><p>之前是一股腦對生資有興趣，看到什麼學什麼，不過如果有些方向的學還是會比較有成效<br>學習規劃大致可以分成1. 程式語言 2. linux作業系統 3. 生物統計和演算法<br>這幾項沒有規定說要先學會哪個再去學哪個，就看自己對哪個有興趣就先接觸他們，因為遲早都會互相交集，也可以併行的學習會更加有效率，<br>像是可以用程式語言執行統計或是在linux下操作程式語言等  </p>
+<h3 id="1-程式語言"><a href="#1-程式語言" class="headerlink" title="1.  程式語言"></a>1.  程式語言</h3><p>看這篇文章的你應該已經知道學生資理所當然要會程式語言，至於要學哪個呢？  答案跟網路上的文章論壇結論一樣，喜歡哪個就哪個<br>R繪圖很漂亮，統計函式很健全; python函式庫很齊全，可爬蟲，AI套件多之類的，但其實各個程式語言都可以達到那些目的，就直接先選一個學就好<br>不會有學那個比較好，哪個吃虧的問題<br>怎麼開始學呢？當然可以去修教程式語言的課程，老師就會一步步帶你，不過認真學的話你會發現老師教的到後來對你來說是很基礎的，很多功能會需要從網路和工具書練習，所以如果沒有修到課，那就自學就好，尤其是R跟python對於新手也是ok的<br>學會一些基礎語法(資料型態、字串處理、迴圈)之後設計一些問題給自己去寫程式解決，這樣學程式就比較不會乏味，不然照著工具書打出那些語法之後通常沒多久就會忘掉<br>就像老師課後會出作業一樣，例如從NCBI下載一個物種的基因體序列（fasta)，然後寫一段程式碼是input特定序列如ATCCGA，找出這段序列位於基因體的哪些位置？<br>或是如果你手邊研究主題剛好可以用程式語言處理更好，學習的動力會更高，我當時就是如此  </p>
+<h3 id="2-linux作業系統"><a href="#2-linux作業系統" class="headerlink" title="2. linux作業系統"></a>2. linux作業系統</h3><p>大部分的人接觸到作業系統是windows或macOS,這兩個都是在圖形化介面操作，鮮少使用到純指令介面（Terminal, cmd）,尤其是windows用戶，可能你會以為linux都是要在畫面是都是黑底白字敲指令使用，以前是如此，但現在有很多linux的發行版安裝後是圖形化介面了，對於新手來說親近許多。<br>為何學生資一定要會linux呢，因為很多程式和演算法開發者都是在linux下操作，而且很多生資程式是沒有圖形化介面，是需要敲指令執行，但其實這樣對於開發跟分析是更有效率的<br>推薦可以使用Ubuntu這個linux的發行版來學習，因為它的使用者多，所以遇到問題也比較容易找到答案，安裝時就是圖形介面了，不會一開始就要你敲指令<br>安裝作業系統在電腦後，第一步可以先學怎麼安裝ncbi-blast,然後在terminal使用。<br>進階的話學內建的程式語言bash來寫腳本，一次執行多行指令  </p>
+<h3 id="3-生物統計、演算法"><a href="#3-生物統計、演算法" class="headerlink" title="3. 生物統計、演算法"></a>3. 生物統計、演算法</h3><p>想必傳統的生物研究都會使用統計，通常都是學SAS或SPSS，但他們就是專門統計軟體，我會推薦使用R做統計，同樣的統計方法，R的語法更簡單直觀，也比較容易理解統計觀念<br>而演算法則是另一個領域，演算法廣義就是指一套演算流程，所以各種統計方法也都是演算法的一種，生資相關常見演算法還有圖論、隱馬可夫鏈、群集分析等可以學習，這部份就很吃數理觀念，自己學比較沉重，找個課程來修會比較容易，我當時是去修統計所的生資統計方法，但現在不一定還有開了  </p>
+<h2 id="Q3：有哪些工作機會"><a href="#Q3：有哪些工作機會" class="headerlink" title="Q3：有哪些工作機會"></a>Q3：有哪些工作機會</h2><p>我想應該在這個大數據盛行的時代應該也不用擔心找不到生資工作了，需求只會愈來愈多<br>最多需求的是NGS定序分析人員，這些公司最基本要求是在學期間就是做NGS，執行過完整的分析流程的人，我當初是做蛋白質體的，所以應徵這些公司果然也都沒理我呵呵<br>再來是其他生物領域類別的工作，像是抗體序列、蛋白質體、蛋白質結構、mRNA表現等，目前大多生資類工作都還是圍繞在序列分析<br>當然傳統的生物統計人員也是一類，主要是在人體臨床試驗和藥物開發的項目<br>最後就是常聽到但又覺得距離遙遠的AI應用，這部份就很硬，尤其是對我們從生物背景跨出去的人來說，要想得到這種工作機會，那首先就要了解AI的基本原理跟背景，類神經網絡、監督式學習等演算法，這部份我建議可以找一種python的AI套件開始學<br>但得說大部份工作機會都是人醫領域，因為我是農學院背景，所以希望可以將生資應用在農業上，有幸找到一家農業相關的公司，或許之後會愈來多吧（不好說）</p>
+<p>覺得抽象的話可以看我面試的三家生資工作經驗  </p>
+<p><a href="http://hunglinchen.ga/?p=145">生資面試經驗筆記(益農/沐恩/安肽)</a> </p>
+<p><embed src="http://hunglinchen.ga/?p=145" width=800 height=600></embed></p>
+<h2 id="我的生資歷程"><a href="#我的生資歷程" class="headerlink" title="我的生資歷程"></a>我的生資歷程</h2><p>最後這部份最無聊，但還是分享給大家看看給對生資有興趣但還不太知道怎麼往下走的人<br>碩班時實驗室是研究動物蛋白質體，碩一陰錯陽差修到生醫所林宜玫老師開的生物醫學資源，明明是想修基因體學，真是神奇的眼殘，但老師教了很多線上的生資資源，所以開始對生物資訊感興趣，接著實驗室學姊建議可以學R，於是就用R將自己的實驗數據做統計分析，這時候我也學生物統計觀念<br>當時發現我們實驗室幾乎都會用到GO跟KEGG這兩種資料庫分析，簡單說就是比對我們找出的差異表現蛋白質有哪些基因功能和參與的生物路徑，以前都是搜尋每個蛋白質的功能後再逐一整理成表格和繪製圖表，非常耗時，所以我就用R做一個使用者介面，把差異表現蛋白質的清單輸入，然後就自動整理出表格跟圖表，<br>這讓我很有熱情地去學R的各種語法，另外一提，這也幫助我後來的求職過程有可以展示的作品，證明自己真的會程式設計，這超級重要，建議不管是不是跟自己的論文有關，畢業前都要寫一個可以分析的一個腳本或程式作為你的side project<br>碩二的時候想說python也是生資很熱門的語言，所以學了它的基本語法，還有生資是依據演算法分析的，所以也去學一些統計的演算法，<br>NGS的理論我有去了解也修過一門課玩過nanopore，不過因為我的研究主題是蛋白質體所以大多心力都在學質譜技術，後來就沒碰序列組裝了<br>要畢業的時候系上來了學生資的老師，跟他聊天後他說生資一定需要Linux，所以再去碰這塊   所以Linux我是到畢業後才真正開始學，使用它的其中一個發行版Ubuntu，在一台電腦灌雙系統(win10和Ubuntu)，然後熟悉指令操作，還有建議要會linux內建的程式語言bash，因為資料分析的pipline都是由許多行指令組成，其中還需要先將資料做預處理，直接在linux下處理會是最有效率的，這也是到工作後才開始學哈<br>一路上大多都是在摸索哈，想到甚麼學甚麼，學R的時候覺得需要有統計觀念所以去找書，到碩二又覺得多學一種語言比較有競爭力，又覺得單純會用軟體但不了解背後演算法不行，所以又去學點演算法  </p>
 ]]></content>
       <categories>
         <category>life</category>
@@ -951,33 +998,6 @@ Ozone Solar.R Wind Temp Month Day</li>
       </categories>
       <tags>
         <tag>animal science</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>中興大學 x 生物資訊 x 未來規劃</title>
-    <url>/2020/04/04/%E4%B8%AD%E8%88%88%E5%A4%A7%E5%AD%B8%20x%20%E7%94%9F%E7%89%A9%E8%B3%87%E8%A8%8A%20x%20%E6%9C%AA%E4%BE%86%E8%A6%8F%E5%8A%83/</url>
-    <content><![CDATA[<p>畢業後有位學弟傳了mail詢問一些生資的規劃，之後應該會愈來愈多人投入生資，所以就把他的問題跟我的經驗分享出來ㄅ  </p>
-<span id="more"></span>
-
-<h2 id="Q1：中興大學有哪些生資相關的課程"><a href="#Q1：中興大學有哪些生資相關的課程" class="headerlink" title="Q1：中興大學有哪些生資相關的課程"></a>Q1：中興大學有哪些生資相關的課程</h2><p>現在生物相關科系開設的生資課程應該會愈來愈多，還有基因體暨生物資訊研究所的課程很多也可以讓外系來修<br>由淺入深的課程主題從1. 使用線上生資工具和軟體 2. 程式語言(R, python, C, java…) 3. 演算法  </p>
-<p>程式語言的課程基資所我知道的就有開R跟python，老師們也會在生物人的角度授課，所以應該會比直接去修理工科系的課還要更親民<br>自己以前是教務系統看有哪個科系開跟生資相關的課就去選看看，自己的動科系以外還有去過生醫所、資基所、統計所，<br>現在大學部應該也很多生資課程了，至少動科系就有兩門吧~~  </p>
-<p>至於以前我修過哪些課程更早之前有寫過文章了，有興趣看我詳細修過哪些課就再去看看嚕<br><a href="http://hunglinchen.ga/?p=154">中興大學研究所生物資訊課程</a>  </p>
-<p><embed src="http://hunglinchen.ga/?p=154" width=800 height=600></embed></p>
-<h2 id="Q2：在學期間的學習規劃建議"><a href="#Q2：在學期間的學習規劃建議" class="headerlink" title="Q2：在學期間的學習規劃建議"></a>Q2：在學期間的學習規劃建議</h2><p>之前是一股腦對生資有興趣，看到什麼學什麼，不過如果有些方向的學還是會比較有成效<br>學習規劃大致可以分成1. 程式語言 2. linux作業系統 3. 生物統計和演算法<br>這幾項沒有規定說要先學會哪個再去學哪個，就看自己對哪個有興趣就先接觸他們，因為遲早都會互相交集，也可以併行的學習會更加有效率，<br>像是可以用程式語言執行統計或是在linux下操作程式語言等  </p>
-<h3 id="1-程式語言"><a href="#1-程式語言" class="headerlink" title="1.  程式語言"></a>1.  程式語言</h3><p>看這篇文章的你應該已經知道學生資理所當然要會程式語言，至於要學哪個呢？  答案跟網路上的文章論壇結論一樣，喜歡哪個就哪個<br>R繪圖很漂亮，統計函式很健全; python函式庫很齊全，可爬蟲，AI套件多之類的，但其實各個程式語言都可以達到那些目的，就直接先選一個學就好<br>不會有學那個比較好，哪個吃虧的問題<br>怎麼開始學呢？當然可以去修教程式語言的課程，老師就會一步步帶你，不過認真學的話你會發現老師教的到後來對你來說是很基礎的，很多功能會需要從網路和工具書練習，所以如果沒有修到課，那就自學就好，尤其是R跟python對於新手也是ok的<br>學會一些基礎語法(資料型態、字串處理、迴圈)之後設計一些問題給自己去寫程式解決，這樣學程式就比較不會乏味，不然照著工具書打出那些語法之後通常沒多久就會忘掉<br>就像老師課後會出作業一樣，例如從NCBI下載一個物種的基因體序列（fasta)，然後寫一段程式碼是input特定序列如ATCCGA，找出這段序列位於基因體的哪些位置？<br>或是如果你手邊研究主題剛好可以用程式語言處理更好，學習的動力會更高，我當時就是如此  </p>
-<h3 id="2-linux作業系統"><a href="#2-linux作業系統" class="headerlink" title="2. linux作業系統"></a>2. linux作業系統</h3><p>大部分的人接觸到作業系統是windows或macOS,這兩個都是在圖形化介面操作，鮮少使用到純指令介面（Terminal, cmd）,尤其是windows用戶，可能你會以為linux都是要在畫面是都是黑底白字敲指令使用，以前是如此，但現在有很多linux的發行版安裝後是圖形化介面了，對於新手來說親近許多。<br>為何學生資一定要會linux呢，因為很多程式和演算法開發者都是在linux下操作，而且很多生資程式是沒有圖形化介面，是需要敲指令執行，但其實這樣對於開發跟分析是更有效率的<br>推薦可以使用Ubuntu這個linux的發行版來學習，因為它的使用者多，所以遇到問題也比較容易找到答案，安裝時就是圖形介面了，不會一開始就要你敲指令<br>安裝作業系統在電腦後，第一步可以先學怎麼安裝ncbi-blast,然後在terminal使用。<br>進階的話學內建的程式語言bash來寫腳本，一次執行多行指令  </p>
-<h3 id="3-生物統計、演算法"><a href="#3-生物統計、演算法" class="headerlink" title="3. 生物統計、演算法"></a>3. 生物統計、演算法</h3><p>想必傳統的生物研究都會使用統計，通常都是學SAS或SPSS，但他們就是專門統計軟體，我會推薦使用R做統計，同樣的統計方法，R的語法更簡單直觀，也比較容易理解統計觀念<br>而演算法則是另一個領域，演算法廣義就是指一套演算流程，所以各種統計方法也都是演算法的一種，生資相關常見演算法還有圖論、隱馬可夫鏈、群集分析等可以學習，這部份就很吃數理觀念，自己學比較沉重，找個課程來修會比較容易，我當時是去修統計所的生資統計方法，但現在不一定還有開了  </p>
-<h2 id="Q3：有哪些工作機會"><a href="#Q3：有哪些工作機會" class="headerlink" title="Q3：有哪些工作機會"></a>Q3：有哪些工作機會</h2><p>我想應該在這個大數據盛行的時代應該也不用擔心找不到生資工作了，需求只會愈來愈多<br>最多需求的是NGS定序分析人員，這些公司最基本要求是在學期間就是做NGS，執行過完整的分析流程的人，我當初是做蛋白質體的，所以應徵這些公司果然也都沒理我呵呵<br>再來是其他生物領域類別的工作，像是抗體序列、蛋白質體、蛋白質結構、mRNA表現等，目前大多生資類工作都還是圍繞在序列分析<br>當然傳統的生物統計人員也是一類，主要是在人體臨床試驗和藥物開發的項目<br>最後就是常聽到但又覺得距離遙遠的AI應用，這部份就很硬，尤其是對我們從生物背景跨出去的人來說，要想得到這種工作機會，那首先就要了解AI的基本原理跟背景，類神經網絡、監督式學習等演算法，這部份我建議可以找一種python的AI套件開始學<br>但得說大部份工作機會都是人醫領域，因為我是農學院背景，所以希望可以將生資應用在農業上，有幸找到一家農業相關的公司，或許之後會愈來多吧（不好說）</p>
-<p>覺得抽象的話可以看我面試的三家生資工作經驗  </p>
-<p><a href="http://hunglinchen.ga/?p=145">生資面試經驗筆記(益農/沐恩/安肽)</a> </p>
-<p><embed src="http://hunglinchen.ga/?p=145" width=800 height=600></embed></p>
-<h2 id="我的生資歷程"><a href="#我的生資歷程" class="headerlink" title="我的生資歷程"></a>我的生資歷程</h2><p>最後這部份最無聊，但還是分享給大家看看給對生資有興趣但還不太知道怎麼往下走的人<br>碩班時實驗室是研究動物蛋白質體，碩一陰錯陽差修到生醫所林宜玫老師開的生物醫學資源，明明是想修基因體學，真是神奇的眼殘，但老師教了很多線上的生資資源，所以開始對生物資訊感興趣，接著實驗室學姊建議可以學R，於是就用R將自己的實驗數據做統計分析，這時候我也學生物統計觀念<br>當時發現我們實驗室幾乎都會用到GO跟KEGG這兩種資料庫分析，簡單說就是比對我們找出的差異表現蛋白質有哪些基因功能和參與的生物路徑，以前都是搜尋每個蛋白質的功能後再逐一整理成表格和繪製圖表，非常耗時，所以我就用R做一個使用者介面，把差異表現蛋白質的清單輸入，然後就自動整理出表格跟圖表，<br>這讓我很有熱情地去學R的各種語法，另外一提，這也幫助我後來的求職過程有可以展示的作品，證明自己真的會程式設計，這超級重要，建議不管是不是跟自己的論文有關，畢業前都要寫一個可以分析的一個腳本或程式作為你的side project<br>碩二的時候想說python也是生資很熱門的語言，所以學了它的基本語法，還有生資是依據演算法分析的，所以也去學一些統計的演算法，<br>NGS的理論我有去了解也修過一門課玩過nanopore，不過因為我的研究主題是蛋白質體所以大多心力都在學質譜技術，後來就沒碰序列組裝了<br>要畢業的時候系上來了學生資的老師，跟他聊天後他說生資一定需要Linux，所以再去碰這塊   所以Linux我是到畢業後才真正開始學，使用它的其中一個發行版Ubuntu，在一台電腦灌雙系統(win10和Ubuntu)，然後熟悉指令操作，還有建議要會linux內建的程式語言bash，因為資料分析的pipline都是由許多行指令組成，其中還需要先將資料做預處理，直接在linux下處理會是最有效率的，這也是到工作後才開始學哈<br>一路上大多都是在摸索哈，想到甚麼學甚麼，學R的時候覺得需要有統計觀念所以去找書，到碩二又覺得多學一種語言比較有競爭力，又覺得單純會用軟體但不了解背後演算法不行，所以又去學點演算法  </p>
-]]></content>
-      <categories>
-        <category>life</category>
-      </categories>
-      <tags>
-        <tag>life</tag>
       </tags>
   </entry>
   <entry>
@@ -1460,124 +1480,6 @@ Ozone Solar.R Wind Temp Month Day</li>
       </tags>
   </entry>
   <entry>
-    <title>中興大學研究所生物資訊課程</title>
-    <url>/2019/02/05/%E4%B8%AD%E8%88%88%E5%A4%A7%E5%AD%B8%E7%A0%94%E7%A9%B6%E6%89%80%E7%94%9F%E7%89%A9%E8%B3%87%E8%A8%8A%E8%AA%B2%E7%A8%8B/</url>
-    <content><![CDATA[<p>雖然標題這樣寫，進來的人應該已經挑選過了，</p>
-<p>但還是再說一次，以下介紹都是給有熱於學習的人看的，</p>
-<p>如果是想看是不是涼課的，可能給到的建議會不多。</p>
-<span id="more"></span>
-
-<p>從碩一上意外修了一門生物資訊課程之後，從此對生資起了興趣，</p>
-<p>於是在碩士生涯中盡可能找了生資相關的課程來修。</p>
-<p>以下會介紹這兩年我修了那些課程，以及課程大綱、收穫、建議，</p>
-<p>主要是想寫給跟我一樣是從生物領域跨生物資訊的人看的。</p>
-<p>由於這是107到108學年度修習的課程，可能會因為時代不同，</p>
-<p>開課時間或是開課老師等會有所變化。</p>
-<hr>
-<h2 id="上學期"><a href="#上學期" class="headerlink" title="上學期:"></a>上學期:</h2><h3 id="6602-生物醫學資訊資源-生醫所-林宜玫"><a href="#6602-生物醫學資訊資源-生醫所-林宜玫" class="headerlink" title="6602 生物醫學資訊資源 生醫所 林宜玫"></a>6602 生物醫學資訊資源 生醫所 林宜玫</h3><p>要入門生物資訊很好的一門課，老師會介紹生物資訊的基本觀念，像是資料庫類型、線上資源。</p>
-<p>每週會介紹一種生物資訊分析的主題，像是查詢基因、序列比對、設計primer，讓我們知道如何自己去尋找分析工具，及如何應用。</p>
-<p>也會一邊介紹生物的基本觀念，像是基因序列各個區域位置及功能(promoter、enhancer、CpG site…)。</p>
-<p>每周結束後，還會出一份與當周主題相關的作業，馬上可以實作練習。</p>
-<p>期末有一份期末報告，大綱是出一個問題，</p>
-<p>然後以上課介紹到軟體或線上資源來解決與回答，</p>
-<p>整個學期結束後真的獲益良多，自己收穫比較多的是對於生物資料庫(如NCBI)使用更加熟悉。</p>
-<h3 id="6080-生物資訊程式設計-基資所-朱彥煒"><a href="#6080-生物資訊程式設計-基資所-朱彥煒" class="headerlink" title="6080 生物資訊程式設計 基資所 朱彥煒"></a>6080 生物資訊程式設計 基資所 朱彥煒</h3><p>原本都是教<strong>perl</strong>，從我這屆開始，因為python變得熱門，</p>
-<p>所以改成教python，近幾年應該也是它了。</p>
-<p>上課內容都是來自於「<a href="https://www.books.com.tw/products/0010690075">精通python</a>」這本書，</p>
-<p>一本寫得滿詳細的工具書，後來我也有看其他python工具書，</p>
-<p>這本是寫的中規中矩的，可以考慮真的買一本。</p>
-<p>不用擔心沒學過，老師也是從最基本的開始教起，</p>
-<p>純生物的人也可以學習，</p>
-<p>每周先上兩節課，剩下時間會有課後作業練習，</p>
-<p>然後當周結束前上傳。</p>
-<p>期中期末考都是出幾題問題，要寫程式去解決，</p>
-<p>還要寫成可以讓使用者輸入的程式。</p>
-<p>老實說，雖然腦袋知道要怎麼寫，但是要寫成實際的程式還是有段距離，</p>
-<p>所以每次我都來不及寫完…</p>
-<p>不過當場沒寫完，可以帶回去完成後再上傳即可。</p>
-<p>這門課給我的收穫是以資工的角度去寫程式，</p>
-<p>以前寫程式都只是寫個腳本，可以當下解決某個問題，</p>
-<p>但要寫一個可以給使用者使用的程式，</p>
-<p>才算是一個完整的程式。</p>
-<h3 id="6061-生物資訊學之統計方法-統計所-陳淑娟"><a href="#6061-生物資訊學之統計方法-統計所-陳淑娟" class="headerlink" title="6061 生物資訊學之統計方法 統計所 陳淑娟"></a>6061 生物資訊學之統計方法 統計所 陳淑娟</h3><p>說起我對生物資訊有興趣，應該說我對資料分析有興趣，</p>
-<p>所以對生物統計也想要了解，程式運行所使用的演算法是如何，</p>
-<p>這樣學程式設計與生物資訊應該會更能融會貫通，</p>
-<p>所以找到了統計所開的這門課，</p>
-<p>但之後不一定能修到這門課了，</p>
-<p>因為老師是在美國教書的台灣人，剛好這年是她在美國任教的大學休假，</p>
-<p>回來台灣當訪問學者，才有機會在中興大學開課，</p>
-<p>還是介紹一下課程內容，</p>
-<p>主要是教序列分析相關的統計方法，像是圖論、HMM、分群，</p>
-<p>好啦，生物人真的要上過課才能比較了解XD</p>
-<p>上到一個段落，老師就會出作業，</p>
-<p>約兩個禮拜後交回批改，</p>
-<p>其實上這門課的時候很懷念，</p>
-<p>因為老師主要是寫板書，</p>
-<p>彷彿回到了高中數學課哈哈，</p>
-<p>期末有個分組報告，讓我們找一個跟生物資訊相關的演算法來介紹，</p>
-<p>也藉此可以跟組員熟絡，也認識了理工領域的同學。</p>
-<p>就期待統計所有老師再開跟生物資訊相關的統計課程吧</p>
-<h2 id="下學期"><a href="#下學期" class="headerlink" title="下學期:"></a>下學期:</h2><h3 id="6060-使用R語言介紹生物統計-基資所-謝立青"><a href="#6060-使用R語言介紹生物統計-基資所-謝立青" class="headerlink" title="6060 使用R語言介紹生物統計 基資所 謝立青"></a>6060 使用R語言介紹生物統計 基資所 謝立青</h3><p>這門課開始我學習R語言之路，要生物資訊領域就勢必要學習程式語言，</p>
-<p>當然不一定是R，選個自己喜歡的即可，重點在於能解決問題，</p>
-<p>別擔心學程式很難，老師會當我們是一張白紙開始教，</p>
-<p>從安裝軟體、統計概念到寫程式，</p>
-<p>上課模式採2-3人一組，前一個小時先上課，後面的時間，各組討論作業，</p>
-<p>當天馬上繳交，如果遇到問題可以馬上向老師提問。</p>
-<p>由於R已經將很多統計的程式碼寫成完整的函式了，</p>
-<p>所以要寫的程式其實不多，簡單一兩行就可以完成與繪圖，</p>
-<p>也是非常適合初學者入門，</p>
-<p>有期中期末考，都是會出幾題統計問題，</p>
-<p>可以看上課的ppt講義，</p>
-<p>平常有跟同學積極討論的話，應該不會太困難。</p>
-<h3 id="6070-基因體暨資訊原理與實習-基資所-陳盈聰"><a href="#6070-基因體暨資訊原理與實習-基資所-陳盈聰" class="headerlink" title="6070 基因體暨資訊原理與實習 基資所 陳盈聰"></a>6070 基因體暨資訊原理與實習 基資所 陳盈聰</h3><p>老師說話風格帶有幽默與嘲諷?，不是嘲諷學生而是嘲諷學術體制XD</p>
-<p>可以聽到很多小八卦?</p>
-<p>前幾堂是上課，內容大致上是介紹基因體研究歷史與定序技術的演進，</p>
-<p>接下來就是上課跟實驗穿插，</p>
-<p>實驗就是萃取細菌DNA然後定序，我們那一屆是學Nanopore定序技術，</p>
-<p>對這個定序技術有興趣的人真的要來修習，讚讚，</p>
-<p>生物資訊的部分，會教如何架設工作站，也就是作業系統</p>
-<p>常聽到的就是微軟的windows、蘋果的MacOS，</p>
-<p>資訊界廣泛使用的工作系統則是Linux，</p>
-<p>但老師是教freeBSD，他也是Linux系統的分支，</p>
-<p>也是這門課對於freeBSD和終端機、命令提示字元的指令有更多了解，</p>
-<p>題外話，想要進入生資領域就一定要學會Linux、freeBSD這種工作系統，</p>
-<p>也許以後會再去介紹吧</p>
-<p>架設完後會安裝定序軟體，Canu，它是一種長序列定序軟體，</p>
-<p>定序完後，會介紹基因註解的工具，以及如何將定序結果上傳到公開資料庫。</p>
-<p>是個很實用的一門課，搞的都好想建立一套定序系統在實驗室了…</p>
-<h3 id="6257-動物試驗設計實習-動科所-陳志峰"><a href="#6257-動物試驗設計實習-動科所-陳志峰" class="headerlink" title="6257 動物試驗設計實習 動科所 陳志峰"></a>6257 動物試驗設計實習 動科所 陳志峰</h3><p>這是我的系上開設教SAS這個統計軟體的一門課，</p>
-<p>嗯，就是教怎麼寫SAS語法的課還有動科領域常用的統計方法，</p>
-<p>老師也是手把手帶你輸入語法，怎麼輸入資料、選擇統計方法…</p>
-<p>但老實說現在還會使用SAS的單位應該會越來越少了，</p>
-<p>除了藥廠、金融界吧，因為相較於R與其它開源軟體，</p>
-<p>SAS是需要每年都付費才能授權使用的，</p>
-<p>所以在學術期刊上，我自己發現越來越多paper的統計方法是使用R</p>
-<p>要不要學習SAS就看個人吧，如果確定以後工作的單位規定只能用SAS，</p>
-<p>那就乖乖地先學起來吧。</p>
-<h2 id="結論"><a href="#結論" class="headerlink" title="結論:"></a>結論:</h2><p>這兩年發現越來越多生物資訊相關課程出現了，</p>
-<p>想必這也是趨勢了，</p>
-<p>上面介紹的課程是我實際修課過的，</p>
-<p>當然還有很多相關課程，大多落在基資所、生醫所、統計所、生技所…</p>
-<p>其實我是從選課系統從可能有相關的系所一個一個看的，</p>
-<p>只是受限於時間跟實力不足，無法都去，</p>
-<p>不然其實資工所的課應該也有很大的幫助，</p>
-<p>寫這篇也是有感於，研究所的課程比較少同學有介紹，</p>
-<p>才寫了這篇心得給大家參考。</p>
-<p>想入門生物資訊也別害怕這些課程對你來說太難，</p>
-<p>我也是有種賭一搏的心態去修程式設計跟統計，</p>
-<p>當時的我真的是一竅不通呢XD</p>
-<p>有興趣就直接選下去，課外的時間也持續學習，</p>
-<p>就不會覺得難度很高了，相反的還會覺得越來越有趣</p>
-<p>這些知識最後逐漸融會貫通了。</p>
-]]></content>
-      <categories>
-        <category>life</category>
-      </categories>
-      <tags>
-        <tag>life</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Osteogenesis (造骨作用)</title>
     <url>/2017/01/31/%E4%B8%AD%E8%88%88%E5%A4%A7%E5%AD%B8%E5%8B%95%E7%89%A9%E7%A7%91%E5%AD%B8%E7%B3%BB105%E5%B9%B4%E5%BA%A6%E7%A2%A9%E5%A3%AB%E6%8B%9B%E7%94%9F%E8%80%83-%E8%A7%A3%E5%89%96%E7%94%9F%E7%90%86%E5%AD%B8%20%20/</url>
     <content><![CDATA[<p>一、名詞解釋</p>
@@ -1753,6 +1655,124 @@ Ozone Solar.R Wind Temp Month Day</li>
       </categories>
       <tags>
         <tag>animal science</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>中興大學研究所生物資訊課程</title>
+    <url>/2019/02/05/%E4%B8%AD%E8%88%88%E5%A4%A7%E5%AD%B8%E7%A0%94%E7%A9%B6%E6%89%80%E7%94%9F%E7%89%A9%E8%B3%87%E8%A8%8A%E8%AA%B2%E7%A8%8B/</url>
+    <content><![CDATA[<p>雖然標題這樣寫，進來的人應該已經挑選過了，</p>
+<p>但還是再說一次，以下介紹都是給有熱於學習的人看的，</p>
+<p>如果是想看是不是涼課的，可能給到的建議會不多。</p>
+<span id="more"></span>
+
+<p>從碩一上意外修了一門生物資訊課程之後，從此對生資起了興趣，</p>
+<p>於是在碩士生涯中盡可能找了生資相關的課程來修。</p>
+<p>以下會介紹這兩年我修了那些課程，以及課程大綱、收穫、建議，</p>
+<p>主要是想寫給跟我一樣是從生物領域跨生物資訊的人看的。</p>
+<p>由於這是107到108學年度修習的課程，可能會因為時代不同，</p>
+<p>開課時間或是開課老師等會有所變化。</p>
+<hr>
+<h2 id="上學期"><a href="#上學期" class="headerlink" title="上學期:"></a>上學期:</h2><h3 id="6602-生物醫學資訊資源-生醫所-林宜玫"><a href="#6602-生物醫學資訊資源-生醫所-林宜玫" class="headerlink" title="6602 生物醫學資訊資源 生醫所 林宜玫"></a>6602 生物醫學資訊資源 生醫所 林宜玫</h3><p>要入門生物資訊很好的一門課，老師會介紹生物資訊的基本觀念，像是資料庫類型、線上資源。</p>
+<p>每週會介紹一種生物資訊分析的主題，像是查詢基因、序列比對、設計primer，讓我們知道如何自己去尋找分析工具，及如何應用。</p>
+<p>也會一邊介紹生物的基本觀念，像是基因序列各個區域位置及功能(promoter、enhancer、CpG site…)。</p>
+<p>每周結束後，還會出一份與當周主題相關的作業，馬上可以實作練習。</p>
+<p>期末有一份期末報告，大綱是出一個問題，</p>
+<p>然後以上課介紹到軟體或線上資源來解決與回答，</p>
+<p>整個學期結束後真的獲益良多，自己收穫比較多的是對於生物資料庫(如NCBI)使用更加熟悉。</p>
+<h3 id="6080-生物資訊程式設計-基資所-朱彥煒"><a href="#6080-生物資訊程式設計-基資所-朱彥煒" class="headerlink" title="6080 生物資訊程式設計 基資所 朱彥煒"></a>6080 生物資訊程式設計 基資所 朱彥煒</h3><p>原本都是教<strong>perl</strong>，從我這屆開始，因為python變得熱門，</p>
+<p>所以改成教python，近幾年應該也是它了。</p>
+<p>上課內容都是來自於「<a href="https://www.books.com.tw/products/0010690075">精通python</a>」這本書，</p>
+<p>一本寫得滿詳細的工具書，後來我也有看其他python工具書，</p>
+<p>這本是寫的中規中矩的，可以考慮真的買一本。</p>
+<p>不用擔心沒學過，老師也是從最基本的開始教起，</p>
+<p>純生物的人也可以學習，</p>
+<p>每周先上兩節課，剩下時間會有課後作業練習，</p>
+<p>然後當周結束前上傳。</p>
+<p>期中期末考都是出幾題問題，要寫程式去解決，</p>
+<p>還要寫成可以讓使用者輸入的程式。</p>
+<p>老實說，雖然腦袋知道要怎麼寫，但是要寫成實際的程式還是有段距離，</p>
+<p>所以每次我都來不及寫完…</p>
+<p>不過當場沒寫完，可以帶回去完成後再上傳即可。</p>
+<p>這門課給我的收穫是以資工的角度去寫程式，</p>
+<p>以前寫程式都只是寫個腳本，可以當下解決某個問題，</p>
+<p>但要寫一個可以給使用者使用的程式，</p>
+<p>才算是一個完整的程式。</p>
+<h3 id="6061-生物資訊學之統計方法-統計所-陳淑娟"><a href="#6061-生物資訊學之統計方法-統計所-陳淑娟" class="headerlink" title="6061 生物資訊學之統計方法 統計所 陳淑娟"></a>6061 生物資訊學之統計方法 統計所 陳淑娟</h3><p>說起我對生物資訊有興趣，應該說我對資料分析有興趣，</p>
+<p>所以對生物統計也想要了解，程式運行所使用的演算法是如何，</p>
+<p>這樣學程式設計與生物資訊應該會更能融會貫通，</p>
+<p>所以找到了統計所開的這門課，</p>
+<p>但之後不一定能修到這門課了，</p>
+<p>因為老師是在美國教書的台灣人，剛好這年是她在美國任教的大學休假，</p>
+<p>回來台灣當訪問學者，才有機會在中興大學開課，</p>
+<p>還是介紹一下課程內容，</p>
+<p>主要是教序列分析相關的統計方法，像是圖論、HMM、分群，</p>
+<p>好啦，生物人真的要上過課才能比較了解XD</p>
+<p>上到一個段落，老師就會出作業，</p>
+<p>約兩個禮拜後交回批改，</p>
+<p>其實上這門課的時候很懷念，</p>
+<p>因為老師主要是寫板書，</p>
+<p>彷彿回到了高中數學課哈哈，</p>
+<p>期末有個分組報告，讓我們找一個跟生物資訊相關的演算法來介紹，</p>
+<p>也藉此可以跟組員熟絡，也認識了理工領域的同學。</p>
+<p>就期待統計所有老師再開跟生物資訊相關的統計課程吧</p>
+<h2 id="下學期"><a href="#下學期" class="headerlink" title="下學期:"></a>下學期:</h2><h3 id="6060-使用R語言介紹生物統計-基資所-謝立青"><a href="#6060-使用R語言介紹生物統計-基資所-謝立青" class="headerlink" title="6060 使用R語言介紹生物統計 基資所 謝立青"></a>6060 使用R語言介紹生物統計 基資所 謝立青</h3><p>這門課開始我學習R語言之路，要生物資訊領域就勢必要學習程式語言，</p>
+<p>當然不一定是R，選個自己喜歡的即可，重點在於能解決問題，</p>
+<p>別擔心學程式很難，老師會當我們是一張白紙開始教，</p>
+<p>從安裝軟體、統計概念到寫程式，</p>
+<p>上課模式採2-3人一組，前一個小時先上課，後面的時間，各組討論作業，</p>
+<p>當天馬上繳交，如果遇到問題可以馬上向老師提問。</p>
+<p>由於R已經將很多統計的程式碼寫成完整的函式了，</p>
+<p>所以要寫的程式其實不多，簡單一兩行就可以完成與繪圖，</p>
+<p>也是非常適合初學者入門，</p>
+<p>有期中期末考，都是會出幾題統計問題，</p>
+<p>可以看上課的ppt講義，</p>
+<p>平常有跟同學積極討論的話，應該不會太困難。</p>
+<h3 id="6070-基因體暨資訊原理與實習-基資所-陳盈聰"><a href="#6070-基因體暨資訊原理與實習-基資所-陳盈聰" class="headerlink" title="6070 基因體暨資訊原理與實習 基資所 陳盈聰"></a>6070 基因體暨資訊原理與實習 基資所 陳盈聰</h3><p>老師說話風格帶有幽默與嘲諷?，不是嘲諷學生而是嘲諷學術體制XD</p>
+<p>可以聽到很多小八卦?</p>
+<p>前幾堂是上課，內容大致上是介紹基因體研究歷史與定序技術的演進，</p>
+<p>接下來就是上課跟實驗穿插，</p>
+<p>實驗就是萃取細菌DNA然後定序，我們那一屆是學Nanopore定序技術，</p>
+<p>對這個定序技術有興趣的人真的要來修習，讚讚，</p>
+<p>生物資訊的部分，會教如何架設工作站，也就是作業系統</p>
+<p>常聽到的就是微軟的windows、蘋果的MacOS，</p>
+<p>資訊界廣泛使用的工作系統則是Linux，</p>
+<p>但老師是教freeBSD，他也是Linux系統的分支，</p>
+<p>也是這門課對於freeBSD和終端機、命令提示字元的指令有更多了解，</p>
+<p>題外話，想要進入生資領域就一定要學會Linux、freeBSD這種工作系統，</p>
+<p>也許以後會再去介紹吧</p>
+<p>架設完後會安裝定序軟體，Canu，它是一種長序列定序軟體，</p>
+<p>定序完後，會介紹基因註解的工具，以及如何將定序結果上傳到公開資料庫。</p>
+<p>是個很實用的一門課，搞的都好想建立一套定序系統在實驗室了…</p>
+<h3 id="6257-動物試驗設計實習-動科所-陳志峰"><a href="#6257-動物試驗設計實習-動科所-陳志峰" class="headerlink" title="6257 動物試驗設計實習 動科所 陳志峰"></a>6257 動物試驗設計實習 動科所 陳志峰</h3><p>這是我的系上開設教SAS這個統計軟體的一門課，</p>
+<p>嗯，就是教怎麼寫SAS語法的課還有動科領域常用的統計方法，</p>
+<p>老師也是手把手帶你輸入語法，怎麼輸入資料、選擇統計方法…</p>
+<p>但老實說現在還會使用SAS的單位應該會越來越少了，</p>
+<p>除了藥廠、金融界吧，因為相較於R與其它開源軟體，</p>
+<p>SAS是需要每年都付費才能授權使用的，</p>
+<p>所以在學術期刊上，我自己發現越來越多paper的統計方法是使用R</p>
+<p>要不要學習SAS就看個人吧，如果確定以後工作的單位規定只能用SAS，</p>
+<p>那就乖乖地先學起來吧。</p>
+<h2 id="結論"><a href="#結論" class="headerlink" title="結論:"></a>結論:</h2><p>這兩年發現越來越多生物資訊相關課程出現了，</p>
+<p>想必這也是趨勢了，</p>
+<p>上面介紹的課程是我實際修課過的，</p>
+<p>當然還有很多相關課程，大多落在基資所、生醫所、統計所、生技所…</p>
+<p>其實我是從選課系統從可能有相關的系所一個一個看的，</p>
+<p>只是受限於時間跟實力不足，無法都去，</p>
+<p>不然其實資工所的課應該也有很大的幫助，</p>
+<p>寫這篇也是有感於，研究所的課程比較少同學有介紹，</p>
+<p>才寫了這篇心得給大家參考。</p>
+<p>想入門生物資訊也別害怕這些課程對你來說太難，</p>
+<p>我也是有種賭一搏的心態去修程式設計跟統計，</p>
+<p>當時的我真的是一竅不通呢XD</p>
+<p>有興趣就直接選下去，課外的時間也持續學習，</p>
+<p>就不會覺得難度很高了，相反的還會覺得越來越有趣</p>
+<p>這些知識最後逐漸融會貫通了。</p>
+]]></content>
+      <categories>
+        <category>life</category>
+      </categories>
+      <tags>
+        <tag>life</tag>
       </tags>
   </entry>
   <entry>
