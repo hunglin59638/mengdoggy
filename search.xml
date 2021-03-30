@@ -76,7 +76,7 @@ sudo mount ~/Google-drive
     <title>Create an application launcher</title>
     <url>/2021/03/30/Create%20an%20application%20launcher/</url>
     <content><![CDATA[<p>For example:  </p>
-<h2 id="Create-a-launcher-to-open-Spyder"><a href="#Create-a-launcher-to-open-Spyder" class="headerlink" title="Create a launcher to open Spyder"></a>Create a launcher to open Spyder</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gedit ~/.<span class="built_in">local</span>/share/applications/spyder.destop</span><br><span class="line">```  </span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">### edit spyder.desktop</span></span><br><span class="line">```vim</span><br><span class="line"><span class="meta">#!/usr/bin/env xdg-open</span></span><br><span class="line">[Desktop Entry]</span><br><span class="line">Type=Application</span><br><span class="line">Exec=/home/hunglin/anaconda3/bin/spyder <span class="comment"># your command</span></span><br><span class="line">Name=Spyder <span class="comment"># display on applicaion list</span></span><br><span class="line">Comment=Spyder <span class="comment"># display near the icon</span></span><br><span class="line">Icon=/home/hunglin/Pictures/Icons/spyder-icon <span class="comment"># input picture path</span></span><br></pre></td></tr></table></figure>
+<h2 id="Create-a-launcher-to-open-Spyder"><a href="#Create-a-launcher-to-open-Spyder" class="headerlink" title="Create a launcher to open Spyder"></a>Create a launcher to open Spyder</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gedit ~/.<span class="built_in">local</span>/share/applications/spyder.destop</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">### edit spyder.desktop</span></span><br><span class="line">```vim</span><br><span class="line"><span class="meta">#!/usr/bin/env xdg-open</span></span><br><span class="line">[Desktop Entry]</span><br><span class="line">Type=Application</span><br><span class="line">Exec=/home/hunglin/anaconda3/bin/spyder <span class="comment"># your command</span></span><br><span class="line">Name=Spyder <span class="comment"># display on applicaion list</span></span><br><span class="line">Comment=Spyder <span class="comment"># display near the icon</span></span><br><span class="line">Icon=/home/hunglin/Pictures/Icons/spyder-icon <span class="comment"># input picture path</span></span><br></pre></td></tr></table></figure>
 <p>save the file  </p>
 <h3 id="change-its-permission-to-be-executable"><a href="#change-its-permission-to-be-executable" class="headerlink" title="change its permission to be executable"></a>change its permission to be executable</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chmod a+x ~&#x2F;.local&#x2F;share&#x2F;applications&#x2F;spyder.destop</span><br></pre></td></tr></table></figure>
 <p>Then, the laucher will show on Application list  </p>
@@ -510,7 +510,7 @@ Ozone Solar.R Wind Temp Month Day</li>
 <p>*檔案的位置會儲存在你下指令的位置</p>
 <p>也可以用一串指令就完成傳輸</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sftp [遠端登入電腦之hostname]@[ip位置]: [檔案位置]</span><br></pre></td></tr></table></figure>
-<p>e.g. sftp <a href="mailto:&#x55;&#83;&#69;&#82;&#x40;&#49;&#x34;&#48;&#46;&#49;&#49;&#49;&#x2e;&#x32;&#x32;&#x32;&#46;&#x31;&#x32;&#51;">&#x55;&#83;&#69;&#82;&#x40;&#49;&#x34;&#48;&#46;&#49;&#49;&#49;&#x2e;&#x32;&#x32;&#x32;&#46;&#x31;&#x32;&#51;</a>: C/canu/barcode03.fastq</p>
+<p>e.g. sftp <a href="mailto:&#85;&#x53;&#x45;&#82;&#64;&#x31;&#52;&#x30;&#46;&#49;&#49;&#49;&#46;&#50;&#x32;&#50;&#x2e;&#49;&#x32;&#x33;">&#85;&#x53;&#x45;&#82;&#64;&#x31;&#52;&#x30;&#46;&#49;&#49;&#49;&#46;&#50;&#x32;&#50;&#x2e;&#49;&#x32;&#x33;</a>: C/canu/barcode03.fastq</p>
 <p>只是傳輸個檔案而已就花了幾天在研究呢….</p>
 ]]></content>
       <categories>
@@ -1480,8 +1480,8 @@ Ozone Solar.R Wind Temp Month Day</li>
       </tags>
   </entry>
   <entry>
-    <title>Osteogenesis (造骨作用)</title>
-    <url>/2017/01/31/%E4%B8%AD%E8%88%88%E5%A4%A7%E5%AD%B8%E5%8B%95%E7%89%A9%E7%A7%91%E5%AD%B8%E7%B3%BB105%E5%B9%B4%E5%BA%A6%E7%A2%A9%E5%A3%AB%E6%8B%9B%E7%94%9F%E8%80%83-%E8%A7%A3%E5%89%96%E7%94%9F%E7%90%86%E5%AD%B8%20%20/</url>
+    <title>中興大學動物科學系105年度碩士招生考-解剖生理學</title>
+    <url>/2017/01/31/%E4%B8%AD%E8%88%88%E5%A4%A7%E5%AD%B8%E5%8B%95%E7%89%A9%E7%A7%91%E5%AD%B8%E7%B3%BB105%E5%B9%B4%E5%BA%A6%E7%A2%A9%E5%A3%AB%E6%8B%9B%E7%94%9F%E8%80%83-%E8%A7%A3%E5%89%96%E7%94%9F%E7%90%86%E5%AD%B8/</url>
     <content><![CDATA[<p>一、名詞解釋</p>
 <ol>
 <li>Rennin: 凝乳酶，蛋白質酵素的一種，可延長為蛋白酶作用時間，增加對蛋白質之吸收。</li>
@@ -1863,7 +1863,7 @@ Ozone Solar.R Wind Temp Month Day</li>
       </tags>
   </entry>
   <entry>
-    <title>在R中執行 SAS的glm lsmeans</title>
+    <title>以R語言解答動物科學統計習題- 習題六 比較兩個變數的平均值與變方</title>
     <url>/2018/12/15/%E4%BB%A5R%E8%AA%9E%E8%A8%80%E8%A7%A3%E7%AD%94%E5%8B%95%E7%89%A9%E7%A7%91%E5%AD%B8%E7%B5%B1%E8%A8%88%E7%BF%92%E9%A1%8C-%20%E7%BF%92%E9%A1%8C%E5%85%AD%20%E6%AF%94%E8%BC%83%E5%85%A9%E5%80%8B%E8%AE%8A%E6%95%B8%E7%9A%84%E5%B9%B3%E5%9D%87%E5%80%BC%E8%88%87%E8%AE%8A%E6%96%B9/</url>
     <content><![CDATA[<h2 id="比較兩品系豬種在10間豬場檢定的平均日增重有沒有差別"><a href="#比較兩品系豬種在10間豬場檢定的平均日增重有沒有差別" class="headerlink" title="比較兩品系豬種在10間豬場檢定的平均日增重有沒有差別?"></a>比較兩品系豬種在10間豬場檢定的平均日增重有沒有差別?</h2><figure class="highlight r"><table><tr><td class="code"><pre><span class="line">lineA&lt;- <span class="built_in">c</span>(<span class="number">.70</span>,<span class="number">.80</span>,<span class="number">.65</span>,<span class="number">.78</span>,<span class="number">.62</span>,<span class="number">.67</span>,<span class="number">.78</span>,<span class="number">.61</span>,<span class="number">.76</span>,<span class="number">.64</span>)</span><br><span class="line">lineB&lt;- <span class="built_in">c</span>(<span class="number">.72</span>,<span class="number">.82</span>,<span class="number">.67</span>,<span class="number">.83</span>,<span class="number">.67</span>,<span class="number">.67</span>,<span class="number">.80</span>,<span class="number">.64</span>,<span class="number">.78</span>,<span class="number">.64</span>)</span><br><span class="line">lineAB&lt;- lineA-lineB <span class="comment">#去除各檢定豬場差異</span></span><br><span class="line">t.test(lineAB)</span><br></pre></td></tr></table></figure>
 <span id="more"></span>
