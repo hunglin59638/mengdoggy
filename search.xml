@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Create an application launcher</title>
+    <url>/2021/03/30/Create%20an%20application%20launcher/</url>
+    <content><![CDATA[<p>For example:  </p>
+<h2 id="Create-a-launcher-to-open-Spyder"><a href="#Create-a-launcher-to-open-Spyder" class="headerlink" title="Create a launcher to open Spyder"></a>Create a launcher to open Spyder</h2><h3 id="edit-spyder-desktop"><a href="#edit-spyder-desktop" class="headerlink" title="edit spyder.desktop"></a>edit spyder.desktop</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gedit ~&#x2F;.local&#x2F;share&#x2F;applications&#x2F;spyder.desktop</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<p>edit the .desktop content</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;env xdg-open</span><br><span class="line">[Desktop Entry]</span><br><span class="line">Type&#x3D;Application</span><br><span class="line">Exec&#x3D;&#x2F;home&#x2F;hunglin&#x2F;anaconda3&#x2F;bin&#x2F;spyder # your command</span><br><span class="line">Name&#x3D;Spyder # display on applicaion list</span><br><span class="line">Comment&#x3D;Spyder # display near the icon</span><br><span class="line">Icon&#x3D;&#x2F;home&#x2F;hunglin&#x2F;Pictures&#x2F;Icons&#x2F;spyder-icon # input picture path</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>save the file  </p>
+<h3 id="change-its-permission-to-be-executable"><a href="#change-its-permission-to-be-executable" class="headerlink" title="change its permission to be executable"></a>change its permission to be executable</h3><pre><code>chmod a+x ~/.local/share/applications/spyder.desktop
+</code></pre>
+<p>Then, the launcher will show on Application list  </p>
+<blockquote>
+<p><a href="https://www.unixmen.com/create-a-launcher-in-ubuntu-using-bash/">https://www.unixmen.com/create-a-launcher-in-ubuntu-using-bash/</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>ubuntu</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Automounting google drive in Unbuntu 18.04</title>
     <url>/2019/12/21/Automounting%20google%20drive%20in%20Unbuntu%2018.04/</url>
     <content><![CDATA[<h2>Conclusion</h2>
@@ -64,32 +90,6 @@ sudo mount ~/Google-drive
 將state改名為state.old即可解決，但我的沒有解決
 而且重開機後state文件又會被建立
 </p>]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-        <tag>ubuntu</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Create an application launcher</title>
-    <url>/2021/03/30/Create%20an%20application%20launcher/</url>
-    <content><![CDATA[<p>For example:  </p>
-<h2 id="Create-a-launcher-to-open-Spyder"><a href="#Create-a-launcher-to-open-Spyder" class="headerlink" title="Create a launcher to open Spyder"></a>Create a launcher to open Spyder</h2><h3 id="edit-spyder-desktop"><a href="#edit-spyder-desktop" class="headerlink" title="edit spyder.desktop"></a>edit spyder.desktop</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gedit ~&#x2F;.local&#x2F;share&#x2F;applications&#x2F;spyder.desktop</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-
-<p>edit the .desktop content</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;env xdg-open</span><br><span class="line">[Desktop Entry]</span><br><span class="line">Type&#x3D;Application</span><br><span class="line">Exec&#x3D;&#x2F;home&#x2F;hunglin&#x2F;anaconda3&#x2F;bin&#x2F;spyder # your command</span><br><span class="line">Name&#x3D;Spyder # display on applicaion list</span><br><span class="line">Comment&#x3D;Spyder # display near the icon</span><br><span class="line">Icon&#x3D;&#x2F;home&#x2F;hunglin&#x2F;Pictures&#x2F;Icons&#x2F;spyder-icon # input picture path</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>save the file  </p>
-<h3 id="change-its-permission-to-be-executable"><a href="#change-its-permission-to-be-executable" class="headerlink" title="change its permission to be executable"></a>change its permission to be executable</h3><pre><code>chmod a+x ~/.local/share/applications/spyder.desktop
-</code></pre>
-<p>Then, the launcher will show on Application list  </p>
-<blockquote>
-<p><a href="https://www.unixmen.com/create-a-launcher-in-ubuntu-using-bash/">https://www.unixmen.com/create-a-launcher-in-ubuntu-using-bash/</a></p>
-</blockquote>
-]]></content>
       <categories>
         <category>linux</category>
       </categories>
@@ -516,7 +516,7 @@ Ozone Solar.R Wind Temp Month Day</li>
 <p>*檔案的位置會儲存在你下指令的位置</p>
 <p>也可以用一串指令就完成傳輸</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sftp [遠端登入電腦之hostname]@[ip位置]: [檔案位置]</span><br></pre></td></tr></table></figure>
-<p>e.g. sftp <a href="mailto:&#x55;&#x53;&#x45;&#x52;&#x40;&#49;&#52;&#48;&#x2e;&#x31;&#x31;&#x31;&#x2e;&#50;&#x32;&#x32;&#46;&#x31;&#50;&#x33;">&#x55;&#x53;&#x45;&#x52;&#x40;&#49;&#52;&#48;&#x2e;&#x31;&#x31;&#x31;&#x2e;&#50;&#x32;&#x32;&#46;&#x31;&#50;&#x33;</a>: C/canu/barcode03.fastq</p>
+<p>e.g. sftp <a href="mailto:&#x55;&#83;&#x45;&#82;&#64;&#x31;&#52;&#48;&#x2e;&#49;&#49;&#49;&#x2e;&#x32;&#x32;&#x32;&#x2e;&#49;&#50;&#51;">&#x55;&#83;&#x45;&#82;&#64;&#x31;&#52;&#48;&#x2e;&#49;&#49;&#49;&#x2e;&#x32;&#x32;&#x32;&#x2e;&#49;&#50;&#51;</a>: C/canu/barcode03.fastq</p>
 <p>只是傳輸個檔案而已就花了幾天在研究呢….</p>
 ]]></content>
       <categories>
@@ -823,7 +823,7 @@ Ozone Solar.R Wind Temp Month Day</li>
   </entry>
   <entry>
     <title>中興大學 x 生物資訊 x 未來規劃</title>
-    <url>/2020/04/04/%E4%B8%AD%E8%88%88%E5%A4%A7%E5%AD%B8%20x%20%E7%94%9F%E7%89%A9%E8%B3%87%E8%A8%8A%20x%20%E6%9C%AA%E4%BE%86%E8%A6%8F%E5%8A%83/</url>
+    <url>/2020/04/05/%E4%B8%AD%E8%88%88%E5%A4%A7%E5%AD%B8%20x%20%E7%94%9F%E7%89%A9%E8%B3%87%E8%A8%8A%20x%20%E6%9C%AA%E4%BE%86%E8%A6%8F%E5%8A%83/</url>
     <content><![CDATA[<p>畢業後有位學弟傳了mail詢問一些生資的規劃，之後應該會愈來愈多人投入生資，所以就把他的問題跟我的經驗分享出來ㄅ  </p>
 <span id="more"></span>
 
@@ -3020,6 +3020,86 @@ sudo service apache2 restart
       </tags>
   </entry>
   <entry>
+    <title>筆電購買守則</title>
+    <url>/2021/08/08/%E7%AD%86%E9%9B%BB%E8%B3%BC%E8%B2%B7%E5%AE%88%E5%89%87/</url>
+    <content><![CDATA[<p>這篇主要是想分享給對於電腦零件不熟悉，不過想購買新筆電的人<br>儘量以超簡短敘述讓大家看完有個基本了解，比較多一點點的解釋放在<strong>Q&amp;A</strong>  </p>
+<span id="more"></span>
+<h2 id="規格最基本需求"><a href="#規格最基本需求" class="headerlink" title="規格最基本需求"></a>規格最基本需求</h2><ul>
+<li>CPU: i5</li>
+<li>記憶體: 16 G</li>
+<li>硬碟: 512 G SSD  </li>
+<li>顯示卡: CPU內顯</li>
+</ul>
+<p>不論是需要怎樣規格的筆電，以上這幾點都是最低標配了，<br>別因為為了省預算導致後續體驗很差，又只能死撐5年以上<br>此規格已經滿足文書功能跟瀏覽網頁的需求 </p>
+<p>符合的機型: ASUS ZenBook, ASUS VivoBook, Acer Swift…</p>
+<h2 id="主流需求"><a href="#主流需求" class="headerlink" title="主流需求"></a>主流需求</h2><h3 id="文書-玩玩輕度遊戲（LOL之類的2D遊戲）"><a href="#文書-玩玩輕度遊戲（LOL之類的2D遊戲）" class="headerlink" title="文書 + 玩玩輕度遊戲（LOL之類的2D遊戲）"></a>文書 + 玩玩輕度遊戲（LOL之類的2D遊戲）</h3><p>這類的人最多，但要注意的是你真的需要所謂的<strong>玩遊戲</strong>這項需求嗎<br>很多人一開始都會說我的需求是會需要玩遊戲<br>但最後都會選一個沒有獨立顯卡的筆電，大多像我詢問筆電的朋友最後也只買基本文書的筆電而已…  </p>
+<p>原因可能有幾點</p>
+<ul>
+<li>考量到預算之後又發現自己其實可以不用玩遊戲 (???)</li>
+<li>發現自己其實不會玩遊戲  </li>
+</ul>
+<p>其實要玩輕度遊戲<strong>也是</strong>可以使用無內顯的文書筆電就好，只是如果玩的時候會卡來卡去就沒救了，或是只能用最低畫質來玩都極大降低遊玩體驗</p>
+<ul>
+<li>CPU: i5</li>
+<li>記憶體: 16 G</li>
+<li>硬碟: 512 G SSD  </li>
+<li>顯示卡: MX250以上 （最低階的獨立顯卡）</li>
+</ul>
+<p>符合的機型: ASUS ZenBook, ASUS VivoBook, Acer Swift … （有內顯的機型）</p>
+<h3 id="玩遊戲-（魔物獵人、刺客教條等3D遊戲…）"><a href="#玩遊戲-（魔物獵人、刺客教條等3D遊戲…）" class="headerlink" title="玩遊戲 （魔物獵人、刺客教條等3D遊戲…）"></a>玩遊戲 （魔物獵人、刺客教條等3D遊戲…）</h3><p>玩遊戲當然就是需要可以跑的動的顯示卡<br>玩遊戲反而比較好去評估規格，如果是Steam平台的遊戲都有提供建議需求<br>按照建議的需求選擇即可  </p>
+<blockquote>
+<p><a href="https://store.steampowered.com/app/582010/Monster_Hunter_World/?l=tchinese">Steam - Monster Hunter</a></p>
+</blockquote>
+<ul>
+<li>CPU: i5</li>
+<li>記憶體: &gt;= 16 G</li>
+<li>硬碟: 512 G SSD  </li>
+<li>顯示卡: Nvdia GTX或RTX系列</li>
+</ul>
+<p>符合的機型: ASUS TUF Gaming, MSI MSI GF…</p>
+<h3 id="剪影片、跑程式"><a href="#剪影片、跑程式" class="headerlink" title="剪影片、跑程式"></a>剪影片、跑程式</h3><p>這裡的剪影片跟跑程式都是指真的重度使用了，<br>像是剪影片如果是剪個幾十分鐘、沒啥特效，只是剪個生活片之類的基本文書都可以勉強應付了<br>會有這類需求的人應該對於電腦也都很熟悉不需要看這篇了XD</p>
+<ul>
+<li>CPU: i7</li>
+<li>記憶體: &gt;= 16G</li>
+<li>硬碟: 512G SSD</li>
+<li>顯示卡: Nvdia GTX或RTX系列</li>
+</ul>
+<p>符合的機型: ASUS TUF Gaming, MSI MSI GF…</p>
+<h2 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h2><h3 id="可以買硬碟寫256-G-SSD-1-TB之類的規格嗎？"><a href="#可以買硬碟寫256-G-SSD-1-TB之類的規格嗎？" class="headerlink" title="可以買硬碟寫256 G SSD + 1 TB之類的規格嗎？"></a>可以買硬碟寫256 G SSD + 1 TB之類的規格嗎？</h3><p>個人極度不建議，硬碟種類分成SSD（固態硬碟）跟HDD（傳統或稱機械硬碟）<br>SSD讀取速度快，可以讓你開機、開程式等跟讀取資料有關的動作都可以很快速<br>HDD適合存放資料也比較便宜，但因為本身結構關係，長期受到外力振動可能會有壞軌的情況發生（<strong>硬碟掛掉</strong>）<br>HDD放在桌電當然適合，但真的不建議放在筆電這種會拿來拿去的產品，況且SSD跟HDD的價錢差距已經非常小了<br>如果是因為想要大容量的空間存放資料，建議就直接買一個外接式硬碟，當然如果是重要資料都要有備份方案<br>不要為了省錢就損失資料，到時候要花錢把資料救回來（可能也救不回來），花的錢都比備份花的錢多<br>結論就是<strong>筆電裡的硬碟都用SSD</strong>就好</p>
+<h3 id="為啥同規格的筆電，不同型號或品牌差幾千塊？"><a href="#為啥同規格的筆電，不同型號或品牌差幾千塊？" class="headerlink" title="為啥同規格的筆電，不同型號或品牌差幾千塊？"></a>為啥同規格的筆電，不同型號或品牌差幾千塊？</h3><p>規格通常是指CPU、顯示卡、記憶體、硬碟容量，但決定價錢不只這些，還有有以下幾點可能影響價格</p>
+<ul>
+<li>重量<br>筆電重要要做的越輕薄，開發與材料的成本都會提升</li>
+<li>螢幕畫質與更新率 (fps)</li>
+<li>觸控等額外功能<br>有多加其他的功能像是觸控、USB槽位多、外殼是金屬或塑膠等都會影響價格  </li>
+</ul>
+<h3 id="這麼多同規格的筆電我應該買哪一台？"><a href="#這麼多同規格的筆電我應該買哪一台？" class="headerlink" title="這麼多同規格的筆電我應該買哪一台？"></a>這麼多同規格的筆電我應該買哪一台？</h3><p>恭喜已經找到符合需求的筆電了，那接下來只要看你喜歡的外型就好了<br>買筆電首要目標是找到符合自己需求的型號，再來就是想像你跟它一起相處5年以上是不是會感到開心<br>讓你最開心的那台就是你該買的   </p>
+<h3 id="獨立顯卡跟內顯差異是啥？"><a href="#獨立顯卡跟內顯差異是啥？" class="headerlink" title="獨立顯卡跟內顯差異是啥？"></a>獨立顯卡跟內顯差異是啥？</h3><p>內顯是指顯示卡長在CPU裏面，所以就不需要額外一個顯示卡，但效能大多都會遠低於獨立的一張顯示卡  </p>
+<h3 id="我在意耗電，希望可以長時間不充電使用筆電"><a href="#我在意耗電，希望可以長時間不充電使用筆電" class="headerlink" title="我在意耗電，希望可以長時間不充電使用筆電"></a>我在意耗電，希望可以長時間不充電使用筆電</h3><p>單就硬體方面，最耗電的就是CPU跟顯示卡<br>那要做的就是買的時候降低他們的規格，顯示卡甚至使用內顯就好<br>如果要效能又要可長時間使用，那就提升預算吧（會提升很多 &gt; 1W） </p>
+<h3 id="CPU的i5、i7還有後面的數字表示什麼"><a href="#CPU的i5、i7還有後面的數字表示什麼" class="headerlink" title="CPU的i5、i7還有後面的數字表示什麼"></a>CPU的i5、i7還有後面的數字表示什麼</h3><p>目前筆電的CPU主流的牌子是Intel，主要有i3、i5、i7，依照效能低到高作為劃分<br>更細相的分類就會看到像是<code>i7 10710U</code>  </p>
+<ul>
+<li>10表示第10代</li>
+<li>710是指CPU效能，數值越大越強</li>
+<li>U指低耗電<br>電獺少女有更詳細的介紹可以看他們的文章  <blockquote>
+<p><a href="https://agirls.aotter.net/post/56192">電獺少女 - 搭載 Intel 10 代處理器的筆電來了！不過 CPU 命名霧煞煞？到底哪顆強？ 解析給你聽！</a></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="CPU有一個叫AMD-Ryzen的是什麼？"><a href="#CPU有一個叫AMD-Ryzen的是什麼？" class="headerlink" title="CPU有一個叫AMD Ryzen的是什麼？"></a>CPU有一個叫AMD Ryzen的是什麼？</h3><p>AMD是CPU的另一個品牌，Ryzen 5可以當成是Intel的 i5<br>舉例<code>Ryzen 5 5600U</code>：</p>
+<ul>
+<li>Ryzen 5: 就像是i5 是為CPU做效能的大略劃分</li>
+<li>5:5000系列，就跟intel第幾世代一樣</li>
+<li>600: CPU效能</li>
+<li>U指低耗電</li>
+</ul>
+]]></content>
+      <categories>
+        <category>technology</category>
+      </categories>
+      <tags>
+        <tag>technology notebook</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>脆蛋與涼蛋</title>
     <url>/2017/01/24/%E8%84%86%E8%9B%8B%E8%88%87%E6%B6%BC%E8%9B%8B/</url>
     <content><![CDATA[<p>水禽與雞在孵蛋過程中最大的差異在涼蛋及噴水(脆蛋)。</p>
@@ -3382,86 +3462,6 @@ sudo service apache2 restart
       <tags>
         <tag>R</tag>
         <tag>biostatistics</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>筆電購買守則</title>
-    <url>/2021/08/08/%E7%AD%86%E9%9B%BB%E8%B3%BC%E8%B2%B7%E5%AE%88%E5%89%87/</url>
-    <content><![CDATA[<p>這篇主要是想分享給對於電腦零件不熟悉，不過想購買新筆電的人<br>儘量以超簡短敘述讓大家看完有個基本了解，比較多一點點的解釋放在<strong>Q&amp;A</strong>  </p>
-<span id="more"></span>
-<h2 id="規格最基本需求"><a href="#規格最基本需求" class="headerlink" title="規格最基本需求"></a>規格最基本需求</h2><ul>
-<li>CPU: i5</li>
-<li>記憶體: 16 G</li>
-<li>硬碟: 512 G SSD  </li>
-<li>顯示卡: CPU內顯</li>
-</ul>
-<p>不論是需要怎樣規格的筆電，以上這幾點都是最低標配了，<br>別因為為了省預算導致後續體驗很差，又只能死撐5年以上<br>此規格已經滿足文書功能跟瀏覽網頁的需求 </p>
-<p>符合的機型: ASUS ZenBook, ASUS VivoBook, Acer Swift…</p>
-<h2 id="主流需求"><a href="#主流需求" class="headerlink" title="主流需求"></a>主流需求</h2><h3 id="文書-玩玩輕度遊戲（LOL之類的2D遊戲）"><a href="#文書-玩玩輕度遊戲（LOL之類的2D遊戲）" class="headerlink" title="文書 + 玩玩輕度遊戲（LOL之類的2D遊戲）"></a>文書 + 玩玩輕度遊戲（LOL之類的2D遊戲）</h3><p>這類的人最多，但要注意的是你真的需要所謂的<strong>玩遊戲</strong>這項需求嗎<br>很多人一開始都會說我的需求是會需要玩遊戲<br>但最後都會選一個沒有獨立顯卡的筆電，大多像我詢問筆電的朋友最後也只買基本文書的筆電而已…  </p>
-<p>原因可能有幾點</p>
-<ul>
-<li>考量到預算之後又發現自己其實可以不用玩遊戲 (???)</li>
-<li>發現自己其實不會玩遊戲  </li>
-</ul>
-<p>其實要玩輕度遊戲<strong>也是</strong>可以使用無內顯的文書筆電就好，只是如果玩的時候會卡來卡去就沒救了，或是只能用最低畫質來玩都極大降低遊玩體驗</p>
-<ul>
-<li>CPU: i5</li>
-<li>記憶體: 16 G</li>
-<li>硬碟: 512 G SSD  </li>
-<li>顯示卡: MX250以上 （最低階的獨立顯卡）</li>
-</ul>
-<p>符合的機型: ASUS ZenBook, ASUS VivoBook, Acer Swift … （有內顯的機型）</p>
-<h3 id="玩遊戲-（魔物獵人、刺客教條等3D遊戲…）"><a href="#玩遊戲-（魔物獵人、刺客教條等3D遊戲…）" class="headerlink" title="玩遊戲 （魔物獵人、刺客教條等3D遊戲…）"></a>玩遊戲 （魔物獵人、刺客教條等3D遊戲…）</h3><p>玩遊戲當然就是需要可以跑的動的顯示卡<br>玩遊戲反而比較好去評估規格，如果是Steam平台的遊戲都有提供建議需求<br>按照建議的需求選擇即可  </p>
-<blockquote>
-<p><a href="https://store.steampowered.com/app/582010/Monster_Hunter_World/?l=tchinese">Steam - Monster Hunter</a></p>
-</blockquote>
-<ul>
-<li>CPU: i5</li>
-<li>記憶體: &gt;= 16 G</li>
-<li>硬碟: 512 G SSD  </li>
-<li>顯示卡: Nvdia GTX或RTX系列</li>
-</ul>
-<p>符合的機型: ASUS TUF Gaming, MSI MSI GF…</p>
-<h3 id="剪影片、跑程式"><a href="#剪影片、跑程式" class="headerlink" title="剪影片、跑程式"></a>剪影片、跑程式</h3><p>這裡的剪影片跟跑程式都是指真的重度使用了，<br>像是剪影片如果是剪個幾十分鐘、沒啥特效，只是剪個生活片之類的基本文書都可以勉強應付了<br>會有這類需求的人應該對於電腦也都很熟悉不需要看這篇了XD</p>
-<ul>
-<li>CPU: i7</li>
-<li>記憶體: &gt;= 16G</li>
-<li>硬碟: 512G SSD</li>
-<li>顯示卡: Nvdia GTX或RTX系列</li>
-</ul>
-<p>符合的機型: ASUS TUF Gaming, MSI MSI GF…</p>
-<h2 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h2><h3 id="可以買硬碟寫256-G-SSD-1-TB之類的規格嗎？"><a href="#可以買硬碟寫256-G-SSD-1-TB之類的規格嗎？" class="headerlink" title="可以買硬碟寫256 G SSD + 1 TB之類的規格嗎？"></a>可以買硬碟寫256 G SSD + 1 TB之類的規格嗎？</h3><p>個人極度不建議，硬碟種類分成SSD（固態硬碟）跟HDD（傳統或稱機械硬碟）<br>SSD讀取速度快，可以讓你開機、開程式等跟讀取資料有關的動作都可以很快速<br>HDD適合存放資料也比較便宜，但因為本身結構關係，長期受到外力振動可能會有壞軌的情況發生（<strong>硬碟掛掉</strong>）<br>HDD放在桌電當然適合，但真的不建議放在筆電這種會拿來拿去的產品，況且SSD跟HDD的價錢差距已經非常小了<br>如果是因為想要大容量的空間存放資料，建議就直接買一個外接式硬碟，當然如果是重要資料都要有備份方案<br>不要為了省錢就損失資料，到時候要花錢把資料救回來（可能也救不回來），花的錢都比備份花的錢多<br>結論就是<strong>筆電裡的硬碟都用SSD</strong>就好</p>
-<h3 id="為啥同規格的筆電，不同型號或品牌差幾千塊？"><a href="#為啥同規格的筆電，不同型號或品牌差幾千塊？" class="headerlink" title="為啥同規格的筆電，不同型號或品牌差幾千塊？"></a>為啥同規格的筆電，不同型號或品牌差幾千塊？</h3><p>規格通常是指CPU、顯示卡、記憶體、硬碟容量，但決定價錢不只這些，還有有以下幾點可能影響價格</p>
-<ul>
-<li>重量<br>筆電重要要做的越輕薄，開發與材料的成本都會提升</li>
-<li>螢幕畫質與更新率 (fps)</li>
-<li>觸控等額外功能<br>有多加其他的功能像是觸控、USB槽位多、外殼是金屬或塑膠等都會影響價格  </li>
-</ul>
-<h3 id="這麼多同規格的筆電我應該買哪一台？"><a href="#這麼多同規格的筆電我應該買哪一台？" class="headerlink" title="這麼多同規格的筆電我應該買哪一台？"></a>這麼多同規格的筆電我應該買哪一台？</h3><p>恭喜已經找到符合需求的筆電了，那接下來只要看你喜歡的外型就好了<br>買筆電首要目標是找到符合自己需求的型號，再來就是想像你跟它一起相處5年以上是不是會感到開心<br>讓你最開心的那台就是你該買的   </p>
-<h3 id="獨立顯卡跟內顯差異是啥？"><a href="#獨立顯卡跟內顯差異是啥？" class="headerlink" title="獨立顯卡跟內顯差異是啥？"></a>獨立顯卡跟內顯差異是啥？</h3><p>內顯是指顯示卡長在CPU裏面，所以就不需要額外一個顯示卡，但效能大多都會遠低於獨立的一張顯示卡  </p>
-<h3 id="我在意耗電，希望可以長時間不充電使用筆電"><a href="#我在意耗電，希望可以長時間不充電使用筆電" class="headerlink" title="我在意耗電，希望可以長時間不充電使用筆電"></a>我在意耗電，希望可以長時間不充電使用筆電</h3><p>單就硬體方面，最耗電的就是CPU跟顯示卡<br>那要做的就是買的時候降低他們的規格，顯示卡甚至使用內顯就好<br>如果要效能又要可長時間使用，那就提升預算吧（會提升很多 &gt; 1W） </p>
-<h3 id="CPU的i5、i7還有後面的數字表示什麼"><a href="#CPU的i5、i7還有後面的數字表示什麼" class="headerlink" title="CPU的i5、i7還有後面的數字表示什麼"></a>CPU的i5、i7還有後面的數字表示什麼</h3><p>目前筆電的CPU主流的牌子是Intel，主要有i3、i5、i7，依照效能低到高作為劃分<br>更細相的分類就會看到像是<code>i7 10710U</code>  </p>
-<ul>
-<li>10表示第10代</li>
-<li>710是指CPU效能，數值越大越強</li>
-<li>U指低耗電<br>電獺少女有更詳細的介紹可以看他們的文章  <blockquote>
-<p><a href="https://agirls.aotter.net/post/56192">電獺少女 - 搭載 Intel 10 代處理器的筆電來了！不過 CPU 命名霧煞煞？到底哪顆強？ 解析給你聽！</a></p>
-</blockquote>
-</li>
-</ul>
-<h3 id="CPU有一個叫AMD-Ryzen的是什麼？"><a href="#CPU有一個叫AMD-Ryzen的是什麼？" class="headerlink" title="CPU有一個叫AMD Ryzen的是什麼？"></a>CPU有一個叫AMD Ryzen的是什麼？</h3><p>AMD是CPU的另一個品牌，Ryzen 5可以當成是Intel的 i5<br>舉例<code>Ryzen 5 5600U</code>：</p>
-<ul>
-<li>Ryzen 5: 就像是i5 是為CPU做效能的大略劃分</li>
-<li>5:5000系列，就跟intel第幾世代一樣</li>
-<li>600: CPU效能</li>
-<li>U指低耗電</li>
-</ul>
-]]></content>
-      <categories>
-        <category>technology</category>
-      </categories>
-      <tags>
-        <tag>technology notebook</tag>
       </tags>
   </entry>
 </search>
