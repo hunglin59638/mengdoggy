@@ -21,12 +21,12 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"hunglin59638.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+    var CONFIG = {"hostname":"hunglinchen.tk","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 <meta name="description" content="許多情況下，一組觀測值的取值很明顯是取決於另一組觀測值。本次的案例中每個「個體」都有兩個觀測值。一個觀測值是「原因變數」、「x變數」、「預測變數」、「自變數」，此變數的取值為實驗者的設定或選擇；另一個觀測值是「效果變數」、「y變數」、「應變數」，此變數的取值非實驗者設定。有一系列方式可以判斷原因和效果之間的關係形式和強度，每個方法對變數及其關係的假定各有不同，這裡考慮五種檢定: 線性回歸、Kend">
 <meta property="og:type" content="article">
 <meta property="og:title" content="兩個變數之間有因果關係嗎_回歸_R語言">
-<meta property="og:url" content="https://hunglin59638.github.io/2018/08/27/%E5%85%A9%E5%80%8B%E8%AE%8A%E6%95%B8%E4%B9%8B%E9%96%93%E6%9C%89%E5%9B%A0%E6%9E%9C%E9%97%9C%E4%BF%82%E5%97%8E_%E5%9B%9E%E6%AD%B8_R%E8%AA%9E%E8%A8%80/index.html">
+<meta property="og:url" content="http://hunglinchen.tk/2018/08/27/%E5%85%A9%E5%80%8B%E8%AE%8A%E6%95%B8%E4%B9%8B%E9%96%93%E6%9C%89%E5%9B%A0%E6%9E%9C%E9%97%9C%E4%BF%82%E5%97%8E_%E5%9B%9E%E6%AD%B8_R%E8%AA%9E%E8%A8%80/index.html">
 <meta property="og:site_name" content="MengDoggy">
 <meta property="og:description" content="許多情況下，一組觀測值的取值很明顯是取決於另一組觀測值。本次的案例中每個「個體」都有兩個觀測值。一個觀測值是「原因變數」、「x變數」、「預測變數」、「自變數」，此變數的取值為實驗者的設定或選擇；另一個觀測值是「效果變數」、「y變數」、「應變數」，此變數的取值非實驗者設定。有一系列方式可以判斷原因和效果之間的關係形式和強度，每個方法對變數及其關係的假定各有不同，這裡考慮五種檢定: 線性回歸、Kend">
 <meta property="og:locale" content="zh_TW">
@@ -40,7 +40,7 @@
 <meta name="twitter:image" content="https://pic.pimg.tw/alex59638/1535360847-3650579954.png">
 
 
-<link rel="canonical" href="https://hunglin59638.github.io/2018/08/27/%E5%85%A9%E5%80%8B%E8%AE%8A%E6%95%B8%E4%B9%8B%E9%96%93%E6%9C%89%E5%9B%A0%E6%9E%9C%E9%97%9C%E4%BF%82%E5%97%8E_%E5%9B%9E%E6%AD%B8_R%E8%AA%9E%E8%A8%80/">
+<link rel="canonical" href="http://hunglinchen.tk/2018/08/27/%E5%85%A9%E5%80%8B%E8%AE%8A%E6%95%B8%E4%B9%8B%E9%96%93%E6%9C%89%E5%9B%A0%E6%9E%9C%E9%97%9C%E4%BF%82%E5%97%8E_%E5%9B%9E%E6%AD%B8_R%E8%AA%9E%E8%A8%80/">
 
 
 <script data-pjax class="page-configurations">
@@ -268,7 +268,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-tw">
-    <link itemprop="mainEntityOfPage" href="https://hunglin59638.github.io/2018/08/27/%E5%85%A9%E5%80%8B%E8%AE%8A%E6%95%B8%E4%B9%8B%E9%96%93%E6%9C%89%E5%9B%A0%E6%9E%9C%E9%97%9C%E4%BF%82%E5%97%8E_%E5%9B%9E%E6%AD%B8_R%E8%AA%9E%E8%A8%80/">
+    <link itemprop="mainEntityOfPage" href="http://hunglinchen.tk/2018/08/27/%E5%85%A9%E5%80%8B%E8%AE%8A%E6%95%B8%E4%B9%8B%E9%96%93%E6%9C%89%E5%9B%A0%E6%9E%9C%E9%97%9C%E4%BF%82%E5%97%8E_%E5%9B%9E%E6%AD%B8_R%E8%AA%9E%E8%A8%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
